@@ -1,0 +1,33 @@
+-Creación de la imagen
+
+docker build -t tfm_imagen .     
+
+docker run -it  --env="DISPLAY=host.docker.internal:0" --name tfm_container --net=host --privileged --mount type=bind,source=<DIRECCIÓN DE CARPETA COMPARTIDA EN ORDENADOR>,target=<DIRECCIÓN DE CARPETA COMPARTIDA EN CONTENEDORbash
+
+-Para entrar al conteneddor en un terminal nuevo
+
+docker exec -it tfm_container /bin/bashch
+
+source devel/setup.bash
+
+-Mundo de una cafetereía
+
+-Servicios con puntos de la cafetería
+
+roslaunch gazebo_sfm_plugin cafe_tfm.launch
+
+-Simulación con un hospital
+
+roslaunch gazebo_sfm_plugin hospital_tfm.launch
+
+-Servicios con puntos del hospital
+
+rosservice call /actor1/update_waypoint "waypoints:
+- {x: -5.0, y: -20.0, z: 0.0}"
+
+rosservice call /actor1/update_waypoint "waypoints:
+- {x: +2.0, y: +11.0, z: 0.0}"
+
+rosservice call /actor1/update_waypoint "waypoints: - {x: -1.0, y: -8.0, z: 1.25}"
+
+
