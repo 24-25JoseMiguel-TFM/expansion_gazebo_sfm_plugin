@@ -1,0 +1,2 @@
+aws-robomaker-hospital-world-ros1:gazebo_sfm_plugin-master
+-DCATKIN_DEVEL_PREFIX=/home/TFM_jose_ws/devel -DCMAKE_INSTALL_PREFIX=/home/TFM_jose_ws/install -G Unix Makefiles
