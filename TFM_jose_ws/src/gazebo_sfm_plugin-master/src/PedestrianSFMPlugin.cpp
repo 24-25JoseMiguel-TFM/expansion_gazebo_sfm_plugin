@@ -22,10 +22,15 @@
 #include <stdio.h>
 #include <string>
 
+#include <gazebo/physics/RayShape.hh>
+#include <gazebo/physics/PhysicsEngine.hh>
+
 // Includes del servcio (Jose Miguel TFM 2025)
 
 #include <geometry_msgs/Point.h>
 #include <gazebo_sfm_plugin/Update_waypoint.h>
+#include <gazebo_sfm_plugin/Return_home.h>
+
 
 // Includes dynamic configure
 
@@ -170,12 +175,19 @@ void PedestrianSFMPlugin::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
   // Create a unique node handle for this pedestrian
   this->nodeHandle.reset(new ros::NodeHandle(pedestrianNamespace));
 
-  // Crear un nombre único para el servicio usando el nombre del actor
+  //Nombre de servicio para actualizar los waypoints
+
   std::string serviceName = "/" + this->actor->GetName() + "/update_waypoint";
 
-  // Inicializar el servicio
+  //Nombre de servicio para actualizar los waypoints
+
   this->updateWaypointService = this->nodeHandle->advertiseService(
     serviceName, &PedestrianSFMPlugin::UpdateWaypointCallback, this);
+
+  serviceName = "/" + this->actor->GetName() + "/return_home";
+
+  this->returnHomeService=this->nodeHandle->advertiseService(
+    serviceName, &PedestrianSFMPlugin::ReturnHomeCallback, this);
 
   // Inicializar el servidor dynamic_reconfigure
   reconfigureServer = std::make_unique<dynamic_reconfigure::Server<gazebo_sfm_plugin::PedestrianSFMPluginConfig>>(*this->nodeHandle);
@@ -187,8 +199,7 @@ void PedestrianSFMPlugin::Reset()
 {
   // this->velocity = 0.8;
   this->lastUpdate = 0;
-
-  // Read in the goals to reach
+  
   if (this->sdf->HasElement("trajectory"))
   {
     sdf::ElementPtr modelElemCyclic =
@@ -281,12 +292,12 @@ void PedestrianSFMPlugin::HandleObstacles()
     }
   }
 
-   ///printf("Actor %s x: %.2f y: %.2f\n", this->actor->GetName().c_str(),
-   ///       this->actor->WorldPose().Pos().X(),
-   ///       this->actor->WorldPose().Pos().Y());
-    /// printf("Model offset x: %.2f y: %.2f\n", closest_obs.X(), closest_obs.Y());
-    /// printf("Model intersec x: %.2f y: %.2f\n\n", closest_obs2.X(),
-         ///   closest_obs2.Y());
+  // printf("Actor %s x: %.2f y: %.2f\n", this->actor->GetName().c_str(),
+  //        this->actor->WorldPose().Pos().X(),
+  //        this->actor->WorldPose().Pos().Y());
+  // printf("Model offset x: %.2f y: %.2f\n", closest_obs.X(), closest_obs.Y());
+  // printf("Model intersec x: %.2f y: %.2f\n\n", closest_obs2.X(),
+  //        closest_obs2.Y());
   utils::Vector2d ob(closest_obs.X(), closest_obs.Y());
   this->sfmActor.obstacles1.push_back(ob);
 }
@@ -349,17 +360,19 @@ void PedestrianSFMPlugin::OnUpdate(const common::UpdateInfo &_info)
 
   ignition::math::Pose3d actorPose = this->actor->WorldPose();
 
+  // Track if the agent just finished waiting
+  bool justFinishedWaiting = this->sfmActor.isWaiting && 
+                           (this->sfmActor.waitingTimeLeft - dt <= 0);
+
   // update closest obstacle
   HandleObstacles();
 
   // update pedestrian around
   HandlePedestrians();
-
   // Compute Social Forces
   sfm::SFM.computeForces(this->sfmActor, this->otherActors);
   // Update model
   sfm::SFM.updatePosition(this->sfmActor, dt);
-
   utils::Angle h = this->sfmActor.yaw;
   utils::Angle add = utils::Angle::fromRadian(1.5707);
   h = h + add;
@@ -401,35 +414,55 @@ void PedestrianSFMPlugin::OnUpdate(const common::UpdateInfo &_info)
   this->actor->SetScriptTime(this->actor->ScriptTime() +
                              (distanceTraveled * this->animationFactor));
   this->lastUpdate = _info.simTime;
+
+  if (justFinishedWaiting) {
+    ROS_INFO("Pedestrian %s has finished a goal.",
+             this->actor->GetName().c_str());
+  }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////
 ///Servicio para actualizar waypoints tfm
 
-// Implementación de la función de callback
+// Waypoint Updates Callback
 bool PedestrianSFMPlugin::UpdateWaypointCallback(gazebo_sfm_plugin::Update_waypoint::Request &req,
   gazebo_sfm_plugin::Update_waypoint::Response &res) {
-// Limpiar la trayectoria actual
+// Clear goals
 this->sfmActor.goals.clear();
 
-// Agregar los nuevos waypoints
+// Adds new Waypoints
 for (const auto &waypoint : req.waypoints) {
 sfm::Goal goal;
 goal.center.set(waypoint.x, waypoint.y);
-goal.radius = 0.3;  // Radio de tolerancia para el waypoint
+goal.radius = 0.3;  // Radius Tolerance
 this->sfmActor.goals.push_back(goal);
 }
 
-sdf::ElementPtr modelElemHome =
-this->sdf->GetElement("trajectory")->GetElement("home");
-if (modelElemHome) // Check if "home" element exists
-{
-sfm::Goal goal;
-ROS_INFO("%s volverá a su punto inicial ", this->actor->GetName().c_str());
-ignition::math::Vector3d g = modelElemHome->Get<ignition::math::Vector3d>();
-goal.center.set(g.X(), g.Y());
-goal.radius = 0.3;
-this->sfmActor.goals.push_back(goal);
+if(sfmActor.cyclicGoals==0){
+
+  sdf::ElementPtr modelElemHome =
+  this->sdf->GetElement("trajectory")->GetElement("home");
+  if (modelElemHome) // Check if "home" element exists
+  {
+  sfm::Goal goal;
+  ROS_INFO("%s volvera a su punto inicial tras acabar el punto", this->actor->GetName().c_str());
+  ignition::math::Vector3d g = modelElemHome->Get<ignition::math::Vector3d>();
+  goal.center.set(g.X(), g.Y());
+  goal.radius = 0.3;
+  this->sfmActor.waitAtGoalDuration = 5.0;
+  this->sfmActor.goals.push_back(goal);
+  }
+  else{
+
+    ROS_INFO("%s No tiene punto inicial", this->actor->GetName().c_str());
+  
+  }
+
+}
+else{
+
+  ROS_INFO("%s repetira el waypoint", this->actor->GetName().c_str());
+
 }
 
 // Responder con éxito
@@ -437,10 +470,40 @@ res.success = true;
 return true;
 }
 
+bool PedestrianSFMPlugin::ReturnHomeCallback(gazebo_sfm_plugin::Return_home::Request &req,
+gazebo_sfm_plugin::Return_home::Response &res) {
+
+    this->sfmActor.goals.clear();
+    sdf::ElementPtr modelElemHome =
+    this->sdf->GetElement("trajectory")->GetElement("home");
+    if (modelElemHome) // Check if "home" element exists
+    {
+    sfm::Goal goal;
+    ROS_INFO("%s volvera a su punto inicial ", this->actor->GetName().c_str());
+    ignition::math::Vector3d g = modelElemHome->Get<ignition::math::Vector3d>();
+    goal.center.set(g.X(), g.Y());
+    goal.radius = 0.3;
+    this->sfmActor.waitAtGoalDuration = 5.0;
+    this->sfmActor.goals.push_back(goal);
+    res.success =true;
+    return true;
+
+    }
+    else{
+
+      ROS_INFO("%s No tiene punto inicial", this->actor->GetName().c_str());
+      res.success =false;
+      return false;
+    
+    }
+
+}
+
 void PedestrianSFMPlugin::reconfigureCallback(gazebo_sfm_plugin::PedestrianSFMPluginConfig &config, uint32_t level) {
   // Actualizar la velocidad deseada del peatón
   this->sfmActor.desiredVelocity = config.pedestrian_velocity;
+  this->sfmActor.cyclicGoals = config.cyclic;
 
-  // Opcional: Imprimir el nuevo valor para depuración
   ROS_INFO("Nueva velocidad deseada para %s: %.2f m/s", this->actor->GetName().c_str(), config.pedestrian_velocity);
+  ROS_INFO("Nuevo cyclic %d",config.cyclic);
 }

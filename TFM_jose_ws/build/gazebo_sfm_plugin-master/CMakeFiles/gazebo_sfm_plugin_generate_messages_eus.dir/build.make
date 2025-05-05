@@ -54,6 +54,8 @@ CMAKE_BINARY_DIR = /home/TFM_jose_ws/build
 include gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_eus.dir/progress.make
 
 gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_eus: /home/TFM_jose_ws/devel/share/roseus/ros/gazebo_sfm_plugin/srv/Update_waypoint.l
+gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_eus: /home/TFM_jose_ws/devel/share/roseus/ros/gazebo_sfm_plugin/srv/Return_home.l
+gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_eus: /home/TFM_jose_ws/devel/share/roseus/ros/gazebo_sfm_plugin/srv/AssignTask.l
 gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_eus: /home/TFM_jose_ws/devel/share/roseus/ros/gazebo_sfm_plugin/manifest.l
 
 
@@ -63,12 +65,25 @@ gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_eus: /ho
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/TFM_jose_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating EusLisp code from gazebo_sfm_plugin/Update_waypoint.srv"
 	cd /home/TFM_jose_ws/build/gazebo_sfm_plugin-master && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/TFM_jose_ws/src/gazebo_sfm_plugin-master/srv/Update_waypoint.srv -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p gazebo_sfm_plugin -o /home/TFM_jose_ws/devel/share/roseus/ros/gazebo_sfm_plugin/srv
 
+/home/TFM_jose_ws/devel/share/roseus/ros/gazebo_sfm_plugin/srv/Return_home.l: /opt/ros/noetic/lib/geneus/gen_eus.py
+/home/TFM_jose_ws/devel/share/roseus/ros/gazebo_sfm_plugin/srv/Return_home.l: /home/TFM_jose_ws/src/gazebo_sfm_plugin-master/srv/Return_home.srv
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/TFM_jose_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating EusLisp code from gazebo_sfm_plugin/Return_home.srv"
+	cd /home/TFM_jose_ws/build/gazebo_sfm_plugin-master && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/TFM_jose_ws/src/gazebo_sfm_plugin-master/srv/Return_home.srv -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p gazebo_sfm_plugin -o /home/TFM_jose_ws/devel/share/roseus/ros/gazebo_sfm_plugin/srv
+
+/home/TFM_jose_ws/devel/share/roseus/ros/gazebo_sfm_plugin/srv/AssignTask.l: /opt/ros/noetic/lib/geneus/gen_eus.py
+/home/TFM_jose_ws/devel/share/roseus/ros/gazebo_sfm_plugin/srv/AssignTask.l: /home/TFM_jose_ws/src/gazebo_sfm_plugin-master/srv/AssignTask.srv
+/home/TFM_jose_ws/devel/share/roseus/ros/gazebo_sfm_plugin/srv/AssignTask.l: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/TFM_jose_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating EusLisp code from gazebo_sfm_plugin/AssignTask.srv"
+	cd /home/TFM_jose_ws/build/gazebo_sfm_plugin-master && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/TFM_jose_ws/src/gazebo_sfm_plugin-master/srv/AssignTask.srv -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p gazebo_sfm_plugin -o /home/TFM_jose_ws/devel/share/roseus/ros/gazebo_sfm_plugin/srv
+
 /home/TFM_jose_ws/devel/share/roseus/ros/gazebo_sfm_plugin/manifest.l: /opt/ros/noetic/lib/geneus/gen_eus.py
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/TFM_jose_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating EusLisp manifest code for gazebo_sfm_plugin"
-	cd /home/TFM_jose_ws/build/gazebo_sfm_plugin-master && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py -m -o /home/TFM_jose_ws/devel/share/roseus/ros/gazebo_sfm_plugin gazebo_sfm_plugin geometry_msgs
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/TFM_jose_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating EusLisp manifest code for gazebo_sfm_plugin"
+	cd /home/TFM_jose_ws/build/gazebo_sfm_plugin-master && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py -m -o /home/TFM_jose_ws/devel/share/roseus/ros/gazebo_sfm_plugin gazebo_sfm_plugin geometry_msgs std_msgs
 
 gazebo_sfm_plugin_generate_messages_eus: gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_eus
 gazebo_sfm_plugin_generate_messages_eus: /home/TFM_jose_ws/devel/share/roseus/ros/gazebo_sfm_plugin/srv/Update_waypoint.l
+gazebo_sfm_plugin_generate_messages_eus: /home/TFM_jose_ws/devel/share/roseus/ros/gazebo_sfm_plugin/srv/Return_home.l
+gazebo_sfm_plugin_generate_messages_eus: /home/TFM_jose_ws/devel/share/roseus/ros/gazebo_sfm_plugin/srv/AssignTask.l
 gazebo_sfm_plugin_generate_messages_eus: /home/TFM_jose_ws/devel/share/roseus/ros/gazebo_sfm_plugin/manifest.l
 gazebo_sfm_plugin_generate_messages_eus: gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_eus.dir/build.make
 

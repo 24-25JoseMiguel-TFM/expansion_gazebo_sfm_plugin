@@ -141,6 +141,8 @@ PedestrianSFMPlugin_EXTERNAL_OBJECTS =
 /home/TFM_jose_ws/devel/lib/libPedestrianSFMPlugin.so: /usr/lib/x86_64-linux-gnu/libOgreTerrain.so
 /home/TFM_jose_ws/devel/lib/libPedestrianSFMPlugin.so: /usr/lib/x86_64-linux-gnu/libOgrePaging.so
 /home/TFM_jose_ws/devel/lib/libPedestrianSFMPlugin.so: /usr/lib/x86_64-linux-gnu/libignition-common3-graphics.so.3.14.2
+/home/TFM_jose_ws/devel/lib/libPedestrianSFMPlugin.so: /usr/lib/x86_64-linux-gnu/libboost_thread.so.1.71.0
+/home/TFM_jose_ws/devel/lib/libPedestrianSFMPlugin.so: /usr/lib/x86_64-linux-gnu/libboost_date_time.so.1.71.0
 /home/TFM_jose_ws/devel/lib/libPedestrianSFMPlugin.so: /usr/lib/x86_64-linux-gnu/libSimTKmath.so.3.6
 /home/TFM_jose_ws/devel/lib/libPedestrianSFMPlugin.so: /usr/lib/x86_64-linux-gnu/libSimTKcommon.so.3.6
 /home/TFM_jose_ws/devel/lib/libPedestrianSFMPlugin.so: /usr/lib/x86_64-linux-gnu/libblas.so

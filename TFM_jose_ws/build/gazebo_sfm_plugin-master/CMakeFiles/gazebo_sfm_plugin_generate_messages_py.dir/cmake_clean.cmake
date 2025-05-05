@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "/home/TFM_jose_ws/devel/lib/python3/dist-packages/gazebo_sfm_plugin/srv/_AssignTask.py"
+  "/home/TFM_jose_ws/devel/lib/python3/dist-packages/gazebo_sfm_plugin/srv/_Return_home.py"
   "/home/TFM_jose_ws/devel/lib/python3/dist-packages/gazebo_sfm_plugin/srv/_Update_waypoint.py"
   "/home/TFM_jose_ws/devel/lib/python3/dist-packages/gazebo_sfm_plugin/srv/__init__.py"
   "CMakeFiles/gazebo_sfm_plugin_generate_messages_py"

@@ -64,10 +64,10 @@
   "e65fdf0b922727bc18f1f1772a8f5a15")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<Update_waypoint-request>)))
   "Returns full string definition for message of type '<Update_waypoint-request>"
-  (cl:format cl:nil "geometry_msgs/Point[] waypoints  # Lista de waypoints (x, y, z)~%~%================================================================================~%MSG: geometry_msgs/Point~%# This contains the position of a point in free space~%float64 x~%float64 y~%float64 z~%~%~%"))
+  (cl:format cl:nil "geometry_msgs/Point[] waypoints~%~%================================================================================~%MSG: geometry_msgs/Point~%# This contains the position of a point in free space~%float64 x~%float64 y~%float64 z~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql 'Update_waypoint-request)))
   "Returns full string definition for message of type 'Update_waypoint-request"
-  (cl:format cl:nil "geometry_msgs/Point[] waypoints  # Lista de waypoints (x, y, z)~%~%================================================================================~%MSG: geometry_msgs/Point~%# This contains the position of a point in free space~%float64 x~%float64 y~%float64 z~%~%~%"))
+  (cl:format cl:nil "geometry_msgs/Point[] waypoints~%~%================================================================================~%MSG: geometry_msgs/Point~%# This contains the position of a point in free space~%float64 x~%float64 y~%float64 z~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:serialization-length ((msg <Update_waypoint-request>))
   (cl:+ 0
      4 (cl:reduce #'cl:+ (cl:slot-value msg 'waypoints) :key #'(cl:lambda (ele) (cl:declare (cl:ignorable ele)) (cl:+ (roslisp-msg-protocol:serialization-length ele))))

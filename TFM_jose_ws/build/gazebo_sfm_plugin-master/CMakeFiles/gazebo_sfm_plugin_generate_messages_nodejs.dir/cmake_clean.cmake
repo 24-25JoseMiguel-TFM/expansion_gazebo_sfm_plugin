@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "/home/TFM_jose_ws/devel/share/gennodejs/ros/gazebo_sfm_plugin/srv/AssignTask.js"
+  "/home/TFM_jose_ws/devel/share/gennodejs/ros/gazebo_sfm_plugin/srv/Return_home.js"
   "/home/TFM_jose_ws/devel/share/gennodejs/ros/gazebo_sfm_plugin/srv/Update_waypoint.js"
   "CMakeFiles/gazebo_sfm_plugin_generate_messages_nodejs"
 )

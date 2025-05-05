@@ -183,6 +183,51 @@ gazebo_sfm_plugin_generate_messages/fast:
 .PHONY : gazebo_sfm_plugin_generate_messages/fast
 
 # Convenience name for target.
+gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_geneus.dir/rule:
+	cd /home/TFM_jose_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_geneus.dir/rule
+.PHONY : gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_geneus.dir/rule
+
+# Convenience name for target.
+gazebo_sfm_plugin_geneus: gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_geneus.dir/rule
+
+.PHONY : gazebo_sfm_plugin_geneus
+
+# fast build rule for target.
+gazebo_sfm_plugin_geneus/fast:
+	cd /home/TFM_jose_ws/build && $(MAKE) -f gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_geneus.dir/build.make gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_geneus.dir/build
+.PHONY : gazebo_sfm_plugin_geneus/fast
+
+# Convenience name for target.
+gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_lisp.dir/rule:
+	cd /home/TFM_jose_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_lisp.dir/rule
+.PHONY : gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+gazebo_sfm_plugin_generate_messages_lisp: gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_lisp.dir/rule
+
+.PHONY : gazebo_sfm_plugin_generate_messages_lisp
+
+# fast build rule for target.
+gazebo_sfm_plugin_generate_messages_lisp/fast:
+	cd /home/TFM_jose_ws/build && $(MAKE) -f gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_lisp.dir/build.make gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_lisp.dir/build
+.PHONY : gazebo_sfm_plugin_generate_messages_lisp/fast
+
+# Convenience name for target.
+gazebo_sfm_plugin-master/CMakeFiles/_gazebo_sfm_plugin_generate_messages_check_deps_AssignTask.dir/rule:
+	cd /home/TFM_jose_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_sfm_plugin-master/CMakeFiles/_gazebo_sfm_plugin_generate_messages_check_deps_AssignTask.dir/rule
+.PHONY : gazebo_sfm_plugin-master/CMakeFiles/_gazebo_sfm_plugin_generate_messages_check_deps_AssignTask.dir/rule
+
+# Convenience name for target.
+_gazebo_sfm_plugin_generate_messages_check_deps_AssignTask: gazebo_sfm_plugin-master/CMakeFiles/_gazebo_sfm_plugin_generate_messages_check_deps_AssignTask.dir/rule
+
+.PHONY : _gazebo_sfm_plugin_generate_messages_check_deps_AssignTask
+
+# fast build rule for target.
+_gazebo_sfm_plugin_generate_messages_check_deps_AssignTask/fast:
+	cd /home/TFM_jose_ws/build && $(MAKE) -f gazebo_sfm_plugin-master/CMakeFiles/_gazebo_sfm_plugin_generate_messages_check_deps_AssignTask.dir/build.make gazebo_sfm_plugin-master/CMakeFiles/_gazebo_sfm_plugin_generate_messages_check_deps_AssignTask.dir/build
+.PHONY : _gazebo_sfm_plugin_generate_messages_check_deps_AssignTask/fast
+
+# Convenience name for target.
 gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_cpp.dir/rule:
 	cd /home/TFM_jose_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_cpp.dir/rule
 .PHONY : gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_cpp.dir/rule
@@ -228,6 +273,81 @@ gazebo_sfm_plugin_generate_messages_nodejs/fast:
 .PHONY : gazebo_sfm_plugin_generate_messages_nodejs/fast
 
 # Convenience name for target.
+gazebo_sfm_plugin-master/CMakeFiles/PedestrianSFMPlugin.dir/rule:
+	cd /home/TFM_jose_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_sfm_plugin-master/CMakeFiles/PedestrianSFMPlugin.dir/rule
+.PHONY : gazebo_sfm_plugin-master/CMakeFiles/PedestrianSFMPlugin.dir/rule
+
+# Convenience name for target.
+PedestrianSFMPlugin: gazebo_sfm_plugin-master/CMakeFiles/PedestrianSFMPlugin.dir/rule
+
+.PHONY : PedestrianSFMPlugin
+
+# fast build rule for target.
+PedestrianSFMPlugin/fast:
+	cd /home/TFM_jose_ws/build && $(MAKE) -f gazebo_sfm_plugin-master/CMakeFiles/PedestrianSFMPlugin.dir/build.make gazebo_sfm_plugin-master/CMakeFiles/PedestrianSFMPlugin.dir/build
+.PHONY : PedestrianSFMPlugin/fast
+
+# Convenience name for target.
+gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_gencfg.dir/rule:
+	cd /home/TFM_jose_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_gencfg.dir/rule
+.PHONY : gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_gencfg.dir/rule
+
+# Convenience name for target.
+gazebo_sfm_plugin_gencfg: gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_gencfg.dir/rule
+
+.PHONY : gazebo_sfm_plugin_gencfg
+
+# fast build rule for target.
+gazebo_sfm_plugin_gencfg/fast:
+	cd /home/TFM_jose_ws/build && $(MAKE) -f gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_gencfg.dir/build.make gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_gencfg.dir/build
+.PHONY : gazebo_sfm_plugin_gencfg/fast
+
+# Convenience name for target.
+gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_genpy.dir/rule:
+	cd /home/TFM_jose_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_genpy.dir/rule
+.PHONY : gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_genpy.dir/rule
+
+# Convenience name for target.
+gazebo_sfm_plugin_genpy: gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_genpy.dir/rule
+
+.PHONY : gazebo_sfm_plugin_genpy
+
+# fast build rule for target.
+gazebo_sfm_plugin_genpy/fast:
+	cd /home/TFM_jose_ws/build && $(MAKE) -f gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_genpy.dir/build.make gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_genpy.dir/build
+.PHONY : gazebo_sfm_plugin_genpy/fast
+
+# Convenience name for target.
+gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_gencpp.dir/rule:
+	cd /home/TFM_jose_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_gencpp.dir/rule
+.PHONY : gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_gencpp.dir/rule
+
+# Convenience name for target.
+gazebo_sfm_plugin_gencpp: gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_gencpp.dir/rule
+
+.PHONY : gazebo_sfm_plugin_gencpp
+
+# fast build rule for target.
+gazebo_sfm_plugin_gencpp/fast:
+	cd /home/TFM_jose_ws/build && $(MAKE) -f gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_gencpp.dir/build.make gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_gencpp.dir/build
+.PHONY : gazebo_sfm_plugin_gencpp/fast
+
+# Convenience name for target.
+gazebo_sfm_plugin-master/CMakeFiles/_gazebo_sfm_plugin_generate_messages_check_deps_Return_home.dir/rule:
+	cd /home/TFM_jose_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_sfm_plugin-master/CMakeFiles/_gazebo_sfm_plugin_generate_messages_check_deps_Return_home.dir/rule
+.PHONY : gazebo_sfm_plugin-master/CMakeFiles/_gazebo_sfm_plugin_generate_messages_check_deps_Return_home.dir/rule
+
+# Convenience name for target.
+_gazebo_sfm_plugin_generate_messages_check_deps_Return_home: gazebo_sfm_plugin-master/CMakeFiles/_gazebo_sfm_plugin_generate_messages_check_deps_Return_home.dir/rule
+
+.PHONY : _gazebo_sfm_plugin_generate_messages_check_deps_Return_home
+
+# fast build rule for target.
+_gazebo_sfm_plugin_generate_messages_check_deps_Return_home/fast:
+	cd /home/TFM_jose_ws/build && $(MAKE) -f gazebo_sfm_plugin-master/CMakeFiles/_gazebo_sfm_plugin_generate_messages_check_deps_Return_home.dir/build.make gazebo_sfm_plugin-master/CMakeFiles/_gazebo_sfm_plugin_generate_messages_check_deps_Return_home.dir/build
+.PHONY : _gazebo_sfm_plugin_generate_messages_check_deps_Return_home/fast
+
+# Convenience name for target.
 gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_eus.dir/rule:
 	cd /home/TFM_jose_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_eus.dir/rule
 .PHONY : gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_eus.dir/rule
@@ -241,36 +361,6 @@ gazebo_sfm_plugin_generate_messages_eus: gazebo_sfm_plugin-master/CMakeFiles/gaz
 gazebo_sfm_plugin_generate_messages_eus/fast:
 	cd /home/TFM_jose_ws/build && $(MAKE) -f gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_eus.dir/build.make gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_eus.dir/build
 .PHONY : gazebo_sfm_plugin_generate_messages_eus/fast
-
-# Convenience name for target.
-gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_geneus.dir/rule:
-	cd /home/TFM_jose_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_geneus.dir/rule
-.PHONY : gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_geneus.dir/rule
-
-# Convenience name for target.
-gazebo_sfm_plugin_geneus: gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_geneus.dir/rule
-
-.PHONY : gazebo_sfm_plugin_geneus
-
-# fast build rule for target.
-gazebo_sfm_plugin_geneus/fast:
-	cd /home/TFM_jose_ws/build && $(MAKE) -f gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_geneus.dir/build.make gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_geneus.dir/build
-.PHONY : gazebo_sfm_plugin_geneus/fast
-
-# Convenience name for target.
-gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_lisp.dir/rule:
-	cd /home/TFM_jose_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_lisp.dir/rule
-.PHONY : gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-gazebo_sfm_plugin_generate_messages_lisp: gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_lisp.dir/rule
-
-.PHONY : gazebo_sfm_plugin_generate_messages_lisp
-
-# fast build rule for target.
-gazebo_sfm_plugin_generate_messages_lisp/fast:
-	cd /home/TFM_jose_ws/build && $(MAKE) -f gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_lisp.dir/build.make gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_lisp.dir/build
-.PHONY : gazebo_sfm_plugin_generate_messages_lisp/fast
 
 # Convenience name for target.
 gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_genlisp.dir/rule:
@@ -303,6 +393,21 @@ gazebo_sfm_plugin_gennodejs/fast:
 .PHONY : gazebo_sfm_plugin_gennodejs/fast
 
 # Convenience name for target.
+gazebo_sfm_plugin-master/CMakeFiles/task_coordinator.dir/rule:
+	cd /home/TFM_jose_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_sfm_plugin-master/CMakeFiles/task_coordinator.dir/rule
+.PHONY : gazebo_sfm_plugin-master/CMakeFiles/task_coordinator.dir/rule
+
+# Convenience name for target.
+task_coordinator: gazebo_sfm_plugin-master/CMakeFiles/task_coordinator.dir/rule
+
+.PHONY : task_coordinator
+
+# fast build rule for target.
+task_coordinator/fast:
+	cd /home/TFM_jose_ws/build && $(MAKE) -f gazebo_sfm_plugin-master/CMakeFiles/task_coordinator.dir/build.make gazebo_sfm_plugin-master/CMakeFiles/task_coordinator.dir/build
+.PHONY : task_coordinator/fast
+
+# Convenience name for target.
 gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_py.dir/rule:
 	cd /home/TFM_jose_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_py.dir/rule
 .PHONY : gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_py.dir/rule
@@ -316,66 +421,6 @@ gazebo_sfm_plugin_generate_messages_py: gazebo_sfm_plugin-master/CMakeFiles/gaze
 gazebo_sfm_plugin_generate_messages_py/fast:
 	cd /home/TFM_jose_ws/build && $(MAKE) -f gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_py.dir/build.make gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_py.dir/build
 .PHONY : gazebo_sfm_plugin_generate_messages_py/fast
-
-# Convenience name for target.
-gazebo_sfm_plugin-master/CMakeFiles/PedestrianSFMPlugin.dir/rule:
-	cd /home/TFM_jose_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_sfm_plugin-master/CMakeFiles/PedestrianSFMPlugin.dir/rule
-.PHONY : gazebo_sfm_plugin-master/CMakeFiles/PedestrianSFMPlugin.dir/rule
-
-# Convenience name for target.
-PedestrianSFMPlugin: gazebo_sfm_plugin-master/CMakeFiles/PedestrianSFMPlugin.dir/rule
-
-.PHONY : PedestrianSFMPlugin
-
-# fast build rule for target.
-PedestrianSFMPlugin/fast:
-	cd /home/TFM_jose_ws/build && $(MAKE) -f gazebo_sfm_plugin-master/CMakeFiles/PedestrianSFMPlugin.dir/build.make gazebo_sfm_plugin-master/CMakeFiles/PedestrianSFMPlugin.dir/build
-.PHONY : PedestrianSFMPlugin/fast
-
-# Convenience name for target.
-gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_gencpp.dir/rule:
-	cd /home/TFM_jose_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_gencpp.dir/rule
-.PHONY : gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_gencpp.dir/rule
-
-# Convenience name for target.
-gazebo_sfm_plugin_gencpp: gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_gencpp.dir/rule
-
-.PHONY : gazebo_sfm_plugin_gencpp
-
-# fast build rule for target.
-gazebo_sfm_plugin_gencpp/fast:
-	cd /home/TFM_jose_ws/build && $(MAKE) -f gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_gencpp.dir/build.make gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_gencpp.dir/build
-.PHONY : gazebo_sfm_plugin_gencpp/fast
-
-# Convenience name for target.
-gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_genpy.dir/rule:
-	cd /home/TFM_jose_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_genpy.dir/rule
-.PHONY : gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_genpy.dir/rule
-
-# Convenience name for target.
-gazebo_sfm_plugin_genpy: gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_genpy.dir/rule
-
-.PHONY : gazebo_sfm_plugin_genpy
-
-# fast build rule for target.
-gazebo_sfm_plugin_genpy/fast:
-	cd /home/TFM_jose_ws/build && $(MAKE) -f gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_genpy.dir/build.make gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_genpy.dir/build
-.PHONY : gazebo_sfm_plugin_genpy/fast
-
-# Convenience name for target.
-gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_gencfg.dir/rule:
-	cd /home/TFM_jose_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_gencfg.dir/rule
-.PHONY : gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_gencfg.dir/rule
-
-# Convenience name for target.
-gazebo_sfm_plugin_gencfg: gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_gencfg.dir/rule
-
-.PHONY : gazebo_sfm_plugin_gencfg
-
-# fast build rule for target.
-gazebo_sfm_plugin_gencfg/fast:
-	cd /home/TFM_jose_ws/build && $(MAKE) -f gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_gencfg.dir/build.make gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_gencfg.dir/build
-.PHONY : gazebo_sfm_plugin_gencfg/fast
 
 src/PedestrianSFMPlugin.o: src/PedestrianSFMPlugin.cpp.o
 
@@ -404,6 +449,33 @@ src/PedestrianSFMPlugin.cpp.s:
 	cd /home/TFM_jose_ws/build && $(MAKE) -f gazebo_sfm_plugin-master/CMakeFiles/PedestrianSFMPlugin.dir/build.make gazebo_sfm_plugin-master/CMakeFiles/PedestrianSFMPlugin.dir/src/PedestrianSFMPlugin.cpp.s
 .PHONY : src/PedestrianSFMPlugin.cpp.s
 
+src/TaskCoordinator.o: src/TaskCoordinator.cpp.o
+
+.PHONY : src/TaskCoordinator.o
+
+# target to build an object file
+src/TaskCoordinator.cpp.o:
+	cd /home/TFM_jose_ws/build && $(MAKE) -f gazebo_sfm_plugin-master/CMakeFiles/task_coordinator.dir/build.make gazebo_sfm_plugin-master/CMakeFiles/task_coordinator.dir/src/TaskCoordinator.cpp.o
+.PHONY : src/TaskCoordinator.cpp.o
+
+src/TaskCoordinator.i: src/TaskCoordinator.cpp.i
+
+.PHONY : src/TaskCoordinator.i
+
+# target to preprocess a source file
+src/TaskCoordinator.cpp.i:
+	cd /home/TFM_jose_ws/build && $(MAKE) -f gazebo_sfm_plugin-master/CMakeFiles/task_coordinator.dir/build.make gazebo_sfm_plugin-master/CMakeFiles/task_coordinator.dir/src/TaskCoordinator.cpp.i
+.PHONY : src/TaskCoordinator.cpp.i
+
+src/TaskCoordinator.s: src/TaskCoordinator.cpp.s
+
+.PHONY : src/TaskCoordinator.s
+
+# target to generate assembly for a file
+src/TaskCoordinator.cpp.s:
+	cd /home/TFM_jose_ws/build && $(MAKE) -f gazebo_sfm_plugin-master/CMakeFiles/task_coordinator.dir/build.make gazebo_sfm_plugin-master/CMakeFiles/task_coordinator.dir/src/TaskCoordinator.cpp.s
+.PHONY : src/TaskCoordinator.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -417,23 +489,29 @@ help:
 	@echo "... edit_cache"
 	@echo "... test"
 	@echo "... gazebo_sfm_plugin_generate_messages"
+	@echo "... gazebo_sfm_plugin_geneus"
+	@echo "... gazebo_sfm_plugin_generate_messages_lisp"
+	@echo "... _gazebo_sfm_plugin_generate_messages_check_deps_AssignTask"
 	@echo "... gazebo_sfm_plugin_generate_messages_cpp"
 	@echo "... _gazebo_sfm_plugin_generate_messages_check_deps_Update_waypoint"
 	@echo "... gazebo_sfm_plugin_generate_messages_nodejs"
+	@echo "... PedestrianSFMPlugin"
+	@echo "... gazebo_sfm_plugin_gencfg"
+	@echo "... gazebo_sfm_plugin_genpy"
+	@echo "... gazebo_sfm_plugin_gencpp"
+	@echo "... _gazebo_sfm_plugin_generate_messages_check_deps_Return_home"
 	@echo "... gazebo_sfm_plugin_generate_messages_eus"
-	@echo "... gazebo_sfm_plugin_geneus"
-	@echo "... gazebo_sfm_plugin_generate_messages_lisp"
 	@echo "... gazebo_sfm_plugin_genlisp"
 	@echo "... gazebo_sfm_plugin_gennodejs"
 	@echo "... install/local"
+	@echo "... task_coordinator"
 	@echo "... gazebo_sfm_plugin_generate_messages_py"
-	@echo "... PedestrianSFMPlugin"
-	@echo "... gazebo_sfm_plugin_gencpp"
-	@echo "... gazebo_sfm_plugin_genpy"
-	@echo "... gazebo_sfm_plugin_gencfg"
 	@echo "... src/PedestrianSFMPlugin.o"
 	@echo "... src/PedestrianSFMPlugin.i"
 	@echo "... src/PedestrianSFMPlugin.s"
+	@echo "... src/TaskCoordinator.o"
+	@echo "... src/TaskCoordinator.i"
+	@echo "... src/TaskCoordinator.s"
 .PHONY : help
 
 

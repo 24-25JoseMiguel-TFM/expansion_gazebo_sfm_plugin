@@ -5,6 +5,10 @@
   :depends-on (:roslisp-msg-protocol :roslisp-utils :geometry_msgs-msg
 )
   :components ((:file "_package")
+    (:file "AssignTask" :depends-on ("_package_AssignTask"))
+    (:file "_package_AssignTask" :depends-on ("_package"))
+    (:file "Return_home" :depends-on ("_package_Return_home"))
+    (:file "_package_Return_home" :depends-on ("_package"))
     (:file "Update_waypoint" :depends-on ("_package_Update_waypoint"))
     (:file "_package_Update_waypoint" :depends-on ("_package"))
   ))

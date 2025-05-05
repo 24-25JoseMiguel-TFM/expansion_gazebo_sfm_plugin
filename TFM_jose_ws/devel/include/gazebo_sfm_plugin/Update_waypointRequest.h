@@ -147,7 +147,7 @@ struct Definition< ::gazebo_sfm_plugin::Update_waypointRequest_<ContainerAllocat
 {
   static const char* value()
   {
-    return "geometry_msgs/Point[] waypoints  # Lista de waypoints (x, y, z)\n"
+    return "geometry_msgs/Point[] waypoints\n"
 "\n"
 "================================================================================\n"
 "MSG: geometry_msgs/Point\n"

@@ -12,7 +12,7 @@ class Update_waypointRequest(genpy.Message):
   _md5sum = "0511c019d3d3f0edeb56aaf3709c8aea"
   _type = "gazebo_sfm_plugin/Update_waypointRequest"
   _has_header = False  # flag to mark the presence of a Header object
-  _full_text = """geometry_msgs/Point[] waypoints  # Lista de waypoints (x, y, z)
+  _full_text = """geometry_msgs/Point[] waypoints
 
 ================================================================================
 MSG: geometry_msgs/Point

@@ -131,7 +131,7 @@ private:
 private:
   physics::TrajectoryInfoPtr trajectoryInfo;
 
-/// Servicio TFM Jose
+/// Servicios TFM Jose
 
 private:
 
@@ -139,12 +139,17 @@ private:
   gazebo_sfm_plugin::Update_waypoint::Response &res);
 
   std::unique_ptr<ros::NodeHandle> nodeHandle;  // Nodo de ROS
-  ros::ServiceServer updateWaypointService;  // Servicio para actualizar waypoints
+  ros::ServiceServer updateWaypointService;  // Servicio para actualizar waypoints  
+
+private:
+
+  bool ReturnHomeCallback(gazebo_sfm_plugin::Return_home::Request &req,
+  gazebo_sfm_plugin::Return_home::Response &res);
+  ros::ServiceServer returnHomeService;
 
 private:
 
   void reconfigureCallback(gazebo_sfm_plugin::PedestrianSFMPluginConfig &config, uint32_t level);
-
   // Servidor dynamic_reconfigure
   std::unique_ptr<dynamic_reconfigure::Server<gazebo_sfm_plugin::PedestrianSFMPluginConfig>> reconfigureServer;
 };

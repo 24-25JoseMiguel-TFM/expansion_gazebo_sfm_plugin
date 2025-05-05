@@ -54,6 +54,8 @@ CMAKE_BINARY_DIR = /home/TFM_jose_ws/build
 include gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_lisp.dir/progress.make
 
 gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_lisp: /home/TFM_jose_ws/devel/share/common-lisp/ros/gazebo_sfm_plugin/srv/Update_waypoint.lisp
+gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_lisp: /home/TFM_jose_ws/devel/share/common-lisp/ros/gazebo_sfm_plugin/srv/Return_home.lisp
+gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_lisp: /home/TFM_jose_ws/devel/share/common-lisp/ros/gazebo_sfm_plugin/srv/AssignTask.lisp
 
 
 /home/TFM_jose_ws/devel/share/common-lisp/ros/gazebo_sfm_plugin/srv/Update_waypoint.lisp: /opt/ros/noetic/lib/genlisp/gen_lisp.py
@@ -62,8 +64,21 @@ gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_lisp: /h
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/TFM_jose_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating Lisp code from gazebo_sfm_plugin/Update_waypoint.srv"
 	cd /home/TFM_jose_ws/build/gazebo_sfm_plugin-master && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/TFM_jose_ws/src/gazebo_sfm_plugin-master/srv/Update_waypoint.srv -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p gazebo_sfm_plugin -o /home/TFM_jose_ws/devel/share/common-lisp/ros/gazebo_sfm_plugin/srv
 
+/home/TFM_jose_ws/devel/share/common-lisp/ros/gazebo_sfm_plugin/srv/Return_home.lisp: /opt/ros/noetic/lib/genlisp/gen_lisp.py
+/home/TFM_jose_ws/devel/share/common-lisp/ros/gazebo_sfm_plugin/srv/Return_home.lisp: /home/TFM_jose_ws/src/gazebo_sfm_plugin-master/srv/Return_home.srv
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/TFM_jose_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Lisp code from gazebo_sfm_plugin/Return_home.srv"
+	cd /home/TFM_jose_ws/build/gazebo_sfm_plugin-master && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/TFM_jose_ws/src/gazebo_sfm_plugin-master/srv/Return_home.srv -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p gazebo_sfm_plugin -o /home/TFM_jose_ws/devel/share/common-lisp/ros/gazebo_sfm_plugin/srv
+
+/home/TFM_jose_ws/devel/share/common-lisp/ros/gazebo_sfm_plugin/srv/AssignTask.lisp: /opt/ros/noetic/lib/genlisp/gen_lisp.py
+/home/TFM_jose_ws/devel/share/common-lisp/ros/gazebo_sfm_plugin/srv/AssignTask.lisp: /home/TFM_jose_ws/src/gazebo_sfm_plugin-master/srv/AssignTask.srv
+/home/TFM_jose_ws/devel/share/common-lisp/ros/gazebo_sfm_plugin/srv/AssignTask.lisp: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/TFM_jose_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating Lisp code from gazebo_sfm_plugin/AssignTask.srv"
+	cd /home/TFM_jose_ws/build/gazebo_sfm_plugin-master && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/TFM_jose_ws/src/gazebo_sfm_plugin-master/srv/AssignTask.srv -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p gazebo_sfm_plugin -o /home/TFM_jose_ws/devel/share/common-lisp/ros/gazebo_sfm_plugin/srv
+
 gazebo_sfm_plugin_generate_messages_lisp: gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_lisp
 gazebo_sfm_plugin_generate_messages_lisp: /home/TFM_jose_ws/devel/share/common-lisp/ros/gazebo_sfm_plugin/srv/Update_waypoint.lisp
+gazebo_sfm_plugin_generate_messages_lisp: /home/TFM_jose_ws/devel/share/common-lisp/ros/gazebo_sfm_plugin/srv/Return_home.lisp
+gazebo_sfm_plugin_generate_messages_lisp: /home/TFM_jose_ws/devel/share/common-lisp/ros/gazebo_sfm_plugin/srv/AssignTask.lisp
 gazebo_sfm_plugin_generate_messages_lisp: gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_lisp.dir/build.make
 
 .PHONY : gazebo_sfm_plugin_generate_messages_lisp

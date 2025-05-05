@@ -240,10 +240,12 @@ class DEFAULT
         (*_i)->getValue(config, val);
 
         if("pedestrian_velocity"==(*_i)->name){pedestrian_velocity = boost::any_cast<double>(val);}
+        if("cyclic"==(*_i)->name){cyclic = boost::any_cast<bool>(val);}
       }
     }
 
     double pedestrian_velocity;
+bool cyclic;
 
     bool state;
     std::string name;
@@ -255,6 +257,8 @@ class DEFAULT
 
 //#line 291 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       double pedestrian_velocity;
+//#line 291 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
+      bool cyclic;
 //#line 231 "/opt/ros/noetic/share/dynamic_reconfigure/cmake/../templates/ConfigType.h.template"
 
     bool __fromMessage__(dynamic_reconfigure::Config &msg)
@@ -396,13 +400,23 @@ PedestrianSFMPluginConfig::GroupDescription<PedestrianSFMPluginConfig::DEFAULT, 
 //#line 291 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       __min__.pedestrian_velocity = 0.0;
 //#line 291 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
-      __max__.pedestrian_velocity = 1.0;
+      __max__.pedestrian_velocity = 2.0;
 //#line 291 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
-      __default__.pedestrian_velocity = 0.5;
+      __default__.pedestrian_velocity = 0.8;
 //#line 291 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       Default.abstract_parameters.push_back(PedestrianSFMPluginConfig::AbstractParamDescriptionConstPtr(new PedestrianSFMPluginConfig::ParamDescription<double>("pedestrian_velocity", "double", 0, "Velocidad peaton", "", &PedestrianSFMPluginConfig::pedestrian_velocity)));
 //#line 291 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       __param_descriptions__.push_back(PedestrianSFMPluginConfig::AbstractParamDescriptionConstPtr(new PedestrianSFMPluginConfig::ParamDescription<double>("pedestrian_velocity", "double", 0, "Velocidad peaton", "", &PedestrianSFMPluginConfig::pedestrian_velocity)));
+//#line 291 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
+      __min__.cyclic = 0;
+//#line 291 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
+      __max__.cyclic = 1;
+//#line 291 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
+      __default__.cyclic = 0;
+//#line 291 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
+      Default.abstract_parameters.push_back(PedestrianSFMPluginConfig::AbstractParamDescriptionConstPtr(new PedestrianSFMPluginConfig::ParamDescription<bool>("cyclic", "bool", 0, "Si el peatón repitira los waypoints tras realizar la trayectoria", "", &PedestrianSFMPluginConfig::cyclic)));
+//#line 291 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
+      __param_descriptions__.push_back(PedestrianSFMPluginConfig::AbstractParamDescriptionConstPtr(new PedestrianSFMPluginConfig::ParamDescription<bool>("cyclic", "bool", 0, "Si el peatón repitira los waypoints tras realizar la trayectoria", "", &PedestrianSFMPluginConfig::cyclic)));
 //#line 246 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       Default.convertParams();
 //#line 246 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"

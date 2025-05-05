@@ -1,6 +1,6 @@
 # generated from genmsg/cmake/pkg-genmsg.cmake.em
 
-message(STATUS "gazebo_sfm_plugin: 0 messages, 1 services")
+message(STATUS "gazebo_sfm_plugin: 0 messages, 3 services")
 
 set(MSG_I_FLAGS "-Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg;-Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg")
 
@@ -22,6 +22,16 @@ add_custom_target(_gazebo_sfm_plugin_generate_messages_check_deps_${_filename}
   COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "gazebo_sfm_plugin" "/home/TFM_jose_ws/src/gazebo_sfm_plugin-master/srv/Update_waypoint.srv" "geometry_msgs/Point"
 )
 
+get_filename_component(_filename "/home/TFM_jose_ws/src/gazebo_sfm_plugin-master/srv/Return_home.srv" NAME_WE)
+add_custom_target(_gazebo_sfm_plugin_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "gazebo_sfm_plugin" "/home/TFM_jose_ws/src/gazebo_sfm_plugin-master/srv/Return_home.srv" ""
+)
+
+get_filename_component(_filename "/home/TFM_jose_ws/src/gazebo_sfm_plugin-master/srv/AssignTask.srv" NAME_WE)
+add_custom_target(_gazebo_sfm_plugin_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "gazebo_sfm_plugin" "/home/TFM_jose_ws/src/gazebo_sfm_plugin-master/srv/AssignTask.srv" "geometry_msgs/Point"
+)
+
 #
 #  langs = gencpp;geneus;genlisp;gennodejs;genpy
 #
@@ -32,6 +42,18 @@ add_custom_target(_gazebo_sfm_plugin_generate_messages_check_deps_${_filename}
 ### Generating Services
 _generate_srv_cpp(gazebo_sfm_plugin
   "/home/TFM_jose_ws/src/gazebo_sfm_plugin-master/srv/Update_waypoint.srv"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/gazebo_sfm_plugin
+)
+_generate_srv_cpp(gazebo_sfm_plugin
+  "/home/TFM_jose_ws/src/gazebo_sfm_plugin-master/srv/Return_home.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/gazebo_sfm_plugin
+)
+_generate_srv_cpp(gazebo_sfm_plugin
+  "/home/TFM_jose_ws/src/gazebo_sfm_plugin-master/srv/AssignTask.srv"
   "${MSG_I_FLAGS}"
   "/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/gazebo_sfm_plugin
@@ -51,6 +73,10 @@ add_dependencies(gazebo_sfm_plugin_generate_messages gazebo_sfm_plugin_generate_
 # add dependencies to all check dependencies targets
 get_filename_component(_filename "/home/TFM_jose_ws/src/gazebo_sfm_plugin-master/srv/Update_waypoint.srv" NAME_WE)
 add_dependencies(gazebo_sfm_plugin_generate_messages_cpp _gazebo_sfm_plugin_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/TFM_jose_ws/src/gazebo_sfm_plugin-master/srv/Return_home.srv" NAME_WE)
+add_dependencies(gazebo_sfm_plugin_generate_messages_cpp _gazebo_sfm_plugin_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/TFM_jose_ws/src/gazebo_sfm_plugin-master/srv/AssignTask.srv" NAME_WE)
+add_dependencies(gazebo_sfm_plugin_generate_messages_cpp _gazebo_sfm_plugin_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
 add_custom_target(gazebo_sfm_plugin_gencpp)
@@ -65,6 +91,18 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS gazebo_sfm_plugin_generate_messages
 ### Generating Services
 _generate_srv_eus(gazebo_sfm_plugin
   "/home/TFM_jose_ws/src/gazebo_sfm_plugin-master/srv/Update_waypoint.srv"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
+  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/gazebo_sfm_plugin
+)
+_generate_srv_eus(gazebo_sfm_plugin
+  "/home/TFM_jose_ws/src/gazebo_sfm_plugin-master/srv/Return_home.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/gazebo_sfm_plugin
+)
+_generate_srv_eus(gazebo_sfm_plugin
+  "/home/TFM_jose_ws/src/gazebo_sfm_plugin-master/srv/AssignTask.srv"
   "${MSG_I_FLAGS}"
   "/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/gazebo_sfm_plugin
@@ -84,6 +122,10 @@ add_dependencies(gazebo_sfm_plugin_generate_messages gazebo_sfm_plugin_generate_
 # add dependencies to all check dependencies targets
 get_filename_component(_filename "/home/TFM_jose_ws/src/gazebo_sfm_plugin-master/srv/Update_waypoint.srv" NAME_WE)
 add_dependencies(gazebo_sfm_plugin_generate_messages_eus _gazebo_sfm_plugin_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/TFM_jose_ws/src/gazebo_sfm_plugin-master/srv/Return_home.srv" NAME_WE)
+add_dependencies(gazebo_sfm_plugin_generate_messages_eus _gazebo_sfm_plugin_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/TFM_jose_ws/src/gazebo_sfm_plugin-master/srv/AssignTask.srv" NAME_WE)
+add_dependencies(gazebo_sfm_plugin_generate_messages_eus _gazebo_sfm_plugin_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
 add_custom_target(gazebo_sfm_plugin_geneus)
@@ -98,6 +140,18 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS gazebo_sfm_plugin_generate_messages
 ### Generating Services
 _generate_srv_lisp(gazebo_sfm_plugin
   "/home/TFM_jose_ws/src/gazebo_sfm_plugin-master/srv/Update_waypoint.srv"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/gazebo_sfm_plugin
+)
+_generate_srv_lisp(gazebo_sfm_plugin
+  "/home/TFM_jose_ws/src/gazebo_sfm_plugin-master/srv/Return_home.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/gazebo_sfm_plugin
+)
+_generate_srv_lisp(gazebo_sfm_plugin
+  "/home/TFM_jose_ws/src/gazebo_sfm_plugin-master/srv/AssignTask.srv"
   "${MSG_I_FLAGS}"
   "/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/gazebo_sfm_plugin
@@ -117,6 +171,10 @@ add_dependencies(gazebo_sfm_plugin_generate_messages gazebo_sfm_plugin_generate_
 # add dependencies to all check dependencies targets
 get_filename_component(_filename "/home/TFM_jose_ws/src/gazebo_sfm_plugin-master/srv/Update_waypoint.srv" NAME_WE)
 add_dependencies(gazebo_sfm_plugin_generate_messages_lisp _gazebo_sfm_plugin_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/TFM_jose_ws/src/gazebo_sfm_plugin-master/srv/Return_home.srv" NAME_WE)
+add_dependencies(gazebo_sfm_plugin_generate_messages_lisp _gazebo_sfm_plugin_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/TFM_jose_ws/src/gazebo_sfm_plugin-master/srv/AssignTask.srv" NAME_WE)
+add_dependencies(gazebo_sfm_plugin_generate_messages_lisp _gazebo_sfm_plugin_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
 add_custom_target(gazebo_sfm_plugin_genlisp)
@@ -131,6 +189,18 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS gazebo_sfm_plugin_generate_messages
 ### Generating Services
 _generate_srv_nodejs(gazebo_sfm_plugin
   "/home/TFM_jose_ws/src/gazebo_sfm_plugin-master/srv/Update_waypoint.srv"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
+  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/gazebo_sfm_plugin
+)
+_generate_srv_nodejs(gazebo_sfm_plugin
+  "/home/TFM_jose_ws/src/gazebo_sfm_plugin-master/srv/Return_home.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/gazebo_sfm_plugin
+)
+_generate_srv_nodejs(gazebo_sfm_plugin
+  "/home/TFM_jose_ws/src/gazebo_sfm_plugin-master/srv/AssignTask.srv"
   "${MSG_I_FLAGS}"
   "/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/gazebo_sfm_plugin
@@ -150,6 +220,10 @@ add_dependencies(gazebo_sfm_plugin_generate_messages gazebo_sfm_plugin_generate_
 # add dependencies to all check dependencies targets
 get_filename_component(_filename "/home/TFM_jose_ws/src/gazebo_sfm_plugin-master/srv/Update_waypoint.srv" NAME_WE)
 add_dependencies(gazebo_sfm_plugin_generate_messages_nodejs _gazebo_sfm_plugin_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/TFM_jose_ws/src/gazebo_sfm_plugin-master/srv/Return_home.srv" NAME_WE)
+add_dependencies(gazebo_sfm_plugin_generate_messages_nodejs _gazebo_sfm_plugin_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/TFM_jose_ws/src/gazebo_sfm_plugin-master/srv/AssignTask.srv" NAME_WE)
+add_dependencies(gazebo_sfm_plugin_generate_messages_nodejs _gazebo_sfm_plugin_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
 add_custom_target(gazebo_sfm_plugin_gennodejs)
@@ -168,6 +242,18 @@ _generate_srv_py(gazebo_sfm_plugin
   "/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/gazebo_sfm_plugin
 )
+_generate_srv_py(gazebo_sfm_plugin
+  "/home/TFM_jose_ws/src/gazebo_sfm_plugin-master/srv/Return_home.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/gazebo_sfm_plugin
+)
+_generate_srv_py(gazebo_sfm_plugin
+  "/home/TFM_jose_ws/src/gazebo_sfm_plugin-master/srv/AssignTask.srv"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/gazebo_sfm_plugin
+)
 
 ### Generating Module File
 _generate_module_py(gazebo_sfm_plugin
@@ -182,6 +268,10 @@ add_dependencies(gazebo_sfm_plugin_generate_messages gazebo_sfm_plugin_generate_
 
 # add dependencies to all check dependencies targets
 get_filename_component(_filename "/home/TFM_jose_ws/src/gazebo_sfm_plugin-master/srv/Update_waypoint.srv" NAME_WE)
+add_dependencies(gazebo_sfm_plugin_generate_messages_py _gazebo_sfm_plugin_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/TFM_jose_ws/src/gazebo_sfm_plugin-master/srv/Return_home.srv" NAME_WE)
+add_dependencies(gazebo_sfm_plugin_generate_messages_py _gazebo_sfm_plugin_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/TFM_jose_ws/src/gazebo_sfm_plugin-master/srv/AssignTask.srv" NAME_WE)
 add_dependencies(gazebo_sfm_plugin_generate_messages_py _gazebo_sfm_plugin_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -203,6 +293,9 @@ endif()
 if(TARGET geometry_msgs_generate_messages_cpp)
   add_dependencies(gazebo_sfm_plugin_generate_messages_cpp geometry_msgs_generate_messages_cpp)
 endif()
+if(TARGET std_msgs_generate_messages_cpp)
+  add_dependencies(gazebo_sfm_plugin_generate_messages_cpp std_msgs_generate_messages_cpp)
+endif()
 
 if(geneus_INSTALL_DIR AND EXISTS ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/gazebo_sfm_plugin)
   # install generated code
@@ -213,6 +306,9 @@ if(geneus_INSTALL_DIR AND EXISTS ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/ga
 endif()
 if(TARGET geometry_msgs_generate_messages_eus)
   add_dependencies(gazebo_sfm_plugin_generate_messages_eus geometry_msgs_generate_messages_eus)
+endif()
+if(TARGET std_msgs_generate_messages_eus)
+  add_dependencies(gazebo_sfm_plugin_generate_messages_eus std_msgs_generate_messages_eus)
 endif()
 
 if(genlisp_INSTALL_DIR AND EXISTS ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/gazebo_sfm_plugin)
@@ -225,6 +321,9 @@ endif()
 if(TARGET geometry_msgs_generate_messages_lisp)
   add_dependencies(gazebo_sfm_plugin_generate_messages_lisp geometry_msgs_generate_messages_lisp)
 endif()
+if(TARGET std_msgs_generate_messages_lisp)
+  add_dependencies(gazebo_sfm_plugin_generate_messages_lisp std_msgs_generate_messages_lisp)
+endif()
 
 if(gennodejs_INSTALL_DIR AND EXISTS ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/gazebo_sfm_plugin)
   # install generated code
@@ -235,6 +334,9 @@ if(gennodejs_INSTALL_DIR AND EXISTS ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_D
 endif()
 if(TARGET geometry_msgs_generate_messages_nodejs)
   add_dependencies(gazebo_sfm_plugin_generate_messages_nodejs geometry_msgs_generate_messages_nodejs)
+endif()
+if(TARGET std_msgs_generate_messages_nodejs)
+  add_dependencies(gazebo_sfm_plugin_generate_messages_nodejs std_msgs_generate_messages_nodejs)
 endif()
 
 if(genpy_INSTALL_DIR AND EXISTS ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/gazebo_sfm_plugin)
@@ -247,4 +349,7 @@ if(genpy_INSTALL_DIR AND EXISTS ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/gaze
 endif()
 if(TARGET geometry_msgs_generate_messages_py)
   add_dependencies(gazebo_sfm_plugin_generate_messages_py geometry_msgs_generate_messages_py)
+endif()
+if(TARGET std_msgs_generate_messages_py)
+  add_dependencies(gazebo_sfm_plugin_generate_messages_py std_msgs_generate_messages_py)
 endif()

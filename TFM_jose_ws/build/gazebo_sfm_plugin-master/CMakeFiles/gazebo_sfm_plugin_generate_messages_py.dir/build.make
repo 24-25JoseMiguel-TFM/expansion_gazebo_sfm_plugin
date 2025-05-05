@@ -54,6 +54,8 @@ CMAKE_BINARY_DIR = /home/TFM_jose_ws/build
 include gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_py.dir/progress.make
 
 gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_py: /home/TFM_jose_ws/devel/lib/python3/dist-packages/gazebo_sfm_plugin/srv/_Update_waypoint.py
+gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_py: /home/TFM_jose_ws/devel/lib/python3/dist-packages/gazebo_sfm_plugin/srv/_Return_home.py
+gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_py: /home/TFM_jose_ws/devel/lib/python3/dist-packages/gazebo_sfm_plugin/srv/_AssignTask.py
 gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_py: /home/TFM_jose_ws/devel/lib/python3/dist-packages/gazebo_sfm_plugin/srv/__init__.py
 
 
@@ -63,13 +65,28 @@ gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_py: /hom
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/TFM_jose_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating Python code from SRV gazebo_sfm_plugin/Update_waypoint"
 	cd /home/TFM_jose_ws/build/gazebo_sfm_plugin-master && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genpy/cmake/../../../lib/genpy/gensrv_py.py /home/TFM_jose_ws/src/gazebo_sfm_plugin-master/srv/Update_waypoint.srv -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p gazebo_sfm_plugin -o /home/TFM_jose_ws/devel/lib/python3/dist-packages/gazebo_sfm_plugin/srv
 
+/home/TFM_jose_ws/devel/lib/python3/dist-packages/gazebo_sfm_plugin/srv/_Return_home.py: /opt/ros/noetic/lib/genpy/gensrv_py.py
+/home/TFM_jose_ws/devel/lib/python3/dist-packages/gazebo_sfm_plugin/srv/_Return_home.py: /home/TFM_jose_ws/src/gazebo_sfm_plugin-master/srv/Return_home.srv
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/TFM_jose_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Python code from SRV gazebo_sfm_plugin/Return_home"
+	cd /home/TFM_jose_ws/build/gazebo_sfm_plugin-master && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genpy/cmake/../../../lib/genpy/gensrv_py.py /home/TFM_jose_ws/src/gazebo_sfm_plugin-master/srv/Return_home.srv -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p gazebo_sfm_plugin -o /home/TFM_jose_ws/devel/lib/python3/dist-packages/gazebo_sfm_plugin/srv
+
+/home/TFM_jose_ws/devel/lib/python3/dist-packages/gazebo_sfm_plugin/srv/_AssignTask.py: /opt/ros/noetic/lib/genpy/gensrv_py.py
+/home/TFM_jose_ws/devel/lib/python3/dist-packages/gazebo_sfm_plugin/srv/_AssignTask.py: /home/TFM_jose_ws/src/gazebo_sfm_plugin-master/srv/AssignTask.srv
+/home/TFM_jose_ws/devel/lib/python3/dist-packages/gazebo_sfm_plugin/srv/_AssignTask.py: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/TFM_jose_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating Python code from SRV gazebo_sfm_plugin/AssignTask"
+	cd /home/TFM_jose_ws/build/gazebo_sfm_plugin-master && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genpy/cmake/../../../lib/genpy/gensrv_py.py /home/TFM_jose_ws/src/gazebo_sfm_plugin-master/srv/AssignTask.srv -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p gazebo_sfm_plugin -o /home/TFM_jose_ws/devel/lib/python3/dist-packages/gazebo_sfm_plugin/srv
+
 /home/TFM_jose_ws/devel/lib/python3/dist-packages/gazebo_sfm_plugin/srv/__init__.py: /opt/ros/noetic/lib/genpy/genmsg_py.py
 /home/TFM_jose_ws/devel/lib/python3/dist-packages/gazebo_sfm_plugin/srv/__init__.py: /home/TFM_jose_ws/devel/lib/python3/dist-packages/gazebo_sfm_plugin/srv/_Update_waypoint.py
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/TFM_jose_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Python srv __init__.py for gazebo_sfm_plugin"
+/home/TFM_jose_ws/devel/lib/python3/dist-packages/gazebo_sfm_plugin/srv/__init__.py: /home/TFM_jose_ws/devel/lib/python3/dist-packages/gazebo_sfm_plugin/srv/_Return_home.py
+/home/TFM_jose_ws/devel/lib/python3/dist-packages/gazebo_sfm_plugin/srv/__init__.py: /home/TFM_jose_ws/devel/lib/python3/dist-packages/gazebo_sfm_plugin/srv/_AssignTask.py
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/TFM_jose_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating Python srv __init__.py for gazebo_sfm_plugin"
 	cd /home/TFM_jose_ws/build/gazebo_sfm_plugin-master && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py -o /home/TFM_jose_ws/devel/lib/python3/dist-packages/gazebo_sfm_plugin/srv --initpy
 
 gazebo_sfm_plugin_generate_messages_py: gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_py
 gazebo_sfm_plugin_generate_messages_py: /home/TFM_jose_ws/devel/lib/python3/dist-packages/gazebo_sfm_plugin/srv/_Update_waypoint.py
+gazebo_sfm_plugin_generate_messages_py: /home/TFM_jose_ws/devel/lib/python3/dist-packages/gazebo_sfm_plugin/srv/_Return_home.py
+gazebo_sfm_plugin_generate_messages_py: /home/TFM_jose_ws/devel/lib/python3/dist-packages/gazebo_sfm_plugin/srv/_AssignTask.py
 gazebo_sfm_plugin_generate_messages_py: /home/TFM_jose_ws/devel/lib/python3/dist-packages/gazebo_sfm_plugin/srv/__init__.py
 gazebo_sfm_plugin_generate_messages_py: gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_py.dir/build.make
 

@@ -121,7 +121,7 @@
 (setf (get gazebo_sfm_plugin::Update_waypointRequest :md5sum-) "e65fdf0b922727bc18f1f1772a8f5a15")
 (setf (get gazebo_sfm_plugin::Update_waypointRequest :datatype-) "gazebo_sfm_plugin/Update_waypointRequest")
 (setf (get gazebo_sfm_plugin::Update_waypointRequest :definition-)
-      "geometry_msgs/Point[] waypoints  # Lista de waypoints (x, y, z)
+      "geometry_msgs/Point[] waypoints
 
 ================================================================================
 MSG: geometry_msgs/Point
@@ -136,7 +136,7 @@ bool success  # Respuesta: true si la trayectoria se actualizó correctamente
 (setf (get gazebo_sfm_plugin::Update_waypointResponse :md5sum-) "e65fdf0b922727bc18f1f1772a8f5a15")
 (setf (get gazebo_sfm_plugin::Update_waypointResponse :datatype-) "gazebo_sfm_plugin/Update_waypointResponse")
 (setf (get gazebo_sfm_plugin::Update_waypointResponse :definition-)
-      "geometry_msgs/Point[] waypoints  # Lista de waypoints (x, y, z)
+      "geometry_msgs/Point[] waypoints
 
 ================================================================================
 MSG: geometry_msgs/Point

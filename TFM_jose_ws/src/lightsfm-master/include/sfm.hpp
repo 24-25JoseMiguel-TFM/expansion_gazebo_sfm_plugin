@@ -73,19 +73,19 @@ struct Agent {
   Agent()
       : desiredVelocity(0.6), radius(0.35), cyclicGoals(false),
         teleoperated(false), antimove(false), linearVelocity(0),
-        angularVelocity(0), groupId(-1) {}
+        angularVelocity(0), groupId(-1),waitingTimeLeft(0),waitAtGoalDuration(0), isWaiting(false) {}
 
   Agent(double linearVelocity, double angularVelocity)
       : desiredVelocity(0.6), radius(0.35), cyclicGoals(false),
         teleoperated(true), antimove(false), linearVelocity(linearVelocity),
-        angularVelocity(angularVelocity), groupId(-1) {}
+        angularVelocity(angularVelocity), groupId(-1),waitingTimeLeft(0),waitAtGoalDuration(0), isWaiting(false) {}
 
   Agent(const utils::Vector2d &position, const utils::Angle &yaw,
         double linearVelocity, double angularVelocity)
       : position(position), yaw(yaw), desiredVelocity(0.6), radius(0.35),
         cyclicGoals(false), teleoperated(true), antimove(false),
         linearVelocity(linearVelocity), angularVelocity(angularVelocity),
-        groupId(-1) {}
+        groupId(-1),waitingTimeLeft(0),waitAtGoalDuration(0), isWaiting(false) {}
 
   void move(double dt); // only if teleoperated
 
@@ -114,6 +114,10 @@ struct Agent {
   Parameters params;
   std::vector<utils::Vector2d> obstacles1;
   std::vector<utils::Vector2d> obstacles2;
+
+  double waitingTimeLeft = 0.0;
+  double waitAtGoalDuration = 0.0;  // Time the Agent will wait
+  bool isWaiting = false;
 };
 
 struct Group {
@@ -552,6 +556,27 @@ SocialForceModel::updatePosition(std::vector<Agent> &agents, double dt) const {
 
 inline void SocialForceModel::updatePosition(Agent &agent, double dt) const {
 
+  if (agent.goals.empty()) {
+    agent.velocity.set(0, 0);
+    agent.linearVelocity = 0;
+    agent.angularVelocity = 0;
+    agent.movement.set(0, 0);
+    agent.isWaiting = false;
+    return;
+  }
+
+  if (agent.isWaiting) {
+    agent.waitingTimeLeft -= dt;
+    if (agent.waitingTimeLeft <= 0) {
+      agent.isWaiting = false;
+    }
+    agent.velocity.set(0, 0);
+    agent.linearVelocity = 0;
+    agent.angularVelocity = 0;
+    agent.movement.set(0, 0);
+    return;
+  }
+
   utils::Vector2d initPos = agent.position;
   utils::Angle initYaw = agent.yaw;
 
@@ -575,7 +600,13 @@ inline void SocialForceModel::updatePosition(Agent &agent, double dt) const {
     if (agent.cyclicGoals) {
       agent.goals.push_back(g);
     }
+    if (agent.waitAtGoalDuration > 0) {
+      agent.isWaiting = true;
+      agent.waitingTimeLeft = agent.waitAtGoalDuration;
+    }
+
   }
+
 }
 
 } // namespace sfm

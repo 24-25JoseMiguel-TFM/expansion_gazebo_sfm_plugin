@@ -78,7 +78,7 @@ class Update_waypointRequest {
   static messageDefinition() {
     // Returns full string definition for message
     return `
-    geometry_msgs/Point[] waypoints  # Lista de waypoints (x, y, z)
+    geometry_msgs/Point[] waypoints
     
     ================================================================================
     MSG: geometry_msgs/Point

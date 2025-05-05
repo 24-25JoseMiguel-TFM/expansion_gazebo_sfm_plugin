@@ -1182,6 +1182,45 @@ gazebo_sfm_plugin_generate_messages/fast:
 .PHONY : gazebo_sfm_plugin_generate_messages/fast
 
 #=============================================================================
+# Target rules for targets named gazebo_sfm_plugin_geneus
+
+# Build rule for target.
+gazebo_sfm_plugin_geneus: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 gazebo_sfm_plugin_geneus
+.PHONY : gazebo_sfm_plugin_geneus
+
+# fast build rule for target.
+gazebo_sfm_plugin_geneus/fast:
+	$(MAKE) -f gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_geneus.dir/build.make gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_geneus.dir/build
+.PHONY : gazebo_sfm_plugin_geneus/fast
+
+#=============================================================================
+# Target rules for targets named gazebo_sfm_plugin_generate_messages_lisp
+
+# Build rule for target.
+gazebo_sfm_plugin_generate_messages_lisp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 gazebo_sfm_plugin_generate_messages_lisp
+.PHONY : gazebo_sfm_plugin_generate_messages_lisp
+
+# fast build rule for target.
+gazebo_sfm_plugin_generate_messages_lisp/fast:
+	$(MAKE) -f gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_lisp.dir/build.make gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_lisp.dir/build
+.PHONY : gazebo_sfm_plugin_generate_messages_lisp/fast
+
+#=============================================================================
+# Target rules for targets named _gazebo_sfm_plugin_generate_messages_check_deps_AssignTask
+
+# Build rule for target.
+_gazebo_sfm_plugin_generate_messages_check_deps_AssignTask: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _gazebo_sfm_plugin_generate_messages_check_deps_AssignTask
+.PHONY : _gazebo_sfm_plugin_generate_messages_check_deps_AssignTask
+
+# fast build rule for target.
+_gazebo_sfm_plugin_generate_messages_check_deps_AssignTask/fast:
+	$(MAKE) -f gazebo_sfm_plugin-master/CMakeFiles/_gazebo_sfm_plugin_generate_messages_check_deps_AssignTask.dir/build.make gazebo_sfm_plugin-master/CMakeFiles/_gazebo_sfm_plugin_generate_messages_check_deps_AssignTask.dir/build
+.PHONY : _gazebo_sfm_plugin_generate_messages_check_deps_AssignTask/fast
+
+#=============================================================================
 # Target rules for targets named gazebo_sfm_plugin_generate_messages_cpp
 
 # Build rule for target.
@@ -1221,6 +1260,71 @@ gazebo_sfm_plugin_generate_messages_nodejs/fast:
 .PHONY : gazebo_sfm_plugin_generate_messages_nodejs/fast
 
 #=============================================================================
+# Target rules for targets named PedestrianSFMPlugin
+
+# Build rule for target.
+PedestrianSFMPlugin: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 PedestrianSFMPlugin
+.PHONY : PedestrianSFMPlugin
+
+# fast build rule for target.
+PedestrianSFMPlugin/fast:
+	$(MAKE) -f gazebo_sfm_plugin-master/CMakeFiles/PedestrianSFMPlugin.dir/build.make gazebo_sfm_plugin-master/CMakeFiles/PedestrianSFMPlugin.dir/build
+.PHONY : PedestrianSFMPlugin/fast
+
+#=============================================================================
+# Target rules for targets named gazebo_sfm_plugin_gencfg
+
+# Build rule for target.
+gazebo_sfm_plugin_gencfg: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 gazebo_sfm_plugin_gencfg
+.PHONY : gazebo_sfm_plugin_gencfg
+
+# fast build rule for target.
+gazebo_sfm_plugin_gencfg/fast:
+	$(MAKE) -f gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_gencfg.dir/build.make gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_gencfg.dir/build
+.PHONY : gazebo_sfm_plugin_gencfg/fast
+
+#=============================================================================
+# Target rules for targets named gazebo_sfm_plugin_genpy
+
+# Build rule for target.
+gazebo_sfm_plugin_genpy: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 gazebo_sfm_plugin_genpy
+.PHONY : gazebo_sfm_plugin_genpy
+
+# fast build rule for target.
+gazebo_sfm_plugin_genpy/fast:
+	$(MAKE) -f gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_genpy.dir/build.make gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_genpy.dir/build
+.PHONY : gazebo_sfm_plugin_genpy/fast
+
+#=============================================================================
+# Target rules for targets named gazebo_sfm_plugin_gencpp
+
+# Build rule for target.
+gazebo_sfm_plugin_gencpp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 gazebo_sfm_plugin_gencpp
+.PHONY : gazebo_sfm_plugin_gencpp
+
+# fast build rule for target.
+gazebo_sfm_plugin_gencpp/fast:
+	$(MAKE) -f gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_gencpp.dir/build.make gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_gencpp.dir/build
+.PHONY : gazebo_sfm_plugin_gencpp/fast
+
+#=============================================================================
+# Target rules for targets named _gazebo_sfm_plugin_generate_messages_check_deps_Return_home
+
+# Build rule for target.
+_gazebo_sfm_plugin_generate_messages_check_deps_Return_home: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _gazebo_sfm_plugin_generate_messages_check_deps_Return_home
+.PHONY : _gazebo_sfm_plugin_generate_messages_check_deps_Return_home
+
+# fast build rule for target.
+_gazebo_sfm_plugin_generate_messages_check_deps_Return_home/fast:
+	$(MAKE) -f gazebo_sfm_plugin-master/CMakeFiles/_gazebo_sfm_plugin_generate_messages_check_deps_Return_home.dir/build.make gazebo_sfm_plugin-master/CMakeFiles/_gazebo_sfm_plugin_generate_messages_check_deps_Return_home.dir/build
+.PHONY : _gazebo_sfm_plugin_generate_messages_check_deps_Return_home/fast
+
+#=============================================================================
 # Target rules for targets named gazebo_sfm_plugin_generate_messages_eus
 
 # Build rule for target.
@@ -1232,32 +1336,6 @@ gazebo_sfm_plugin_generate_messages_eus: cmake_check_build_system
 gazebo_sfm_plugin_generate_messages_eus/fast:
 	$(MAKE) -f gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_eus.dir/build.make gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_eus.dir/build
 .PHONY : gazebo_sfm_plugin_generate_messages_eus/fast
-
-#=============================================================================
-# Target rules for targets named gazebo_sfm_plugin_geneus
-
-# Build rule for target.
-gazebo_sfm_plugin_geneus: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 gazebo_sfm_plugin_geneus
-.PHONY : gazebo_sfm_plugin_geneus
-
-# fast build rule for target.
-gazebo_sfm_plugin_geneus/fast:
-	$(MAKE) -f gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_geneus.dir/build.make gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_geneus.dir/build
-.PHONY : gazebo_sfm_plugin_geneus/fast
-
-#=============================================================================
-# Target rules for targets named gazebo_sfm_plugin_generate_messages_lisp
-
-# Build rule for target.
-gazebo_sfm_plugin_generate_messages_lisp: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 gazebo_sfm_plugin_generate_messages_lisp
-.PHONY : gazebo_sfm_plugin_generate_messages_lisp
-
-# fast build rule for target.
-gazebo_sfm_plugin_generate_messages_lisp/fast:
-	$(MAKE) -f gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_lisp.dir/build.make gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_lisp.dir/build
-.PHONY : gazebo_sfm_plugin_generate_messages_lisp/fast
 
 #=============================================================================
 # Target rules for targets named gazebo_sfm_plugin_genlisp
@@ -1286,6 +1364,19 @@ gazebo_sfm_plugin_gennodejs/fast:
 .PHONY : gazebo_sfm_plugin_gennodejs/fast
 
 #=============================================================================
+# Target rules for targets named task_coordinator
+
+# Build rule for target.
+task_coordinator: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 task_coordinator
+.PHONY : task_coordinator
+
+# fast build rule for target.
+task_coordinator/fast:
+	$(MAKE) -f gazebo_sfm_plugin-master/CMakeFiles/task_coordinator.dir/build.make gazebo_sfm_plugin-master/CMakeFiles/task_coordinator.dir/build
+.PHONY : task_coordinator/fast
+
+#=============================================================================
 # Target rules for targets named gazebo_sfm_plugin_generate_messages_py
 
 # Build rule for target.
@@ -1297,58 +1388,6 @@ gazebo_sfm_plugin_generate_messages_py: cmake_check_build_system
 gazebo_sfm_plugin_generate_messages_py/fast:
 	$(MAKE) -f gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_py.dir/build.make gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_py.dir/build
 .PHONY : gazebo_sfm_plugin_generate_messages_py/fast
-
-#=============================================================================
-# Target rules for targets named PedestrianSFMPlugin
-
-# Build rule for target.
-PedestrianSFMPlugin: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 PedestrianSFMPlugin
-.PHONY : PedestrianSFMPlugin
-
-# fast build rule for target.
-PedestrianSFMPlugin/fast:
-	$(MAKE) -f gazebo_sfm_plugin-master/CMakeFiles/PedestrianSFMPlugin.dir/build.make gazebo_sfm_plugin-master/CMakeFiles/PedestrianSFMPlugin.dir/build
-.PHONY : PedestrianSFMPlugin/fast
-
-#=============================================================================
-# Target rules for targets named gazebo_sfm_plugin_gencpp
-
-# Build rule for target.
-gazebo_sfm_plugin_gencpp: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 gazebo_sfm_plugin_gencpp
-.PHONY : gazebo_sfm_plugin_gencpp
-
-# fast build rule for target.
-gazebo_sfm_plugin_gencpp/fast:
-	$(MAKE) -f gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_gencpp.dir/build.make gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_gencpp.dir/build
-.PHONY : gazebo_sfm_plugin_gencpp/fast
-
-#=============================================================================
-# Target rules for targets named gazebo_sfm_plugin_genpy
-
-# Build rule for target.
-gazebo_sfm_plugin_genpy: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 gazebo_sfm_plugin_genpy
-.PHONY : gazebo_sfm_plugin_genpy
-
-# fast build rule for target.
-gazebo_sfm_plugin_genpy/fast:
-	$(MAKE) -f gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_genpy.dir/build.make gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_genpy.dir/build
-.PHONY : gazebo_sfm_plugin_genpy/fast
-
-#=============================================================================
-# Target rules for targets named gazebo_sfm_plugin_gencfg
-
-# Build rule for target.
-gazebo_sfm_plugin_gencfg: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 gazebo_sfm_plugin_gencfg
-.PHONY : gazebo_sfm_plugin_gencfg
-
-# fast build rule for target.
-gazebo_sfm_plugin_gencfg/fast:
-	$(MAKE) -f gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_gencfg.dir/build.make gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_gencfg.dir/build
-.PHONY : gazebo_sfm_plugin_gencfg/fast
 
 # Help Target
 help:
@@ -1441,19 +1480,22 @@ help:
 	@echo "... dynamic_reconfigure_generate_messages_eus"
 	@echo "... dynamic_reconfigure_gencfg"
 	@echo "... gazebo_sfm_plugin_generate_messages"
+	@echo "... gazebo_sfm_plugin_geneus"
+	@echo "... gazebo_sfm_plugin_generate_messages_lisp"
+	@echo "... _gazebo_sfm_plugin_generate_messages_check_deps_AssignTask"
 	@echo "... gazebo_sfm_plugin_generate_messages_cpp"
 	@echo "... _gazebo_sfm_plugin_generate_messages_check_deps_Update_waypoint"
 	@echo "... gazebo_sfm_plugin_generate_messages_nodejs"
+	@echo "... PedestrianSFMPlugin"
+	@echo "... gazebo_sfm_plugin_gencfg"
+	@echo "... gazebo_sfm_plugin_genpy"
+	@echo "... gazebo_sfm_plugin_gencpp"
+	@echo "... _gazebo_sfm_plugin_generate_messages_check_deps_Return_home"
 	@echo "... gazebo_sfm_plugin_generate_messages_eus"
-	@echo "... gazebo_sfm_plugin_geneus"
-	@echo "... gazebo_sfm_plugin_generate_messages_lisp"
 	@echo "... gazebo_sfm_plugin_genlisp"
 	@echo "... gazebo_sfm_plugin_gennodejs"
+	@echo "... task_coordinator"
 	@echo "... gazebo_sfm_plugin_generate_messages_py"
-	@echo "... PedestrianSFMPlugin"
-	@echo "... gazebo_sfm_plugin_gencpp"
-	@echo "... gazebo_sfm_plugin_genpy"
-	@echo "... gazebo_sfm_plugin_gencfg"
 .PHONY : help
 
 

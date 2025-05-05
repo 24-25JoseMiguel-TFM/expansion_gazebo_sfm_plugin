@@ -54,6 +54,8 @@ CMAKE_BINARY_DIR = /home/TFM_jose_ws/build
 include gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_nodejs.dir/progress.make
 
 gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_nodejs: /home/TFM_jose_ws/devel/share/gennodejs/ros/gazebo_sfm_plugin/srv/Update_waypoint.js
+gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_nodejs: /home/TFM_jose_ws/devel/share/gennodejs/ros/gazebo_sfm_plugin/srv/Return_home.js
+gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_nodejs: /home/TFM_jose_ws/devel/share/gennodejs/ros/gazebo_sfm_plugin/srv/AssignTask.js
 
 
 /home/TFM_jose_ws/devel/share/gennodejs/ros/gazebo_sfm_plugin/srv/Update_waypoint.js: /opt/ros/noetic/lib/gennodejs/gen_nodejs.py
@@ -62,8 +64,21 @@ gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_nodejs: 
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/TFM_jose_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating Javascript code from gazebo_sfm_plugin/Update_waypoint.srv"
 	cd /home/TFM_jose_ws/build/gazebo_sfm_plugin-master && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/TFM_jose_ws/src/gazebo_sfm_plugin-master/srv/Update_waypoint.srv -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p gazebo_sfm_plugin -o /home/TFM_jose_ws/devel/share/gennodejs/ros/gazebo_sfm_plugin/srv
 
+/home/TFM_jose_ws/devel/share/gennodejs/ros/gazebo_sfm_plugin/srv/Return_home.js: /opt/ros/noetic/lib/gennodejs/gen_nodejs.py
+/home/TFM_jose_ws/devel/share/gennodejs/ros/gazebo_sfm_plugin/srv/Return_home.js: /home/TFM_jose_ws/src/gazebo_sfm_plugin-master/srv/Return_home.srv
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/TFM_jose_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Javascript code from gazebo_sfm_plugin/Return_home.srv"
+	cd /home/TFM_jose_ws/build/gazebo_sfm_plugin-master && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/TFM_jose_ws/src/gazebo_sfm_plugin-master/srv/Return_home.srv -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p gazebo_sfm_plugin -o /home/TFM_jose_ws/devel/share/gennodejs/ros/gazebo_sfm_plugin/srv
+
+/home/TFM_jose_ws/devel/share/gennodejs/ros/gazebo_sfm_plugin/srv/AssignTask.js: /opt/ros/noetic/lib/gennodejs/gen_nodejs.py
+/home/TFM_jose_ws/devel/share/gennodejs/ros/gazebo_sfm_plugin/srv/AssignTask.js: /home/TFM_jose_ws/src/gazebo_sfm_plugin-master/srv/AssignTask.srv
+/home/TFM_jose_ws/devel/share/gennodejs/ros/gazebo_sfm_plugin/srv/AssignTask.js: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/TFM_jose_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating Javascript code from gazebo_sfm_plugin/AssignTask.srv"
+	cd /home/TFM_jose_ws/build/gazebo_sfm_plugin-master && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/TFM_jose_ws/src/gazebo_sfm_plugin-master/srv/AssignTask.srv -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p gazebo_sfm_plugin -o /home/TFM_jose_ws/devel/share/gennodejs/ros/gazebo_sfm_plugin/srv
+
 gazebo_sfm_plugin_generate_messages_nodejs: gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_nodejs
 gazebo_sfm_plugin_generate_messages_nodejs: /home/TFM_jose_ws/devel/share/gennodejs/ros/gazebo_sfm_plugin/srv/Update_waypoint.js
+gazebo_sfm_plugin_generate_messages_nodejs: /home/TFM_jose_ws/devel/share/gennodejs/ros/gazebo_sfm_plugin/srv/Return_home.js
+gazebo_sfm_plugin_generate_messages_nodejs: /home/TFM_jose_ws/devel/share/gennodejs/ros/gazebo_sfm_plugin/srv/AssignTask.js
 gazebo_sfm_plugin_generate_messages_nodejs: gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_nodejs.dir/build.make
 
 .PHONY : gazebo_sfm_plugin_generate_messages_nodejs

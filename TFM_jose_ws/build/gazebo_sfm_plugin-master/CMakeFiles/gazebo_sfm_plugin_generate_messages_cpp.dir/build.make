@@ -54,6 +54,8 @@ CMAKE_BINARY_DIR = /home/TFM_jose_ws/build
 include gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_cpp.dir/progress.make
 
 gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_cpp: /home/TFM_jose_ws/devel/include/gazebo_sfm_plugin/Update_waypoint.h
+gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_cpp: /home/TFM_jose_ws/devel/include/gazebo_sfm_plugin/Return_home.h
+gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_cpp: /home/TFM_jose_ws/devel/include/gazebo_sfm_plugin/AssignTask.h
 
 
 /home/TFM_jose_ws/devel/include/gazebo_sfm_plugin/Update_waypoint.h: /opt/ros/noetic/lib/gencpp/gen_cpp.py
@@ -64,8 +66,25 @@ gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_cpp: /ho
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/TFM_jose_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating C++ code from gazebo_sfm_plugin/Update_waypoint.srv"
 	cd /home/TFM_jose_ws/src/gazebo_sfm_plugin-master && /home/TFM_jose_ws/build/catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/TFM_jose_ws/src/gazebo_sfm_plugin-master/srv/Update_waypoint.srv -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p gazebo_sfm_plugin -o /home/TFM_jose_ws/devel/include/gazebo_sfm_plugin -e /opt/ros/noetic/share/gencpp/cmake/..
 
+/home/TFM_jose_ws/devel/include/gazebo_sfm_plugin/Return_home.h: /opt/ros/noetic/lib/gencpp/gen_cpp.py
+/home/TFM_jose_ws/devel/include/gazebo_sfm_plugin/Return_home.h: /home/TFM_jose_ws/src/gazebo_sfm_plugin-master/srv/Return_home.srv
+/home/TFM_jose_ws/devel/include/gazebo_sfm_plugin/Return_home.h: /opt/ros/noetic/share/gencpp/msg.h.template
+/home/TFM_jose_ws/devel/include/gazebo_sfm_plugin/Return_home.h: /opt/ros/noetic/share/gencpp/srv.h.template
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/TFM_jose_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating C++ code from gazebo_sfm_plugin/Return_home.srv"
+	cd /home/TFM_jose_ws/src/gazebo_sfm_plugin-master && /home/TFM_jose_ws/build/catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/TFM_jose_ws/src/gazebo_sfm_plugin-master/srv/Return_home.srv -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p gazebo_sfm_plugin -o /home/TFM_jose_ws/devel/include/gazebo_sfm_plugin -e /opt/ros/noetic/share/gencpp/cmake/..
+
+/home/TFM_jose_ws/devel/include/gazebo_sfm_plugin/AssignTask.h: /opt/ros/noetic/lib/gencpp/gen_cpp.py
+/home/TFM_jose_ws/devel/include/gazebo_sfm_plugin/AssignTask.h: /home/TFM_jose_ws/src/gazebo_sfm_plugin-master/srv/AssignTask.srv
+/home/TFM_jose_ws/devel/include/gazebo_sfm_plugin/AssignTask.h: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
+/home/TFM_jose_ws/devel/include/gazebo_sfm_plugin/AssignTask.h: /opt/ros/noetic/share/gencpp/msg.h.template
+/home/TFM_jose_ws/devel/include/gazebo_sfm_plugin/AssignTask.h: /opt/ros/noetic/share/gencpp/srv.h.template
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/TFM_jose_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating C++ code from gazebo_sfm_plugin/AssignTask.srv"
+	cd /home/TFM_jose_ws/src/gazebo_sfm_plugin-master && /home/TFM_jose_ws/build/catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/TFM_jose_ws/src/gazebo_sfm_plugin-master/srv/AssignTask.srv -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p gazebo_sfm_plugin -o /home/TFM_jose_ws/devel/include/gazebo_sfm_plugin -e /opt/ros/noetic/share/gencpp/cmake/..
+
 gazebo_sfm_plugin_generate_messages_cpp: gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_cpp
 gazebo_sfm_plugin_generate_messages_cpp: /home/TFM_jose_ws/devel/include/gazebo_sfm_plugin/Update_waypoint.h
+gazebo_sfm_plugin_generate_messages_cpp: /home/TFM_jose_ws/devel/include/gazebo_sfm_plugin/Return_home.h
+gazebo_sfm_plugin_generate_messages_cpp: /home/TFM_jose_ws/devel/include/gazebo_sfm_plugin/AssignTask.h
 gazebo_sfm_plugin_generate_messages_cpp: gazebo_sfm_plugin-master/CMakeFiles/gazebo_sfm_plugin_generate_messages_cpp.dir/build.make
 
 .PHONY : gazebo_sfm_plugin_generate_messages_cpp

@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "/home/TFM_jose_ws/devel/include/gazebo_sfm_plugin/AssignTask.h"
+  "/home/TFM_jose_ws/devel/include/gazebo_sfm_plugin/Return_home.h"
   "/home/TFM_jose_ws/devel/include/gazebo_sfm_plugin/Update_waypoint.h"
   "CMakeFiles/gazebo_sfm_plugin_generate_messages_cpp"
 )
