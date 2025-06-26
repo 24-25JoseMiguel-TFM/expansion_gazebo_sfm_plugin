@@ -1,0 +1,35 @@
+tasks:
+  - name: "Mesa1"
+    position:
+      x: -0.6
+      y: -1.6
+      z: 0.0
+    target_type: "both"
+
+  - name: "Mesa2"
+    position:
+      x: -2.6
+      y: -5.5
+      z: 0.0
+    target_type: "both"
+
+  - name: "Mesa3"
+    position:
+      x: 1.34
+      y: -5.5
+      z: 0.0
+    target_type: "both"
+
+  - name: "Mesa4"
+    position:
+      x: -2.7
+      y: -8.9
+      z: 0.0
+    target_type: "both"
+
+  - name: "Mesa5"
+    position:
+      x: 1.4
+      y: -8.9
+      z: 0.0
+    target_type: "both" 

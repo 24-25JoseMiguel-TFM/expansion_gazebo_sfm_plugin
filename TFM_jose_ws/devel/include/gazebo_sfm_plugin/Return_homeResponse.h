@@ -184,6 +184,8 @@ struct Printer< ::gazebo_sfm_plugin::Return_homeResponse_<ContainerAllocator> >
 {
   template<typename Stream> static void stream(Stream& s, const std::string& indent, const ::gazebo_sfm_plugin::Return_homeResponse_<ContainerAllocator>& v)
   {
+    if (false || !indent.empty())
+      s << std::endl;
     s << indent << "success: ";
     Printer<uint8_t>::stream(s, indent + "  ", v.success);
   }
