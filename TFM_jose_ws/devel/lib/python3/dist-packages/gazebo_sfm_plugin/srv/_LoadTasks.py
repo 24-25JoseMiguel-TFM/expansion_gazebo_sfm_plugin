@@ -6,27 +6,23 @@ python3 = True if sys.hexversion > 0x03000000 else False
 import genpy
 import struct
 
-import geometry_msgs.msg
 
 class LoadTasksRequest(genpy.Message):
-  _md5sum = "cb4b966d20833cec6bbbed888bd4dd89"
+  _md5sum = "4e2f7b35aeaa37e86fdac63440aae097"
   _type = "gazebo_sfm_plugin/LoadTasksRequest"
   _has_header = False  # flag to mark the presence of a Header object
-  _full_text = """bool use_file
+  _full_text = """string[] task_names
+float64[] x_humans
+float64[] y_humans
+float64[] x_robots
+float64[] y_robots
+bool[] for_humans
+bool[] for_robots
+bool use_file
 string file_path
-string[] task_names
-geometry_msgs/Point[] positions
-string[] target_types
-
-================================================================================
-MSG: geometry_msgs/Point
-# This contains the position of a point in free space
-float64 x
-float64 y
-float64 z
 """
-  __slots__ = ['use_file','file_path','task_names','positions','target_types']
-  _slot_types = ['bool','string','string[]','geometry_msgs/Point[]','string[]']
+  __slots__ = ['task_names','x_humans','y_humans','x_robots','y_robots','for_humans','for_robots','use_file','file_path']
+  _slot_types = ['string[]','float64[]','float64[]','float64[]','float64[]','bool[]','bool[]','bool','string']
 
   def __init__(self, *args, **kwds):
     """
@@ -36,7 +32,7 @@ float64 z
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       use_file,file_path,task_names,positions,target_types
+       task_names,x_humans,y_humans,x_robots,y_robots,for_humans,for_robots,use_file,file_path
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -45,22 +41,34 @@ float64 z
     if args or kwds:
       super(LoadTasksRequest, self).__init__(*args, **kwds)
       # message fields cannot be None, assign default values for those that are
+      if self.task_names is None:
+        self.task_names = []
+      if self.x_humans is None:
+        self.x_humans = []
+      if self.y_humans is None:
+        self.y_humans = []
+      if self.x_robots is None:
+        self.x_robots = []
+      if self.y_robots is None:
+        self.y_robots = []
+      if self.for_humans is None:
+        self.for_humans = []
+      if self.for_robots is None:
+        self.for_robots = []
       if self.use_file is None:
         self.use_file = False
       if self.file_path is None:
         self.file_path = ''
-      if self.task_names is None:
-        self.task_names = []
-      if self.positions is None:
-        self.positions = []
-      if self.target_types is None:
-        self.target_types = []
     else:
+      self.task_names = []
+      self.x_humans = []
+      self.y_humans = []
+      self.x_robots = []
+      self.y_robots = []
+      self.for_humans = []
+      self.for_robots = []
       self.use_file = False
       self.file_path = ''
-      self.task_names = []
-      self.positions = []
-      self.target_types = []
 
   def _get_types(self):
     """
@@ -74,14 +82,6 @@ float64 z
     :param buff: buffer, ``StringIO``
     """
     try:
-      _x = self.use_file
-      buff.write(_get_struct_B().pack(_x))
-      _x = self.file_path
-      length = len(_x)
-      if python3 or type(_x) == unicode:
-        _x = _x.encode('utf-8')
-        length = len(_x)
-      buff.write(struct.Struct('<I%ss'%length).pack(length, _x))
       length = len(self.task_names)
       buff.write(_struct_I.pack(length))
       for val1 in self.task_names:
@@ -90,19 +90,38 @@ float64 z
           val1 = val1.encode('utf-8')
           length = len(val1)
         buff.write(struct.Struct('<I%ss'%length).pack(length, val1))
-      length = len(self.positions)
+      length = len(self.x_humans)
       buff.write(_struct_I.pack(length))
-      for val1 in self.positions:
-        _x = val1
-        buff.write(_get_struct_3d().pack(_x.x, _x.y, _x.z))
-      length = len(self.target_types)
+      pattern = '<%sd'%length
+      buff.write(struct.Struct(pattern).pack(*self.x_humans))
+      length = len(self.y_humans)
       buff.write(_struct_I.pack(length))
-      for val1 in self.target_types:
-        length = len(val1)
-        if python3 or type(val1) == unicode:
-          val1 = val1.encode('utf-8')
-          length = len(val1)
-        buff.write(struct.Struct('<I%ss'%length).pack(length, val1))
+      pattern = '<%sd'%length
+      buff.write(struct.Struct(pattern).pack(*self.y_humans))
+      length = len(self.x_robots)
+      buff.write(_struct_I.pack(length))
+      pattern = '<%sd'%length
+      buff.write(struct.Struct(pattern).pack(*self.x_robots))
+      length = len(self.y_robots)
+      buff.write(_struct_I.pack(length))
+      pattern = '<%sd'%length
+      buff.write(struct.Struct(pattern).pack(*self.y_robots))
+      length = len(self.for_humans)
+      buff.write(_struct_I.pack(length))
+      pattern = '<%sB'%length
+      buff.write(struct.Struct(pattern).pack(*self.for_humans))
+      length = len(self.for_robots)
+      buff.write(_struct_I.pack(length))
+      pattern = '<%sB'%length
+      buff.write(struct.Struct(pattern).pack(*self.for_robots))
+      _x = self.use_file
+      buff.write(_get_struct_B().pack(_x))
+      _x = self.file_path
+      length = len(_x)
+      if python3 or type(_x) == unicode:
+        _x = _x.encode('utf-8')
+        length = len(_x)
+      buff.write(struct.Struct('<I%ss'%length).pack(length, _x))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -114,22 +133,7 @@ float64 z
     if python3:
       codecs.lookup_error("rosmsg").msg_type = self._type
     try:
-      if self.positions is None:
-        self.positions = None
       end = 0
-      start = end
-      end += 1
-      (self.use_file,) = _get_struct_B().unpack(str[start:end])
-      self.use_file = bool(self.use_file)
-      start = end
-      end += 4
-      (length,) = _struct_I.unpack(str[start:end])
-      start = end
-      end += length
-      if python3:
-        self.file_path = str[start:end].decode('utf-8', 'rosmsg')
-      else:
-        self.file_path = str[start:end]
       start = end
       end += 4
       (length,) = _struct_I.unpack(str[start:end])
@@ -148,29 +152,66 @@ float64 z
       start = end
       end += 4
       (length,) = _struct_I.unpack(str[start:end])
-      self.positions = []
-      for i in range(0, length):
-        val1 = geometry_msgs.msg.Point()
-        _x = val1
-        start = end
-        end += 24
-        (_x.x, _x.y, _x.z,) = _get_struct_3d().unpack(str[start:end])
-        self.positions.append(val1)
+      pattern = '<%sd'%length
+      start = end
+      s = struct.Struct(pattern)
+      end += s.size
+      self.x_humans = s.unpack(str[start:end])
       start = end
       end += 4
       (length,) = _struct_I.unpack(str[start:end])
-      self.target_types = []
-      for i in range(0, length):
-        start = end
-        end += 4
-        (length,) = _struct_I.unpack(str[start:end])
-        start = end
-        end += length
-        if python3:
-          val1 = str[start:end].decode('utf-8', 'rosmsg')
-        else:
-          val1 = str[start:end]
-        self.target_types.append(val1)
+      pattern = '<%sd'%length
+      start = end
+      s = struct.Struct(pattern)
+      end += s.size
+      self.y_humans = s.unpack(str[start:end])
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      pattern = '<%sd'%length
+      start = end
+      s = struct.Struct(pattern)
+      end += s.size
+      self.x_robots = s.unpack(str[start:end])
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      pattern = '<%sd'%length
+      start = end
+      s = struct.Struct(pattern)
+      end += s.size
+      self.y_robots = s.unpack(str[start:end])
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      pattern = '<%sB'%length
+      start = end
+      s = struct.Struct(pattern)
+      end += s.size
+      self.for_humans = s.unpack(str[start:end])
+      self.for_humans = list(map(bool, self.for_humans))
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      pattern = '<%sB'%length
+      start = end
+      s = struct.Struct(pattern)
+      end += s.size
+      self.for_robots = s.unpack(str[start:end])
+      self.for_robots = list(map(bool, self.for_robots))
+      start = end
+      end += 1
+      (self.use_file,) = _get_struct_B().unpack(str[start:end])
+      self.use_file = bool(self.use_file)
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      start = end
+      end += length
+      if python3:
+        self.file_path = str[start:end].decode('utf-8', 'rosmsg')
+      else:
+        self.file_path = str[start:end]
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e)  # most likely buffer underfill
@@ -183,14 +224,6 @@ float64 z
     :param numpy: numpy python module
     """
     try:
-      _x = self.use_file
-      buff.write(_get_struct_B().pack(_x))
-      _x = self.file_path
-      length = len(_x)
-      if python3 or type(_x) == unicode:
-        _x = _x.encode('utf-8')
-        length = len(_x)
-      buff.write(struct.Struct('<I%ss'%length).pack(length, _x))
       length = len(self.task_names)
       buff.write(_struct_I.pack(length))
       for val1 in self.task_names:
@@ -199,19 +232,38 @@ float64 z
           val1 = val1.encode('utf-8')
           length = len(val1)
         buff.write(struct.Struct('<I%ss'%length).pack(length, val1))
-      length = len(self.positions)
+      length = len(self.x_humans)
       buff.write(_struct_I.pack(length))
-      for val1 in self.positions:
-        _x = val1
-        buff.write(_get_struct_3d().pack(_x.x, _x.y, _x.z))
-      length = len(self.target_types)
+      pattern = '<%sd'%length
+      buff.write(self.x_humans.tostring())
+      length = len(self.y_humans)
       buff.write(_struct_I.pack(length))
-      for val1 in self.target_types:
-        length = len(val1)
-        if python3 or type(val1) == unicode:
-          val1 = val1.encode('utf-8')
-          length = len(val1)
-        buff.write(struct.Struct('<I%ss'%length).pack(length, val1))
+      pattern = '<%sd'%length
+      buff.write(self.y_humans.tostring())
+      length = len(self.x_robots)
+      buff.write(_struct_I.pack(length))
+      pattern = '<%sd'%length
+      buff.write(self.x_robots.tostring())
+      length = len(self.y_robots)
+      buff.write(_struct_I.pack(length))
+      pattern = '<%sd'%length
+      buff.write(self.y_robots.tostring())
+      length = len(self.for_humans)
+      buff.write(_struct_I.pack(length))
+      pattern = '<%sB'%length
+      buff.write(self.for_humans.tostring())
+      length = len(self.for_robots)
+      buff.write(_struct_I.pack(length))
+      pattern = '<%sB'%length
+      buff.write(self.for_robots.tostring())
+      _x = self.use_file
+      buff.write(_get_struct_B().pack(_x))
+      _x = self.file_path
+      length = len(_x)
+      if python3 or type(_x) == unicode:
+        _x = _x.encode('utf-8')
+        length = len(_x)
+      buff.write(struct.Struct('<I%ss'%length).pack(length, _x))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -224,22 +276,7 @@ float64 z
     if python3:
       codecs.lookup_error("rosmsg").msg_type = self._type
     try:
-      if self.positions is None:
-        self.positions = None
       end = 0
-      start = end
-      end += 1
-      (self.use_file,) = _get_struct_B().unpack(str[start:end])
-      self.use_file = bool(self.use_file)
-      start = end
-      end += 4
-      (length,) = _struct_I.unpack(str[start:end])
-      start = end
-      end += length
-      if python3:
-        self.file_path = str[start:end].decode('utf-8', 'rosmsg')
-      else:
-        self.file_path = str[start:end]
       start = end
       end += 4
       (length,) = _struct_I.unpack(str[start:end])
@@ -258,29 +295,66 @@ float64 z
       start = end
       end += 4
       (length,) = _struct_I.unpack(str[start:end])
-      self.positions = []
-      for i in range(0, length):
-        val1 = geometry_msgs.msg.Point()
-        _x = val1
-        start = end
-        end += 24
-        (_x.x, _x.y, _x.z,) = _get_struct_3d().unpack(str[start:end])
-        self.positions.append(val1)
+      pattern = '<%sd'%length
+      start = end
+      s = struct.Struct(pattern)
+      end += s.size
+      self.x_humans = numpy.frombuffer(str[start:end], dtype=numpy.float64, count=length)
       start = end
       end += 4
       (length,) = _struct_I.unpack(str[start:end])
-      self.target_types = []
-      for i in range(0, length):
-        start = end
-        end += 4
-        (length,) = _struct_I.unpack(str[start:end])
-        start = end
-        end += length
-        if python3:
-          val1 = str[start:end].decode('utf-8', 'rosmsg')
-        else:
-          val1 = str[start:end]
-        self.target_types.append(val1)
+      pattern = '<%sd'%length
+      start = end
+      s = struct.Struct(pattern)
+      end += s.size
+      self.y_humans = numpy.frombuffer(str[start:end], dtype=numpy.float64, count=length)
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      pattern = '<%sd'%length
+      start = end
+      s = struct.Struct(pattern)
+      end += s.size
+      self.x_robots = numpy.frombuffer(str[start:end], dtype=numpy.float64, count=length)
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      pattern = '<%sd'%length
+      start = end
+      s = struct.Struct(pattern)
+      end += s.size
+      self.y_robots = numpy.frombuffer(str[start:end], dtype=numpy.float64, count=length)
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      pattern = '<%sB'%length
+      start = end
+      s = struct.Struct(pattern)
+      end += s.size
+      self.for_humans = numpy.frombuffer(str[start:end], dtype=numpy.bool, count=length)
+      self.for_humans = list(map(bool, self.for_humans))
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      pattern = '<%sB'%length
+      start = end
+      s = struct.Struct(pattern)
+      end += s.size
+      self.for_robots = numpy.frombuffer(str[start:end], dtype=numpy.bool, count=length)
+      self.for_robots = list(map(bool, self.for_robots))
+      start = end
+      end += 1
+      (self.use_file,) = _get_struct_B().unpack(str[start:end])
+      self.use_file = bool(self.use_file)
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      start = end
+      end += length
+      if python3:
+        self.file_path = str[start:end].decode('utf-8', 'rosmsg')
+      else:
+        self.file_path = str[start:end]
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e)  # most likely buffer underfill
@@ -289,12 +363,6 @@ _struct_I = genpy.struct_I
 def _get_struct_I():
     global _struct_I
     return _struct_I
-_struct_3d = None
-def _get_struct_3d():
-    global _struct_3d
-    if _struct_3d is None:
-        _struct_3d = struct.Struct("<3d")
-    return _struct_3d
 _struct_B = None
 def _get_struct_B():
     global _struct_B
@@ -452,6 +520,6 @@ def _get_struct_B():
     return _struct_B
 class LoadTasks(object):
   _type          = 'gazebo_sfm_plugin/LoadTasks'
-  _md5sum = '3b67f7d0c861348ae151a1487a64fe7e'
+  _md5sum = 'deda9a7b2b857b0ae878e4665876836b'
   _request_class  = LoadTasksRequest
   _response_class = LoadTasksResponse

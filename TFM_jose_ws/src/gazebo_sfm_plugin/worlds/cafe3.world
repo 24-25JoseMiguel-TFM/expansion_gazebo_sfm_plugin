@@ -104,6 +104,7 @@
         <trajectory>
           <cyclic>false</cyclic>
           <waypoint>-1 2 1.25</waypoint>
+          <home>-1 2 1.25</home> 
         </trajectory>
       </plugin>
     </actor>
@@ -138,6 +139,7 @@
         <trajectory>
           <cyclic>false</cyclic>
           <waypoint>-1 -8 1.25</waypoint>
+          <home>-1 -8 1.25</home> 
         </trajectory>
       </plugin>
     </actor>
@@ -171,6 +173,7 @@
         <trajectory>
           <cyclic>false</cyclic>
           <waypoint>-1 0 1.25</waypoint>
+          <home>-1 0 1.25</home> 
         </trajectory>
       </plugin>
     </actor> 

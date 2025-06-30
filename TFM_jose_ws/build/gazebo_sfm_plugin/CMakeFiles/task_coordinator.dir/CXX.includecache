@@ -29,8 +29,6 @@ ros/builtin_message_traits.h
 -
 ros/message_operations.h
 -
-geometry_msgs/Point.h
--
 
 /home/jose/TFM_jose_ws/devel/include/gazebo_sfm_plugin/LoadTasksResponse.h
 string

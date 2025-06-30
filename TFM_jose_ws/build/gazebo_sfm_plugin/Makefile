@@ -68,6 +68,16 @@ install/fast: preinstall/fast
 	/usr/bin/cmake -P cmake_install.cmake
 .PHONY : install/fast
 
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+
+.PHONY : list_install_components/fast
+
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
@@ -124,16 +134,6 @@ test:
 test/fast: test
 
 .PHONY : test/fast
-
-# Special rule for the target list_install_components
-list_install_components:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
-.PHONY : list_install_components
-
-# Special rule for the target list_install_components
-list_install_components/fast: list_install_components
-
-.PHONY : list_install_components/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -196,6 +196,21 @@ gazebo_sfm_plugin_generate_messages_nodejs: gazebo_sfm_plugin/CMakeFiles/gazebo_
 gazebo_sfm_plugin_generate_messages_nodejs/fast:
 	cd /home/jose/TFM_jose_ws/build && $(MAKE) -f gazebo_sfm_plugin/CMakeFiles/gazebo_sfm_plugin_generate_messages_nodejs.dir/build.make gazebo_sfm_plugin/CMakeFiles/gazebo_sfm_plugin_generate_messages_nodejs.dir/build
 .PHONY : gazebo_sfm_plugin_generate_messages_nodejs/fast
+
+# Convenience name for target.
+gazebo_sfm_plugin/CMakeFiles/cafe_robot_system.dir/rule:
+	cd /home/jose/TFM_jose_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gazebo_sfm_plugin/CMakeFiles/cafe_robot_system.dir/rule
+.PHONY : gazebo_sfm_plugin/CMakeFiles/cafe_robot_system.dir/rule
+
+# Convenience name for target.
+cafe_robot_system: gazebo_sfm_plugin/CMakeFiles/cafe_robot_system.dir/rule
+
+.PHONY : cafe_robot_system
+
+# fast build rule for target.
+cafe_robot_system/fast:
+	cd /home/jose/TFM_jose_ws/build && $(MAKE) -f gazebo_sfm_plugin/CMakeFiles/cafe_robot_system.dir/build.make gazebo_sfm_plugin/CMakeFiles/cafe_robot_system.dir/build
+.PHONY : cafe_robot_system/fast
 
 # Convenience name for target.
 gazebo_sfm_plugin/CMakeFiles/_gazebo_sfm_plugin_generate_messages_check_deps_TaskAssignmentGoal.dir/rule:
@@ -542,6 +557,33 @@ task_coordinator/fast:
 	cd /home/jose/TFM_jose_ws/build && $(MAKE) -f gazebo_sfm_plugin/CMakeFiles/task_coordinator.dir/build.make gazebo_sfm_plugin/CMakeFiles/task_coordinator.dir/build
 .PHONY : task_coordinator/fast
 
+src/CafeRobotSystem.o: src/CafeRobotSystem.cpp.o
+
+.PHONY : src/CafeRobotSystem.o
+
+# target to build an object file
+src/CafeRobotSystem.cpp.o:
+	cd /home/jose/TFM_jose_ws/build && $(MAKE) -f gazebo_sfm_plugin/CMakeFiles/cafe_robot_system.dir/build.make gazebo_sfm_plugin/CMakeFiles/cafe_robot_system.dir/src/CafeRobotSystem.cpp.o
+.PHONY : src/CafeRobotSystem.cpp.o
+
+src/CafeRobotSystem.i: src/CafeRobotSystem.cpp.i
+
+.PHONY : src/CafeRobotSystem.i
+
+# target to preprocess a source file
+src/CafeRobotSystem.cpp.i:
+	cd /home/jose/TFM_jose_ws/build && $(MAKE) -f gazebo_sfm_plugin/CMakeFiles/cafe_robot_system.dir/build.make gazebo_sfm_plugin/CMakeFiles/cafe_robot_system.dir/src/CafeRobotSystem.cpp.i
+.PHONY : src/CafeRobotSystem.cpp.i
+
+src/CafeRobotSystem.s: src/CafeRobotSystem.cpp.s
+
+.PHONY : src/CafeRobotSystem.s
+
+# target to generate assembly for a file
+src/CafeRobotSystem.cpp.s:
+	cd /home/jose/TFM_jose_ws/build && $(MAKE) -f gazebo_sfm_plugin/CMakeFiles/cafe_robot_system.dir/build.make gazebo_sfm_plugin/CMakeFiles/cafe_robot_system.dir/src/CafeRobotSystem.cpp.s
+.PHONY : src/CafeRobotSystem.cpp.s
+
 src/PedestrianSFMPlugin.o: src/PedestrianSFMPlugin.cpp.o
 
 .PHONY : src/PedestrianSFMPlugin.o
@@ -603,8 +645,10 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... install"
+	@echo "... list_install_components"
 	@echo "... _gazebo_sfm_plugin_generate_messages_check_deps_Update_waypoint"
 	@echo "... gazebo_sfm_plugin_generate_messages_nodejs"
+	@echo "... cafe_robot_system"
 	@echo "... _gazebo_sfm_plugin_generate_messages_check_deps_TaskAssignmentGoal"
 	@echo "... _gazebo_sfm_plugin_generate_messages_check_deps_Return_home"
 	@echo "... gazebo_sfm_plugin_generate_messages_eus"
@@ -633,7 +677,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... task_coordinator"
 	@echo "... test"
-	@echo "... list_install_components"
+	@echo "... src/CafeRobotSystem.o"
+	@echo "... src/CafeRobotSystem.i"
+	@echo "... src/CafeRobotSystem.s"
 	@echo "... src/PedestrianSFMPlugin.o"
 	@echo "... src/PedestrianSFMPlugin.i"
 	@echo "... src/PedestrianSFMPlugin.s"

@@ -15,7 +15,6 @@
 #include <ros/builtin_message_traits.h>
 #include <ros/message_operations.h>
 
-#include <geometry_msgs/Point.h>
 
 namespace gazebo_sfm_plugin
 {
@@ -25,37 +24,57 @@ struct LoadTasksRequest_
   typedef LoadTasksRequest_<ContainerAllocator> Type;
 
   LoadTasksRequest_()
-    : use_file(false)
-    , file_path()
-    , task_names()
-    , positions()
-    , target_types()  {
+    : task_names()
+    , x_humans()
+    , y_humans()
+    , x_robots()
+    , y_robots()
+    , for_humans()
+    , for_robots()
+    , use_file(false)
+    , file_path()  {
     }
   LoadTasksRequest_(const ContainerAllocator& _alloc)
-    : use_file(false)
-    , file_path(_alloc)
-    , task_names(_alloc)
-    , positions(_alloc)
-    , target_types(_alloc)  {
+    : task_names(_alloc)
+    , x_humans(_alloc)
+    , y_humans(_alloc)
+    , x_robots(_alloc)
+    , y_robots(_alloc)
+    , for_humans(_alloc)
+    , for_robots(_alloc)
+    , use_file(false)
+    , file_path(_alloc)  {
   (void)_alloc;
     }
 
 
+
+   typedef std::vector<std::basic_string<char, std::char_traits<char>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<char>>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<std::basic_string<char, std::char_traits<char>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<char>>>> _task_names_type;
+  _task_names_type task_names;
+
+   typedef std::vector<double, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<double>> _x_humans_type;
+  _x_humans_type x_humans;
+
+   typedef std::vector<double, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<double>> _y_humans_type;
+  _y_humans_type y_humans;
+
+   typedef std::vector<double, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<double>> _x_robots_type;
+  _x_robots_type x_robots;
+
+   typedef std::vector<double, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<double>> _y_robots_type;
+  _y_robots_type y_robots;
+
+   typedef std::vector<uint8_t, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<uint8_t>> _for_humans_type;
+  _for_humans_type for_humans;
+
+   typedef std::vector<uint8_t, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<uint8_t>> _for_robots_type;
+  _for_robots_type for_robots;
 
    typedef uint8_t _use_file_type;
   _use_file_type use_file;
 
    typedef std::basic_string<char, std::char_traits<char>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<char>> _file_path_type;
   _file_path_type file_path;
-
-   typedef std::vector<std::basic_string<char, std::char_traits<char>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<char>>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<std::basic_string<char, std::char_traits<char>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<char>>>> _task_names_type;
-  _task_names_type task_names;
-
-   typedef std::vector< ::geometry_msgs::Point_<ContainerAllocator> , typename std::allocator_traits<ContainerAllocator>::template rebind_alloc< ::geometry_msgs::Point_<ContainerAllocator> >> _positions_type;
-  _positions_type positions;
-
-   typedef std::vector<std::basic_string<char, std::char_traits<char>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<char>>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<std::basic_string<char, std::char_traits<char>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<char>>>> _target_types_type;
-  _target_types_type target_types;
 
 
 
@@ -86,11 +105,15 @@ return s;
 template<typename ContainerAllocator1, typename ContainerAllocator2>
 bool operator==(const ::gazebo_sfm_plugin::LoadTasksRequest_<ContainerAllocator1> & lhs, const ::gazebo_sfm_plugin::LoadTasksRequest_<ContainerAllocator2> & rhs)
 {
-  return lhs.use_file == rhs.use_file &&
-    lhs.file_path == rhs.file_path &&
-    lhs.task_names == rhs.task_names &&
-    lhs.positions == rhs.positions &&
-    lhs.target_types == rhs.target_types;
+  return lhs.task_names == rhs.task_names &&
+    lhs.x_humans == rhs.x_humans &&
+    lhs.y_humans == rhs.y_humans &&
+    lhs.x_robots == rhs.x_robots &&
+    lhs.y_robots == rhs.y_robots &&
+    lhs.for_humans == rhs.for_humans &&
+    lhs.for_robots == rhs.for_robots &&
+    lhs.use_file == rhs.use_file &&
+    lhs.file_path == rhs.file_path;
 }
 
 template<typename ContainerAllocator1, typename ContainerAllocator2>
@@ -147,12 +170,12 @@ struct MD5Sum< ::gazebo_sfm_plugin::LoadTasksRequest_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "cb4b966d20833cec6bbbed888bd4dd89";
+    return "4e2f7b35aeaa37e86fdac63440aae097";
   }
 
   static const char* value(const ::gazebo_sfm_plugin::LoadTasksRequest_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0xcb4b966d20833cecULL;
-  static const uint64_t static_value2 = 0x6bbbed888bd4dd89ULL;
+  static const uint64_t static_value1 = 0x4e2f7b35aeaa37e8ULL;
+  static const uint64_t static_value2 = 0x6fdac63440aae097ULL;
 };
 
 template<class ContainerAllocator>
@@ -171,18 +194,15 @@ struct Definition< ::gazebo_sfm_plugin::LoadTasksRequest_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "bool use_file\n"
+    return "string[] task_names\n"
+"float64[] x_humans\n"
+"float64[] y_humans\n"
+"float64[] x_robots\n"
+"float64[] y_robots\n"
+"bool[] for_humans\n"
+"bool[] for_robots\n"
+"bool use_file\n"
 "string file_path\n"
-"string[] task_names\n"
-"geometry_msgs/Point[] positions\n"
-"string[] target_types\n"
-"\n"
-"================================================================================\n"
-"MSG: geometry_msgs/Point\n"
-"# This contains the position of a point in free space\n"
-"float64 x\n"
-"float64 y\n"
-"float64 z\n"
 ;
   }
 
@@ -201,11 +221,15 @@ namespace serialization
   {
     template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
     {
+      stream.next(m.task_names);
+      stream.next(m.x_humans);
+      stream.next(m.y_humans);
+      stream.next(m.x_robots);
+      stream.next(m.y_robots);
+      stream.next(m.for_humans);
+      stream.next(m.for_robots);
       stream.next(m.use_file);
       stream.next(m.file_path);
-      stream.next(m.task_names);
-      stream.next(m.positions);
-      stream.next(m.target_types);
     }
 
     ROS_DECLARE_ALLINONE_SERIALIZER
@@ -226,14 +250,6 @@ struct Printer< ::gazebo_sfm_plugin::LoadTasksRequest_<ContainerAllocator> >
   {
     if (false || !indent.empty())
       s << std::endl;
-    s << indent << "use_file: ";
-    Printer<uint8_t>::stream(s, indent + "  ", v.use_file);
-    if (true || !indent.empty())
-      s << std::endl;
-    s << indent << "file_path: ";
-    Printer<std::basic_string<char, std::char_traits<char>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<char>>>::stream(s, indent + "  ", v.file_path);
-    if (true || !indent.empty())
-      s << std::endl;
     s << indent << "task_names: ";
     if (v.task_names.empty() || true)
       s << "[";
@@ -249,34 +265,102 @@ struct Printer< ::gazebo_sfm_plugin::LoadTasksRequest_<ContainerAllocator> >
       s << "]";
     if (true || !indent.empty())
       s << std::endl;
-    s << indent << "positions: ";
-    if (v.positions.empty() || false)
+    s << indent << "x_humans: ";
+    if (v.x_humans.empty() || true)
       s << "[";
-    for (size_t i = 0; i < v.positions.size(); ++i)
-    {
-      if (false && i > 0)
-        s << ", ";
-      else if (!false)
-        s << std::endl << indent << "  -";
-      Printer< ::geometry_msgs::Point_<ContainerAllocator> >::stream(s, false ? std::string() : indent + "    ", v.positions[i]);
-    }
-    if (v.positions.empty() || false)
-      s << "]";
-    if (true || !indent.empty())
-      s << std::endl;
-    s << indent << "target_types: ";
-    if (v.target_types.empty() || true)
-      s << "[";
-    for (size_t i = 0; i < v.target_types.size(); ++i)
+    for (size_t i = 0; i < v.x_humans.size(); ++i)
     {
       if (true && i > 0)
         s << ", ";
       else if (!true)
         s << std::endl << indent << "  -";
-      Printer<std::basic_string<char, std::char_traits<char>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<char>>>::stream(s, true ? std::string() : indent + "    ", v.target_types[i]);
+      Printer<double>::stream(s, true ? std::string() : indent + "    ", v.x_humans[i]);
     }
-    if (v.target_types.empty() || true)
+    if (v.x_humans.empty() || true)
       s << "]";
+    if (true || !indent.empty())
+      s << std::endl;
+    s << indent << "y_humans: ";
+    if (v.y_humans.empty() || true)
+      s << "[";
+    for (size_t i = 0; i < v.y_humans.size(); ++i)
+    {
+      if (true && i > 0)
+        s << ", ";
+      else if (!true)
+        s << std::endl << indent << "  -";
+      Printer<double>::stream(s, true ? std::string() : indent + "    ", v.y_humans[i]);
+    }
+    if (v.y_humans.empty() || true)
+      s << "]";
+    if (true || !indent.empty())
+      s << std::endl;
+    s << indent << "x_robots: ";
+    if (v.x_robots.empty() || true)
+      s << "[";
+    for (size_t i = 0; i < v.x_robots.size(); ++i)
+    {
+      if (true && i > 0)
+        s << ", ";
+      else if (!true)
+        s << std::endl << indent << "  -";
+      Printer<double>::stream(s, true ? std::string() : indent + "    ", v.x_robots[i]);
+    }
+    if (v.x_robots.empty() || true)
+      s << "]";
+    if (true || !indent.empty())
+      s << std::endl;
+    s << indent << "y_robots: ";
+    if (v.y_robots.empty() || true)
+      s << "[";
+    for (size_t i = 0; i < v.y_robots.size(); ++i)
+    {
+      if (true && i > 0)
+        s << ", ";
+      else if (!true)
+        s << std::endl << indent << "  -";
+      Printer<double>::stream(s, true ? std::string() : indent + "    ", v.y_robots[i]);
+    }
+    if (v.y_robots.empty() || true)
+      s << "]";
+    if (true || !indent.empty())
+      s << std::endl;
+    s << indent << "for_humans: ";
+    if (v.for_humans.empty() || true)
+      s << "[";
+    for (size_t i = 0; i < v.for_humans.size(); ++i)
+    {
+      if (true && i > 0)
+        s << ", ";
+      else if (!true)
+        s << std::endl << indent << "  -";
+      Printer<uint8_t>::stream(s, true ? std::string() : indent + "    ", v.for_humans[i]);
+    }
+    if (v.for_humans.empty() || true)
+      s << "]";
+    if (true || !indent.empty())
+      s << std::endl;
+    s << indent << "for_robots: ";
+    if (v.for_robots.empty() || true)
+      s << "[";
+    for (size_t i = 0; i < v.for_robots.size(); ++i)
+    {
+      if (true && i > 0)
+        s << ", ";
+      else if (!true)
+        s << std::endl << indent << "  -";
+      Printer<uint8_t>::stream(s, true ? std::string() : indent + "    ", v.for_robots[i]);
+    }
+    if (v.for_robots.empty() || true)
+      s << "]";
+    if (true || !indent.empty())
+      s << std::endl;
+    s << indent << "use_file: ";
+    Printer<uint8_t>::stream(s, indent + "  ", v.use_file);
+    if (true || !indent.empty())
+      s << std::endl;
+    s << indent << "file_path: ";
+    Printer<std::basic_string<char, std::char_traits<char>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<char>>>::stream(s, indent + "  ", v.file_path);
   }
 };
 

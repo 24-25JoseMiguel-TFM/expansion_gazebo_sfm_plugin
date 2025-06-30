@@ -4,7 +4,7 @@
   
   <!-- Arguments -->
   <arg name="model" default="$(env TURTLEBOT3_MODEL)"/>
-  <arg name="map_file" default="/home/jose/mis_mapas/mi_mapa_bueno_mejorado.yaml"/>
+  <arg name="map_file" default="/home/jose/TFM_jose_ws/mis_mapas/mi_mapa_bueno_mejorado.yaml"/>
   <arg name="open_rviz" default="true"/>
   <arg name="move_forward_only" default="false"/>
   <arg name="x_pos" default="-3.9"/>
@@ -14,7 +14,7 @@
 
   <!-- Gazebo -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="world_name" value="$(find gazebo_sfm_plugin)/worlds/cafe_tfm.world"/>
+    <arg name="world_name" value="$(find gazebo_sfm_plugin)/worlds/cafe3.world"/>
   </include>
 
   <!-- Turtlebot3 -->
@@ -32,10 +32,10 @@
   <!-- Map server -->
   <node pkg="map_server" type="map_server" name="map_server" args="$(arg map_file)"/>
 
-  <!-- AMCL -->
+   <!-- AMCL -->
   <include file="$(find turtlebot3_navigation)/launch/amcl.launch">
-    <arg name="initial_pose_x" value="13.0"/>
-    <arg name="initial_pose_y" value="4.2"/>
+    <arg name="initial_pose_x" value="6.96"/>
+    <arg name="initial_pose_y" value="-4.2"/>
     <arg name="initial_pose_a" value="90"/>
   </include>
 
@@ -51,6 +51,12 @@
           args="-d $(find turtlebot3_navigation)/rviz/turtlebot3_navigation.rviz"/>
   </group>
 
-  <node name="task_coordinator" pkg="gazebo_sfm_plugin" type="task_coordinator" output="screen"/>
+    <node name="task_coordinator" pkg="gazebo_sfm_plugin" type="task_coordinator" output="screen">
+        <param name="num_pedestrians" type="int" value="3" />  <!-- 3 humanos -->
+        <param name="num_robots"     type="int" value="1" />  <!-- 1 robots -->
+    </node>
+
+  <!-- Task Robot Controller Node -->
+  <node pkg="gazebo_sfm_plugin" type="cafe_robot_system" name="task_robot_controller" output="screen"/>
 
 </launch>

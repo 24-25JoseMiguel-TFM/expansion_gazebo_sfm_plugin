@@ -19,8 +19,10 @@ class Task {
     if (initObj === null) {
       // initObj === null is a special case for deserialization where we don't initialize fields
       this.name = null;
-      this.x = null;
-      this.y = null;
+      this.x_humans = null;
+      this.y_humans = null;
+      this.x_robots = null;
+      this.y_robots = null;
       this.for_humans = null;
       this.for_robots = null;
     }
@@ -31,17 +33,29 @@ class Task {
       else {
         this.name = '';
       }
-      if (initObj.hasOwnProperty('x')) {
-        this.x = initObj.x
+      if (initObj.hasOwnProperty('x_humans')) {
+        this.x_humans = initObj.x_humans
       }
       else {
-        this.x = 0.0;
+        this.x_humans = 0.0;
       }
-      if (initObj.hasOwnProperty('y')) {
-        this.y = initObj.y
+      if (initObj.hasOwnProperty('y_humans')) {
+        this.y_humans = initObj.y_humans
       }
       else {
-        this.y = 0.0;
+        this.y_humans = 0.0;
+      }
+      if (initObj.hasOwnProperty('x_robots')) {
+        this.x_robots = initObj.x_robots
+      }
+      else {
+        this.x_robots = 0.0;
+      }
+      if (initObj.hasOwnProperty('y_robots')) {
+        this.y_robots = initObj.y_robots
+      }
+      else {
+        this.y_robots = 0.0;
       }
       if (initObj.hasOwnProperty('for_humans')) {
         this.for_humans = initObj.for_humans
@@ -62,10 +76,14 @@ class Task {
     // Serializes a message object of type Task
     // Serialize message field [name]
     bufferOffset = _serializer.string(obj.name, buffer, bufferOffset);
-    // Serialize message field [x]
-    bufferOffset = _serializer.float64(obj.x, buffer, bufferOffset);
-    // Serialize message field [y]
-    bufferOffset = _serializer.float64(obj.y, buffer, bufferOffset);
+    // Serialize message field [x_humans]
+    bufferOffset = _serializer.float64(obj.x_humans, buffer, bufferOffset);
+    // Serialize message field [y_humans]
+    bufferOffset = _serializer.float64(obj.y_humans, buffer, bufferOffset);
+    // Serialize message field [x_robots]
+    bufferOffset = _serializer.float64(obj.x_robots, buffer, bufferOffset);
+    // Serialize message field [y_robots]
+    bufferOffset = _serializer.float64(obj.y_robots, buffer, bufferOffset);
     // Serialize message field [for_humans]
     bufferOffset = _serializer.bool(obj.for_humans, buffer, bufferOffset);
     // Serialize message field [for_robots]
@@ -79,10 +97,14 @@ class Task {
     let data = new Task(null);
     // Deserialize message field [name]
     data.name = _deserializer.string(buffer, bufferOffset);
-    // Deserialize message field [x]
-    data.x = _deserializer.float64(buffer, bufferOffset);
-    // Deserialize message field [y]
-    data.y = _deserializer.float64(buffer, bufferOffset);
+    // Deserialize message field [x_humans]
+    data.x_humans = _deserializer.float64(buffer, bufferOffset);
+    // Deserialize message field [y_humans]
+    data.y_humans = _deserializer.float64(buffer, bufferOffset);
+    // Deserialize message field [x_robots]
+    data.x_robots = _deserializer.float64(buffer, bufferOffset);
+    // Deserialize message field [y_robots]
+    data.y_robots = _deserializer.float64(buffer, bufferOffset);
     // Deserialize message field [for_humans]
     data.for_humans = _deserializer.bool(buffer, bufferOffset);
     // Deserialize message field [for_robots]
@@ -93,7 +115,7 @@ class Task {
   static getMessageSize(object) {
     let length = 0;
     length += _getByteLength(object.name);
-    return length + 22;
+    return length + 38;
   }
 
   static datatype() {
@@ -103,15 +125,17 @@ class Task {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return 'de59c720fc23a7eda058f059c469339b';
+    return 'f3b3fd965b6c18a7c7b49995790c231c';
   }
 
   static messageDefinition() {
     // Returns full string definition for message
     return `
     string name
-    float64 x
-    float64 y
+    float64 x_humans
+    float64 y_humans
+    float64 x_robots
+    float64 y_robots
     bool for_humans
     bool for_robots
     `;
@@ -130,18 +154,32 @@ class Task {
       resolved.name = ''
     }
 
-    if (msg.x !== undefined) {
-      resolved.x = msg.x;
+    if (msg.x_humans !== undefined) {
+      resolved.x_humans = msg.x_humans;
     }
     else {
-      resolved.x = 0.0
+      resolved.x_humans = 0.0
     }
 
-    if (msg.y !== undefined) {
-      resolved.y = msg.y;
+    if (msg.y_humans !== undefined) {
+      resolved.y_humans = msg.y_humans;
     }
     else {
-      resolved.y = 0.0
+      resolved.y_humans = 0.0
+    }
+
+    if (msg.x_robots !== undefined) {
+      resolved.x_robots = msg.x_robots;
+    }
+    else {
+      resolved.x_robots = 0.0
+    }
+
+    if (msg.y_robots !== undefined) {
+      resolved.y_robots = msg.y_robots;
+    }
+    else {
+      resolved.y_robots = 0.0
     }
 
     if (msg.for_humans !== undefined) {

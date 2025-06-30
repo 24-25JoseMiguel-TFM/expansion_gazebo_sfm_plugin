@@ -25,15 +25,19 @@ struct Task_
 
   Task_()
     : name()
-    , x(0.0)
-    , y(0.0)
+    , x_humans(0.0)
+    , y_humans(0.0)
+    , x_robots(0.0)
+    , y_robots(0.0)
     , for_humans(false)
     , for_robots(false)  {
     }
   Task_(const ContainerAllocator& _alloc)
     : name(_alloc)
-    , x(0.0)
-    , y(0.0)
+    , x_humans(0.0)
+    , y_humans(0.0)
+    , x_robots(0.0)
+    , y_robots(0.0)
     , for_humans(false)
     , for_robots(false)  {
   (void)_alloc;
@@ -44,11 +48,17 @@ struct Task_
    typedef std::basic_string<char, std::char_traits<char>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<char>> _name_type;
   _name_type name;
 
-   typedef double _x_type;
-  _x_type x;
+   typedef double _x_humans_type;
+  _x_humans_type x_humans;
 
-   typedef double _y_type;
-  _y_type y;
+   typedef double _y_humans_type;
+  _y_humans_type y_humans;
+
+   typedef double _x_robots_type;
+  _x_robots_type x_robots;
+
+   typedef double _y_robots_type;
+  _y_robots_type y_robots;
 
    typedef uint8_t _for_humans_type;
   _for_humans_type for_humans;
@@ -86,8 +96,10 @@ template<typename ContainerAllocator1, typename ContainerAllocator2>
 bool operator==(const ::gazebo_sfm_plugin::Task_<ContainerAllocator1> & lhs, const ::gazebo_sfm_plugin::Task_<ContainerAllocator2> & rhs)
 {
   return lhs.name == rhs.name &&
-    lhs.x == rhs.x &&
-    lhs.y == rhs.y &&
+    lhs.x_humans == rhs.x_humans &&
+    lhs.y_humans == rhs.y_humans &&
+    lhs.x_robots == rhs.x_robots &&
+    lhs.y_robots == rhs.y_robots &&
     lhs.for_humans == rhs.for_humans &&
     lhs.for_robots == rhs.for_robots;
 }
@@ -146,12 +158,12 @@ struct MD5Sum< ::gazebo_sfm_plugin::Task_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "de59c720fc23a7eda058f059c469339b";
+    return "f3b3fd965b6c18a7c7b49995790c231c";
   }
 
   static const char* value(const ::gazebo_sfm_plugin::Task_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0xde59c720fc23a7edULL;
-  static const uint64_t static_value2 = 0xa058f059c469339bULL;
+  static const uint64_t static_value1 = 0xf3b3fd965b6c18a7ULL;
+  static const uint64_t static_value2 = 0xc7b49995790c231cULL;
 };
 
 template<class ContainerAllocator>
@@ -171,8 +183,10 @@ struct Definition< ::gazebo_sfm_plugin::Task_<ContainerAllocator> >
   static const char* value()
   {
     return "string name\n"
-"float64 x\n"
-"float64 y\n"
+"float64 x_humans\n"
+"float64 y_humans\n"
+"float64 x_robots\n"
+"float64 y_robots\n"
 "bool for_humans\n"
 "bool for_robots\n"
 ;
@@ -194,8 +208,10 @@ namespace serialization
     template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
     {
       stream.next(m.name);
-      stream.next(m.x);
-      stream.next(m.y);
+      stream.next(m.x_humans);
+      stream.next(m.y_humans);
+      stream.next(m.x_robots);
+      stream.next(m.y_robots);
       stream.next(m.for_humans);
       stream.next(m.for_robots);
     }
@@ -222,12 +238,20 @@ struct Printer< ::gazebo_sfm_plugin::Task_<ContainerAllocator> >
     Printer<std::basic_string<char, std::char_traits<char>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<char>>>::stream(s, indent + "  ", v.name);
     if (true || !indent.empty())
       s << std::endl;
-    s << indent << "x: ";
-    Printer<double>::stream(s, indent + "  ", v.x);
+    s << indent << "x_humans: ";
+    Printer<double>::stream(s, indent + "  ", v.x_humans);
     if (true || !indent.empty())
       s << std::endl;
-    s << indent << "y: ";
-    Printer<double>::stream(s, indent + "  ", v.y);
+    s << indent << "y_humans: ";
+    Printer<double>::stream(s, indent + "  ", v.y_humans);
+    if (true || !indent.empty())
+      s << std::endl;
+    s << indent << "x_robots: ";
+    Printer<double>::stream(s, indent + "  ", v.x_robots);
+    if (true || !indent.empty())
+      s << std::endl;
+    s << indent << "y_robots: ";
+    Printer<double>::stream(s, indent + "  ", v.y_robots);
     if (true || !indent.empty())
       s << std::endl;
     s << indent << "for_humans: ";

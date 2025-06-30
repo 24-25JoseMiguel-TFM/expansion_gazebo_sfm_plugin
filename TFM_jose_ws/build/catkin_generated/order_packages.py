@@ -1,5 +1,5 @@
 # generated from catkin/cmake/template/order_packages.context.py.in
-source_root_dir = '/home/TFM_jose_ws/src'
+source_root_dir = '/home/jose/TFM_jose_ws/src'
 whitelisted_packages = ''.split(';') if '' != '' else []
 blacklisted_packages = ''.split(';') if '' != '' else []
-underlay_workspaces = '/home/TFM_jose_ws/devel;/opt/ros/noetic'.split(';') if '/home/TFM_jose_ws/devel;/opt/ros/noetic' != '' else []
+underlay_workspaces = '/home/jose/TFM_jose_ws/devel;/opt/ros/noetic'.split(';') if '/home/jose/TFM_jose_ws/devel;/opt/ros/noetic' != '' else []

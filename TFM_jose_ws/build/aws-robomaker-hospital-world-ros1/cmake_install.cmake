@@ -1,8 +1,8 @@
-# Install script for directory: /home/TFM_jose_ws/src/aws-robomaker-hospital-world-ros1
+# Install script for directory: /home/jose/TFM_jose_ws/src/aws-robomaker-hospital-world-ros1
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/TFM_jose_ws/install")
+  set(CMAKE_INSTALL_PREFIX "/home/jose/TFM_jose_ws/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -38,26 +38,26 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/TFM_jose_ws/build/aws-robomaker-hospital-world-ros1/catkin_generated/installspace/aws_robomaker_hospital_world.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/jose/TFM_jose_ws/build/aws-robomaker-hospital-world-ros1/catkin_generated/installspace/aws_robomaker_hospital_world.pc")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/aws_robomaker_hospital_world/cmake" TYPE FILE FILES
-    "/home/TFM_jose_ws/build/aws-robomaker-hospital-world-ros1/catkin_generated/installspace/aws_robomaker_hospital_worldConfig.cmake"
-    "/home/TFM_jose_ws/build/aws-robomaker-hospital-world-ros1/catkin_generated/installspace/aws_robomaker_hospital_worldConfig-version.cmake"
+    "/home/jose/TFM_jose_ws/build/aws-robomaker-hospital-world-ros1/catkin_generated/installspace/aws_robomaker_hospital_worldConfig.cmake"
+    "/home/jose/TFM_jose_ws/build/aws-robomaker-hospital-world-ros1/catkin_generated/installspace/aws_robomaker_hospital_worldConfig-version.cmake"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/aws_robomaker_hospital_world" TYPE FILE FILES "/home/TFM_jose_ws/src/aws-robomaker-hospital-world-ros1/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/aws_robomaker_hospital_world" TYPE FILE FILES "/home/jose/TFM_jose_ws/src/aws-robomaker-hospital-world-ros1/package.xml")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/aws_robomaker_hospital_world" TYPE DIRECTORY FILES
-    "/home/TFM_jose_ws/src/aws-robomaker-hospital-world-ros1/launch"
-    "/home/TFM_jose_ws/src/aws-robomaker-hospital-world-ros1/models"
-    "/home/TFM_jose_ws/src/aws-robomaker-hospital-world-ros1/fuel_models"
-    "/home/TFM_jose_ws/src/aws-robomaker-hospital-world-ros1/worlds"
+    "/home/jose/TFM_jose_ws/src/aws-robomaker-hospital-world-ros1/launch"
+    "/home/jose/TFM_jose_ws/src/aws-robomaker-hospital-world-ros1/models"
+    "/home/jose/TFM_jose_ws/src/aws-robomaker-hospital-world-ros1/fuel_models"
+    "/home/jose/TFM_jose_ws/src/aws-robomaker-hospital-world-ros1/worlds"
     )
 endif()
 

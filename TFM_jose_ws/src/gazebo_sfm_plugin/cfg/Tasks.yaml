@@ -1,35 +1,56 @@
 tasks:
   - name: "Mesa1"
-    position:
-      x: -0.6
-      y: -1.6
-      z: 0.0
-    target_type: "both"
+    x_humans: -0.6
+    y_humans: -1.6
+    x_robots: 5.6
+    y_robots: -0.97
+    for_humans: true
+    for_robots: true
 
   - name: "Mesa2"
-    position:
-      x: -2.6
-      y: -5.5
-      z: 0.0
-    target_type: "both"
+    x_humans: -2.6
+    y_humans: -5.5
+    x_robots: 10
+    y_robots: -1.27
+    for_humans: true
+    for_robots: true
 
   - name: "Mesa3"
-    position:
-      x: 1.34
-      y: -5.5
-      z: 0.0
-    target_type: "both"
+    x_humans: 1.34
+    y_humans: -5.5
+    x_robots: 8.7
+    y_robots: 2.5
+    for_humans: true
+    for_robots: true
 
   - name: "Mesa4"
-    position:
-      x: -2.7
-      y: -8.9
-      z: 0.0
-    target_type: "both"
+    x_humans: -2.7
+    y_humans: -8.9
+    x_robots: 0.0
+    y_robots: 0.0
+    for_humans: true
+    for_robots: false
 
   - name: "Mesa5"
-    position:
-      x: 1.4
-      y: -8.9
-      z: 0.0
-    target_type: "both" 
+    x_humans: 1.4
+    y_humans: -8.9
+    x_robots: 0.0
+    y_robots: 0.0
+    for_humans: true
+    for_robots: false
+
+  - name: "Nevera"
+    x_humans: -3.2
+    y_humans: 0.2
+    x_robots: 0.0
+    y_robots: 0.0
+    for_humans: true
+    for_robots: false
+
+  - name: "Puerta trasera"
+    x_humans: 0.0
+    y_humans: 0.0
+    x_robots: -6.0
+    y_robots: -1.78
+    for_humans: false
+    for_robots: true

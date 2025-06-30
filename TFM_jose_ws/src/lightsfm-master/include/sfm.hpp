@@ -28,6 +28,7 @@
 #include <cmath>
 #include <unordered_map>
 #include <vector>
+#include <list>
 
 namespace sfm {
 struct Forces {
@@ -47,7 +48,7 @@ struct Parameters {
       : forceFactorDesired(2.0), forceFactorObstacle(10),
         forceSigmaObstacle(0.2), forceFactorSocial(2.1),
         forceFactorGroupGaze(3.0), forceFactorGroupCoherence(2.0),
-        forceFactorGroupRepulsion(1.0), lambda(2.0), gamma(0.35), n(2.0),
+        forceFactorGroupRepulsion(1.0), lambda(2.0), gamma(0.35), n(2.0), epsilon(0.005),
         nPrime(3.0), relaxationTime(0.5) {}
 
   double forceFactorDesired;
@@ -60,6 +61,7 @@ struct Parameters {
   double lambda;
   double gamma;
   double n;
+  double epsilon;
   double nPrime;
   double relaxationTime;
 };
@@ -73,19 +75,21 @@ struct Agent {
   Agent()
       : desiredVelocity(0.6), radius(0.35), cyclicGoals(false),
         teleoperated(false), antimove(false), linearVelocity(0),
-        angularVelocity(0), groupId(-1),waitingTimeLeft(0),waitAtGoalDuration(0), isWaiting(false) {}
+        angularVelocity(0), groupId(-1), isWaiting(false), waitingTimeLeft(0),
+        waitAtGoalDuration(0) {}
 
   Agent(double linearVelocity, double angularVelocity)
       : desiredVelocity(0.6), radius(0.35), cyclicGoals(false),
         teleoperated(true), antimove(false), linearVelocity(linearVelocity),
-        angularVelocity(angularVelocity), groupId(-1),waitingTimeLeft(0),waitAtGoalDuration(0), isWaiting(false) {}
+        angularVelocity(angularVelocity), groupId(-1), isWaiting(false),
+        waitingTimeLeft(0), waitAtGoalDuration(0) {}
 
   Agent(const utils::Vector2d &position, const utils::Angle &yaw,
         double linearVelocity, double angularVelocity)
       : position(position), yaw(yaw), desiredVelocity(0.6), radius(0.35),
         cyclicGoals(false), teleoperated(true), antimove(false),
         linearVelocity(linearVelocity), angularVelocity(angularVelocity),
-        groupId(-1),waitingTimeLeft(0),waitAtGoalDuration(0), isWaiting(false) {}
+        groupId(-1), isWaiting(false), waitingTimeLeft(0), waitAtGoalDuration(0) {}
 
   void move(double dt); // only if teleoperated
 
@@ -115,9 +119,10 @@ struct Agent {
   std::vector<utils::Vector2d> obstacles1;
   std::vector<utils::Vector2d> obstacles2;
 
-  double waitingTimeLeft = 0.0;
-  double waitAtGoalDuration = 0.0;  // Time the Agent will wait
-  bool isWaiting = false;
+  // Waiting behavior variables
+  bool isWaiting;          // Flag to indicate if the agent is currently waiting
+  double waitingTimeLeft;  // Remaining waiting time
+  double waitAtGoalDuration; // Duration to wait when reaching a goal (0 means no waiting)
 };
 
 struct Group {
@@ -163,7 +168,7 @@ private:
 inline utils::Vector2d
 SocialForceModel::computeDesiredForce(Agent &agent) const {
   utils::Vector2d desiredDirection;
-  if (!agent.goals.empty() &&
+  if (!agent.goals.empty() && !agent.isWaiting &&
       (agent.goals.front().center - agent.position).norm() >
           agent.goals.front().radius) {
     utils::Vector2d diff = agent.goals.front().center - agent.position;
@@ -182,27 +187,6 @@ SocialForceModel::computeDesiredForce(Agent &agent) const {
 
 inline void SocialForceModel::computeObstacleForce(Agent &agent,
                                                    Map *map) const {
-
-  // Initially, the obstacles were expected to be in robot local frame. We have
-  // replaced it to work in the same frame of the other forces.
-  //   if (agent.obstacles1.size() > 0 || agent.obstacles2.size() > 0) {
-  //     agent.forces.obstacleForce.set(0, 0);
-  //     for (unsigned i = 0; i < agent.obstacles1.size(); i++) {
-  //       double distance = agent.obstacles1[i].norm() - agent.radius;
-  //       agent.forces.obstacleForce +=
-  //           agent.params.forceFactorObstacle *
-  //           std::exp(-distance / agent.params.forceSigmaObstacle) *
-  //           (-agent.obstacles1[i]).normalized();
-  //     }
-  //     for (unsigned i = 0; i < agent.obstacles2.size(); i++) {
-  //       double distance = agent.obstacles2[i].norm() - agent.radius;
-  //       agent.forces.obstacleForce +=
-  //           agent.params.forceFactorObstacle *
-  //           std::exp(-distance / agent.params.forceSigmaObstacle) *
-  //           (-agent.obstacles2[i]).normalized();
-  //     }
-  //     agent.forces.obstacleForce /=
-  //         (double)(agent.obstacles1.size() + agent.obstacles2.size());
   if (agent.obstacles1.size() > 0 || agent.obstacles2.size() > 0) {
     agent.forces.obstacleForce.set(0, 0);
     for (unsigned i = 0; i < agent.obstacles1.size(); i++) {
@@ -221,8 +205,6 @@ inline void SocialForceModel::computeObstacleForce(Agent &agent,
           std::exp(-distance / agent.params.forceSigmaObstacle) *
           minDiff.normalized();
     }
-    agent.forces.obstacleForce /=
-        (double)(agent.obstacles1.size() + agent.obstacles2.size());
   } else if (map != NULL) {
     const Map::Obstacle &obs = map->getNearestObstacle(agent.position);
     utils::Vector2d minDiff = agent.position - obs.position;
@@ -246,6 +228,7 @@ SocialForceModel::computeSocialForce(unsigned index,
       continue;
     }
     utils::Vector2d diff = agents[i].position - agent.position;
+
     utils::Vector2d diffDirection = diff.normalized();
     utils::Vector2d velDiff = agent.velocity - agents[i].velocity;
     utils::Vector2d interactionVector =
@@ -253,9 +236,11 @@ SocialForceModel::computeSocialForce(unsigned index,
     double interactionLength = interactionVector.norm();
     utils::Vector2d interactionDirection =
         interactionVector / interactionLength;
-    utils::Angle theta = interactionDirection.angleTo(diffDirection);
+
     double B = agent.params.gamma * interactionLength;
-    double thetaRad = theta.toRadian();
+    utils::Angle theta = interactionDirection.angleTo(diffDirection);
+    theta.setRadian(theta.toRadian() + (agent.params.epsilon * B));
+    double thetaRad = theta.toRadian()  ;
     double forceVelocityAmount =
         -std::exp(-diff.norm() / B - PW(agent.params.nPrime * B * thetaRad));
     double forceAngleAmount =
@@ -276,7 +261,6 @@ SocialForceModel::computeSocialForce(unsigned index,
 inline void
 SocialForceModel::computeSocialForce(Agent &me,
                                      std::vector<Agent> &agents) const {
-  // Agent& agent = agents[index];
   me.forces.socialForce.set(0, 0);
   for (unsigned i = 0; i < agents.size(); i++) {
     if (agents[i].id == me.id) {
@@ -303,11 +287,6 @@ SocialForceModel::computeSocialForce(Agent &me,
         forceAngleAmount * interactionDirection.leftNormalVector();
     me.forces.socialForce +=
         me.params.forceFactorSocial * (forceVelocity + forceAngle);
-    // if (i == 0)
-    //{
-    //  agent.forces.robotSocialForce =
-    //      agent.params.forceFactorSocial * (forceVelocity + forceAngle);
-    //}
   }
 }
 
@@ -387,7 +366,6 @@ inline void SocialForceModel::computeGroupForce(
 inline void SocialForceModel::computeGroupForce(
     Agent &me, const utils::Vector2d &desiredDirection,
     std::vector<Agent> &agents, Group &group) const {
-  // Agent& agent = agents[index];
   me.forces.groupForce.set(0, 0);
   me.forces.groupGazeForce.set(0, 0);
   me.forces.groupCoherenceForce.set(0, 0);
@@ -436,9 +414,7 @@ inline void SocialForceModel::computeGroupForce(
 #endif
 
   // Repulsion Force
-  // Index 0 -> me
   for (unsigned i = 1; i < group.agents.size(); i++) {
-
     utils::Vector2d diff = me.position - agents.at(group.agents[i]).position;
     if (diff.norm() < me.radius + agents.at(group.agents[i]).radius) {
       me.forces.groupRepulsionForce += diff;
@@ -521,12 +497,25 @@ inline std::vector<Agent> &
 SocialForceModel::updatePosition(std::vector<Agent> &agents, double dt) const {
   for (unsigned i = 0; i < agents.size(); i++) {
     utils::Vector2d initPos = agents[i].position;
-    if (agents[i].teleoperated) {
+    
+    if (agents[i].isWaiting) {
+      // Agent is waiting - reduce remaining time and don't move
+      agents[i].waitingTimeLeft -= dt;
+      if (agents[i].waitingTimeLeft <= 0) {
+        agents[i].isWaiting = false;
+        agents[i].waitingTimeLeft = 0;
+      }
+      
+      // Set velocity to zero while waiting
+      agents[i].velocity.set(0, 0);
+      agents[i].linearVelocity = 0;
+      agents[i].angularVelocity = 0;
+    } else if (agents[i].teleoperated) {
       double imd = agents[i].linearVelocity * dt;
       utils::Vector2d inc(imd * std::cos(agents[i].yaw.toRadian() +
-                                         agents[i].angularVelocity * dt * 0.5),
+                         agents[i].angularVelocity * dt * 0.5),
                           imd * std::sin(agents[i].yaw.toRadian() +
-                                         agents[i].angularVelocity * dt * 0.5));
+                         agents[i].angularVelocity * dt * 0.5));
       agents[i].yaw += utils::Angle::fromRadian(agents[i].angularVelocity * dt);
       agents[i].position += inc;
       agents[i].velocity.set(agents[i].linearVelocity * agents[i].yaw.cos(),
@@ -540,14 +529,24 @@ SocialForceModel::updatePosition(std::vector<Agent> &agents, double dt) const {
       agents[i].yaw = agents[i].velocity.angle();
       agents[i].position += agents[i].velocity * dt;
     }
+
     agents[i].movement = agents[i].position - initPos;
+    
+    // Check if reached a goal and should start waiting
     if (!agents[i].goals.empty() &&
         (agents[i].goals.front().center - agents[i].position).norm() <=
             agents[i].goals.front().radius) {
-      Goal g = agents[i].goals.front();
-      agents[i].goals.pop_front();
-      if (agents[i].cyclicGoals) {
-        agents[i].goals.push_back(g);
+      if (agents[i].waitAtGoalDuration > 0) {
+        // Start waiting at this goal
+        agents[i].isWaiting = true;
+        agents[i].waitingTimeLeft = agents[i].waitAtGoalDuration;
+      } else {
+        // Immediate goal transition
+        Goal g = agents[i].goals.front();
+        agents[i].goals.pop_front();
+        if (agents[i].cyclicGoals) {
+          agents[i].goals.push_back(g);
+        }
       }
     }
   }
@@ -555,58 +554,54 @@ SocialForceModel::updatePosition(std::vector<Agent> &agents, double dt) const {
 }
 
 inline void SocialForceModel::updatePosition(Agent &agent, double dt) const {
-
-  if (agent.goals.empty()) {
-    agent.velocity.set(0, 0);
-    agent.linearVelocity = 0;
-    agent.angularVelocity = 0;
-    agent.movement.set(0, 0);
-    agent.isWaiting = false;
-    return;
-  }
-
-  if (agent.isWaiting) {
-    agent.waitingTimeLeft -= dt;
-    if (agent.waitingTimeLeft <= 0) {
-      agent.isWaiting = false;
-    }
-    agent.velocity.set(0, 0);
-    agent.linearVelocity = 0;
-    agent.angularVelocity = 0;
-    agent.movement.set(0, 0);
-    return;
-  }
-
   utils::Vector2d initPos = agent.position;
   utils::Angle initYaw = agent.yaw;
 
-  agent.velocity += agent.forces.globalForce * dt;
-  if (agent.velocity.norm() > agent.desiredVelocity) {
-    agent.velocity.normalize();
-    agent.velocity *= agent.desiredVelocity;
-  }
-  agent.yaw = agent.velocity.angle();
-  agent.position += agent.velocity * dt;
+  if (agent.isWaiting) {
+    // Agent is waiting - reduce remaining time and don't move
+    agent.waitingTimeLeft -= dt;
+    if (agent.waitingTimeLeft <= 0) {
+      agent.isWaiting = false;
+      agent.waitingTimeLeft = 0;
+    }
+    
+    // Set velocity to zero while waiting
+    agent.velocity.set(0, 0);
+    agent.linearVelocity = 0;
+    agent.angularVelocity = 0;
+  } else {
+    // Normal movement when not waiting
+    agent.velocity += agent.forces.globalForce * dt;
+    if (agent.velocity.norm() > agent.desiredVelocity) {
+      agent.velocity.normalize();
+      agent.velocity *= agent.desiredVelocity;
+    }
+    agent.yaw = agent.velocity.angle();
+    agent.position += agent.velocity * dt;
 
-  agent.linearVelocity = agent.velocity.norm();
-  agent.angularVelocity = (agent.yaw - initYaw).toRadian() / dt;
+    agent.linearVelocity = agent.velocity.norm();
+    agent.angularVelocity = (agent.yaw - initYaw).toRadian() / dt;
+  }
 
   agent.movement = agent.position - initPos;
+  
+  // Check if reached a goal
   if (!agent.goals.empty() &&
       (agent.goals.front().center - agent.position).norm() <=
           agent.goals.front().radius) {
-    Goal g = agent.goals.front();
-    agent.goals.pop_front();
-    if (agent.cyclicGoals) {
-      agent.goals.push_back(g);
-    }
     if (agent.waitAtGoalDuration > 0) {
+      // Start waiting at this goal
       agent.isWaiting = true;
       agent.waitingTimeLeft = agent.waitAtGoalDuration;
+    } else {
+      // Immediate goal transition
+      Goal g = agent.goals.front();
+      agent.goals.pop_front();
+      if (agent.cyclicGoals) {
+        agent.goals.push_back(g);
+      }
     }
-
   }
-
 }
 
 } // namespace sfm

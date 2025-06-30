@@ -48,6 +48,15 @@
     <arg name="move_forward_only" value="$(arg move_forward_only)"/>
   </include>
 
+  <!-- Task Coordinator Node -->
+  <node pkg="gazebo_sfm_plugin" type="TaskCoordinator" name="task_coordinator" output="screen">
+    <param name="num_pedestrians" value="0"/>  <!-- Adjust as needed -->
+    <param name="num_robots" value="1"/>       <!-- Adjust as needed -->
+  </node>
+
+  <!-- Task Robot Controller Node -->
+  <node pkg="gazebo_sfm_plugin" type="CafeRobotSystem" name="task_robot_controller" output="screen"/>
+
   <!-- rviz -->
   <group if="$(arg open_rviz)"> 
     <node pkg="rviz" type="rviz" name="rviz" required="true"

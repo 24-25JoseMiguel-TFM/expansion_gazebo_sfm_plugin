@@ -119,10 +119,26 @@ add_dependencies(task_coordinator
   ${catkin_EXPORTED_TARGETS}
 )
 
+# ========== Cafe Robot System Node ==========
+add_executable(cafe_robot_system
+  src/CafeRobotSystem.cpp
+)
+
+target_link_libraries(cafe_robot_system
+  ${catkin_LIBRARIES}
+  ${Boost_LIBRARIES}
+)
+
+add_dependencies(cafe_robot_system
+  ${PROJECT_NAME}_gencpp
+  ${catkin_EXPORTED_TARGETS}
+)
+
 # ========== Installation ==========
 install(TARGETS
   PedestrianSFMPlugin
   task_coordinator
+  cafe_robot_system
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}

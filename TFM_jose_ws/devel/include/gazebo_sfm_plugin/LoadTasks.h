@@ -40,7 +40,7 @@ template<>
 struct MD5Sum< ::gazebo_sfm_plugin::LoadTasks > {
   static const char* value()
   {
-    return "3b67f7d0c861348ae151a1487a64fe7e";
+    return "deda9a7b2b857b0ae878e4665876836b";
   }
 
   static const char* value(const ::gazebo_sfm_plugin::LoadTasks&) { return value(); }

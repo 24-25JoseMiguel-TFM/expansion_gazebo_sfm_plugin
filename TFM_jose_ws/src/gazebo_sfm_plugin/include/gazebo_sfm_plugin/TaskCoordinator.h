@@ -20,8 +20,12 @@ private:
     // Task structure
     struct Task {
         std::string name;
-        geometry_msgs::Point position;
-        std::string target_type;  // "human", "robot", or "both"
+        double x_humans;
+        double y_humans;
+        double x_robots;
+        double y_robots;
+        bool for_humans;
+        bool for_robots;
         bool completed;
     };
     

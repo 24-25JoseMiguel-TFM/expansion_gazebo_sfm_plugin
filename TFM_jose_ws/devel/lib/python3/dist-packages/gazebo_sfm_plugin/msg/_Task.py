@@ -8,16 +8,18 @@ import struct
 
 
 class Task(genpy.Message):
-  _md5sum = "de59c720fc23a7eda058f059c469339b"
+  _md5sum = "f3b3fd965b6c18a7c7b49995790c231c"
   _type = "gazebo_sfm_plugin/Task"
   _has_header = False  # flag to mark the presence of a Header object
   _full_text = """string name
-float64 x
-float64 y
+float64 x_humans
+float64 y_humans
+float64 x_robots
+float64 y_robots
 bool for_humans
 bool for_robots"""
-  __slots__ = ['name','x','y','for_humans','for_robots']
-  _slot_types = ['string','float64','float64','bool','bool']
+  __slots__ = ['name','x_humans','y_humans','x_robots','y_robots','for_humans','for_robots']
+  _slot_types = ['string','float64','float64','float64','float64','bool','bool']
 
   def __init__(self, *args, **kwds):
     """
@@ -27,7 +29,7 @@ bool for_robots"""
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       name,x,y,for_humans,for_robots
+       name,x_humans,y_humans,x_robots,y_robots,for_humans,for_robots
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -38,18 +40,24 @@ bool for_robots"""
       # message fields cannot be None, assign default values for those that are
       if self.name is None:
         self.name = ''
-      if self.x is None:
-        self.x = 0.
-      if self.y is None:
-        self.y = 0.
+      if self.x_humans is None:
+        self.x_humans = 0.
+      if self.y_humans is None:
+        self.y_humans = 0.
+      if self.x_robots is None:
+        self.x_robots = 0.
+      if self.y_robots is None:
+        self.y_robots = 0.
       if self.for_humans is None:
         self.for_humans = False
       if self.for_robots is None:
         self.for_robots = False
     else:
       self.name = ''
-      self.x = 0.
-      self.y = 0.
+      self.x_humans = 0.
+      self.y_humans = 0.
+      self.x_robots = 0.
+      self.y_robots = 0.
       self.for_humans = False
       self.for_robots = False
 
@@ -72,7 +80,7 @@ bool for_robots"""
         length = len(_x)
       buff.write(struct.Struct('<I%ss'%length).pack(length, _x))
       _x = self
-      buff.write(_get_struct_2d2B().pack(_x.x, _x.y, _x.for_humans, _x.for_robots))
+      buff.write(_get_struct_4d2B().pack(_x.x_humans, _x.y_humans, _x.x_robots, _x.y_robots, _x.for_humans, _x.for_robots))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -96,8 +104,8 @@ bool for_robots"""
         self.name = str[start:end]
       _x = self
       start = end
-      end += 18
-      (_x.x, _x.y, _x.for_humans, _x.for_robots,) = _get_struct_2d2B().unpack(str[start:end])
+      end += 34
+      (_x.x_humans, _x.y_humans, _x.x_robots, _x.y_robots, _x.for_humans, _x.for_robots,) = _get_struct_4d2B().unpack(str[start:end])
       self.for_humans = bool(self.for_humans)
       self.for_robots = bool(self.for_robots)
       return self
@@ -119,7 +127,7 @@ bool for_robots"""
         length = len(_x)
       buff.write(struct.Struct('<I%ss'%length).pack(length, _x))
       _x = self
-      buff.write(_get_struct_2d2B().pack(_x.x, _x.y, _x.for_humans, _x.for_robots))
+      buff.write(_get_struct_4d2B().pack(_x.x_humans, _x.y_humans, _x.x_robots, _x.y_robots, _x.for_humans, _x.for_robots))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -144,8 +152,8 @@ bool for_robots"""
         self.name = str[start:end]
       _x = self
       start = end
-      end += 18
-      (_x.x, _x.y, _x.for_humans, _x.for_robots,) = _get_struct_2d2B().unpack(str[start:end])
+      end += 34
+      (_x.x_humans, _x.y_humans, _x.x_robots, _x.y_robots, _x.for_humans, _x.for_robots,) = _get_struct_4d2B().unpack(str[start:end])
       self.for_humans = bool(self.for_humans)
       self.for_robots = bool(self.for_robots)
       return self
@@ -156,9 +164,9 @@ _struct_I = genpy.struct_I
 def _get_struct_I():
     global _struct_I
     return _struct_I
-_struct_2d2B = None
-def _get_struct_2d2B():
-    global _struct_2d2B
-    if _struct_2d2B is None:
-        _struct_2d2B = struct.Struct("<2d2B")
-    return _struct_2d2B
+_struct_4d2B = None
+def _get_struct_4d2B():
+    global _struct_4d2B
+    if _struct_4d2B is None:
+        _struct_4d2B = struct.Struct("<4d2B")
+    return _struct_4d2B

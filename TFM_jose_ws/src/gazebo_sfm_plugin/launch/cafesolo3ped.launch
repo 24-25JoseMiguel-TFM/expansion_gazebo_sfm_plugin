@@ -12,4 +12,7 @@
         <param name="num_pedestrians" type="int" value="3" />  <!-- 3 humanos -->
         <param name="num_robots"     type="int" value="0" />  <!-- 0 robots -->
     </node>
+
+    <node name="task_robot_controller" pkg="gazebo_sfm_plugin" type="task_robot_controller" output="screen">
+    </node>
 </launch>
