@@ -1,7 +1,0 @@
-\subsubsection parameters ROS parameters
-
-Reads and maintains the following parameters on the ROS server
-
-- \b "~pedestrian_velocity" : \b [double] Velocidad peaton min: 0.0, default: 0.8, max: 2.0
-- \b "~cyclic" : \b [bool] Si el peatón repitira los waypoints tras realizar la trayectoria min: False, default: False, max: True
-

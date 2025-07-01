@@ -1,3 +1,0 @@
-geometry_msgs/Point[] waypoints
----
-bool success  # Respuesta: true si la trayectoria se actualizó correctamente
