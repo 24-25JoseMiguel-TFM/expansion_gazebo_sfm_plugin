@@ -1,0 +1,8 @@
+\subsubsection usage Usage
+\verbatim
+<node name="PedestrianSFMPlugin" pkg="gazebo_sfm_plugin" type="PedestrianSFMPlugin">
+  <param name="pedestrian_velocity" type="double" value="0.8" />
+  <param name="cyclic" type="bool" value="False" />
+</node>
+\endverbatim
+

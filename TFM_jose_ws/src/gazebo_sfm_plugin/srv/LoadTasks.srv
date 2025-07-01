@@ -1,0 +1,12 @@
+string[] task_names
+float64[] x_humans
+float64[] y_humans
+float64[] x_robots
+float64[] y_robots
+bool[] for_humans
+bool[] for_robots
+bool use_file
+string file_path
+---
+bool success
+string message
