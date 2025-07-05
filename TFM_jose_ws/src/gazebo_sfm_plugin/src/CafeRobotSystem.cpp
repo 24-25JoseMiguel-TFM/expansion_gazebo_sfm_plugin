@@ -1,8 +1,8 @@
 #include <ros/ros.h>
-#include <actionlib/client/simple_action_client.h>
-#include <move_base_msgs/MoveBaseAction.h>
-#include <gazebo_sfm_plugin/TaskAssignmentAction.h>
 #include <geometry_msgs/PoseStamped.h>
+#include <move_base_msgs/MoveBaseAction.h>
+#include <actionlib/client/simple_action_client.h>
+#include "gazebo_sfm_plugin/Update_waypoint.h"
 
 typedef actionlib::SimpleActionClient<move_base_msgs::MoveBaseAction> MoveBaseClient;
 
@@ -17,65 +17,79 @@ public:
             ROS_INFO("Waiting for the move_base action server to come up");
         }
 
-        // Subscribe to task assignments
-        task_sub_ = nh_.subscribe("/task_assignment/goal", 10, &TaskRobotController::taskCallback, this);
+        // Get robot name from parameter
+        nh_.param<std::string>("robot_name", robot_name_, "robot1");
+        
+        // Service client for receiving tasks
+        task_service_ = nh_.advertiseService("/" + robot_name_ + "/task_assignment", 
+                                           &TaskRobotController::handleTaskService, this);
 
-        ROS_INFO("Task Robot Controller ready to receive tasks");
+        ROS_INFO("%s ready to receive tasks", robot_name_.c_str());
     }
 
-    void taskCallback(const gazebo_sfm_plugin::TaskAssignmentGoalConstPtr& goal) {
-        if (goal->positions.empty()) {
-            ROS_WARN("Received empty task assignment");
-            return;
+    bool handleTaskService(gazebo_sfm_plugin::Update_waypoint::Request &req,
+                         gazebo_sfm_plugin::Update_waypoint::Response &res) {
+        if (req.waypoints.empty()) {
+            ROS_WARN("Received empty waypoints");
+            res.success = false;
+            return true;
         }
 
-        // For simplicity, we'll just use the first position in the array
-        // You may want to implement more sophisticated task selection logic
-        const auto& target_pos = goal->positions[0];
+        ROS_INFO("Received new task: %s with %zu waypoints", 
+                req.task_name.c_str(), req.waypoints.size());
+
+        // Process all waypoints sequentially
+        for (const auto& waypoint : req.waypoints) {
+            move_base_msgs::MoveBaseGoal move_goal;
+            move_goal.target_pose.header.frame_id = "map";
+            move_goal.target_pose.header.stamp = ros::Time::now();
+            
+            move_goal.target_pose.pose.position = waypoint;
+            move_goal.target_pose.pose.orientation.w = 1.0; // Default orientation
+
+            ROS_INFO("Moving to position: x=%.2f, y=%.2f", 
+                    waypoint.x, waypoint.y);
+
+            ac_.sendGoal(move_goal);
+            ac_.waitForResult();
+
+            if (ac_.getState() != actionlib::SimpleClientGoalState::SUCCEEDED) {
+                ROS_WARN("Failed to reach waypoint");
+                res.success = false;
+                return true;
+            }
+        }
+
+        ROS_INFO("Completed task: %s", req.task_name.c_str());
+
+        //Returns to initial position
+
+        ROS_INFO("Returning to initial position");
+
+        move_base_msgs::MoveBaseGoal init;
+        init.target_pose.header.frame_id = "map";
+        init.target_pose.header.stamp = ros::Time::now();
+        init.target_pose.pose.position.x = 6.98;
+        init.target_pose.pose.position.y = -4.2;
+        init.target_pose.pose.orientation.w = 1.0; // Default orientation
         
-        ROS_INFO("Received new task with %zu positions", goal->positions.size());
-
-        move_base_msgs::MoveBaseGoal move_goal;
-
-        // Set up the frame parameters
-        move_goal.target_pose.header.frame_id = "map";
-        move_goal.target_pose.header.stamp = ros::Time::now();
-
-        // Use the first position from the task
-        move_goal.target_pose.pose.position = target_pos;
-        
-        // Default orientation - face forward
-        move_goal.target_pose.pose.orientation.w = 1.0;
-
-        ROS_INFO("Sending robot to position: x=%f, y=%f", 
-                move_goal.target_pose.pose.position.x,
-                move_goal.target_pose.pose.position.y);
-
-        ac_.sendGoal(move_goal);
-
-        // Wait for the action to return
+        ac_.sendGoal(init);
         ac_.waitForResult();
-
-        if (ac_.getState() == actionlib::SimpleClientGoalState::SUCCEEDED) {
-            ROS_INFO("Robot successfully reached the goal!");
-        } else {
-            ROS_WARN("The robot failed to reach the goal for some reason");
-        }
+       
+        res.success = true;
+        return true;
     }
 
 private:
     ros::NodeHandle nh_;
-    ros::Subscriber task_sub_;
     MoveBaseClient ac_;
+    ros::ServiceServer task_service_;
+    std::string robot_name_;
 };
 
 int main(int argc, char** argv) {
     ros::init(argc, argv, "task_robot_controller");
-    
-    ROS_INFO("EL ROBOT ESTA LISTO");  // Añadido el mensaje de aviso
-    
     TaskRobotController controller;
-
     ros::spin();
     return 0;
 }

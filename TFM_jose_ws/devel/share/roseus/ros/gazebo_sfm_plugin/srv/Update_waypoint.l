@@ -22,15 +22,17 @@
 
 (defclass gazebo_sfm_plugin::Update_waypointRequest
   :super ros::object
-  :slots (_waypoints ))
+  :slots (_waypoints _task_name ))
 
 (defmethod gazebo_sfm_plugin::Update_waypointRequest
   (:init
    (&key
     ((:waypoints __waypoints) ())
+    ((:task_name __task_name) "")
     )
    (send-super :init)
    (setq _waypoints __waypoints)
+   (setq _task_name (string __task_name))
    self)
   (:waypoints
    (&rest __waypoints)
@@ -39,11 +41,16 @@
      (progn
        (if __waypoints (setq _waypoints (car __waypoints)))
        _waypoints)))
+  (:task_name
+   (&optional __task_name)
+   (if __task_name (setq _task_name __task_name)) _task_name)
   (:serialization-length
    ()
    (+
     ;; geometry_msgs/Point[] _waypoints
     (apply #'+ (send-all _waypoints :serialization-length)) 4
+    ;; string _task_name
+    4 (length _task_name)
     ))
   (:serialize
    (&optional strm)
@@ -54,6 +61,8 @@
      (dolist (elem _waypoints)
        (send elem :serialize s)
        )
+     ;; string _task_name
+       (write-long (length _task_name) s) (princ _task_name s)
      ;;
      (if (null strm) (get-output-stream-string s))))
   (:deserialize
@@ -65,6 +74,8 @@
      (dolist (elem- _waypoints)
      (send elem- :deserialize buf ptr-) (incf ptr- (send elem- :serialization-length))
      ))
+   ;; string _task_name
+     (let (n) (setq n (sys::peek buf ptr- :integer)) (incf ptr- 4) (setq _task_name (subseq buf ptr- (+ ptr- n))) (incf ptr- n))
    ;;
    self)
   )
@@ -110,7 +121,7 @@
   :super ros::object
   :slots ())
 
-(setf (get gazebo_sfm_plugin::Update_waypoint :md5sum-) "e65fdf0b922727bc18f1f1772a8f5a15")
+(setf (get gazebo_sfm_plugin::Update_waypoint :md5sum-) "f5dd19960de228b666941d1879a83836")
 (setf (get gazebo_sfm_plugin::Update_waypoint :datatype-) "gazebo_sfm_plugin/Update_waypoint")
 (setf (get gazebo_sfm_plugin::Update_waypoint :request) gazebo_sfm_plugin::Update_waypointRequest)
 (setf (get gazebo_sfm_plugin::Update_waypoint :response) gazebo_sfm_plugin::Update_waypointResponse)
@@ -118,10 +129,11 @@
 (defmethod gazebo_sfm_plugin::Update_waypointRequest
   (:response () (instance gazebo_sfm_plugin::Update_waypointResponse :init)))
 
-(setf (get gazebo_sfm_plugin::Update_waypointRequest :md5sum-) "e65fdf0b922727bc18f1f1772a8f5a15")
+(setf (get gazebo_sfm_plugin::Update_waypointRequest :md5sum-) "f5dd19960de228b666941d1879a83836")
 (setf (get gazebo_sfm_plugin::Update_waypointRequest :datatype-) "gazebo_sfm_plugin/Update_waypointRequest")
 (setf (get gazebo_sfm_plugin::Update_waypointRequest :definition-)
       "geometry_msgs/Point[] waypoints
+string task_name
 
 ================================================================================
 MSG: geometry_msgs/Point
@@ -133,10 +145,11 @@ float64 z
 bool success  # Respuesta: true si la trayectoria se actualizo correctamente
 ")
 
-(setf (get gazebo_sfm_plugin::Update_waypointResponse :md5sum-) "e65fdf0b922727bc18f1f1772a8f5a15")
+(setf (get gazebo_sfm_plugin::Update_waypointResponse :md5sum-) "f5dd19960de228b666941d1879a83836")
 (setf (get gazebo_sfm_plugin::Update_waypointResponse :datatype-) "gazebo_sfm_plugin/Update_waypointResponse")
 (setf (get gazebo_sfm_plugin::Update_waypointResponse :definition-)
       "geometry_msgs/Point[] waypoints
+string task_name
 
 ================================================================================
 MSG: geometry_msgs/Point
@@ -150,6 +163,6 @@ bool success  # Respuesta: true si la trayectoria se actualizo correctamente
 
 
 
-(provide :gazebo_sfm_plugin/Update_waypoint "e65fdf0b922727bc18f1f1772a8f5a15")
+(provide :gazebo_sfm_plugin/Update_waypoint "f5dd19960de228b666941d1879a83836")
 
 

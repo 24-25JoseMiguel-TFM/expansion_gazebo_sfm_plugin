@@ -23,6 +23,7 @@ class Update_waypointRequest {
     if (initObj === null) {
       // initObj === null is a special case for deserialization where we don't initialize fields
       this.waypoints = null;
+      this.task_name = null;
     }
     else {
       if (initObj.hasOwnProperty('waypoints')) {
@@ -30,6 +31,12 @@ class Update_waypointRequest {
       }
       else {
         this.waypoints = [];
+      }
+      if (initObj.hasOwnProperty('task_name')) {
+        this.task_name = initObj.task_name
+      }
+      else {
+        this.task_name = '';
       }
     }
   }
@@ -42,6 +49,8 @@ class Update_waypointRequest {
     obj.waypoints.forEach((val) => {
       bufferOffset = geometry_msgs.msg.Point.serialize(val, buffer, bufferOffset);
     });
+    // Serialize message field [task_name]
+    bufferOffset = _serializer.string(obj.task_name, buffer, bufferOffset);
     return bufferOffset;
   }
 
@@ -56,13 +65,16 @@ class Update_waypointRequest {
     for (let i = 0; i < len; ++i) {
       data.waypoints[i] = geometry_msgs.msg.Point.deserialize(buffer, bufferOffset)
     }
+    // Deserialize message field [task_name]
+    data.task_name = _deserializer.string(buffer, bufferOffset);
     return data;
   }
 
   static getMessageSize(object) {
     let length = 0;
     length += 24 * object.waypoints.length;
-    return length + 4;
+    length += _getByteLength(object.task_name);
+    return length + 8;
   }
 
   static datatype() {
@@ -72,13 +84,14 @@ class Update_waypointRequest {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return '0511c019d3d3f0edeb56aaf3709c8aea';
+    return 'ff528316f30ce0dbcbe264c018c709a7';
   }
 
   static messageDefinition() {
     // Returns full string definition for message
     return `
     geometry_msgs/Point[] waypoints
+    string task_name
     
     ================================================================================
     MSG: geometry_msgs/Point
@@ -104,6 +117,13 @@ class Update_waypointRequest {
     }
     else {
       resolved.waypoints = []
+    }
+
+    if (msg.task_name !== undefined) {
+      resolved.task_name = msg.task_name;
+    }
+    else {
+      resolved.task_name = ''
     }
 
     return resolved;
@@ -184,6 +204,6 @@ class Update_waypointResponse {
 module.exports = {
   Request: Update_waypointRequest,
   Response: Update_waypointResponse,
-  md5sum() { return 'e65fdf0b922727bc18f1f1772a8f5a15'; },
+  md5sum() { return 'f5dd19960de228b666941d1879a83836'; },
   datatype() { return 'gazebo_sfm_plugin/Update_waypoint'; }
 };

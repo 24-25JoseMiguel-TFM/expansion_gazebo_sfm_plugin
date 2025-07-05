@@ -1,3 +1,4 @@
 geometry_msgs/Point[] waypoints
+string task_name
 ---
 bool success  # Respuesta: true si la trayectoria se actualizo correctamente

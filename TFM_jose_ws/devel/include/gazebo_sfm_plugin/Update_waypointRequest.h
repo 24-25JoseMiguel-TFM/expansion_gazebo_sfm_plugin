@@ -25,10 +25,12 @@ struct Update_waypointRequest_
   typedef Update_waypointRequest_<ContainerAllocator> Type;
 
   Update_waypointRequest_()
-    : waypoints()  {
+    : waypoints()
+    , task_name()  {
     }
   Update_waypointRequest_(const ContainerAllocator& _alloc)
-    : waypoints(_alloc)  {
+    : waypoints(_alloc)
+    , task_name(_alloc)  {
   (void)_alloc;
     }
 
@@ -36,6 +38,9 @@ struct Update_waypointRequest_
 
    typedef std::vector< ::geometry_msgs::Point_<ContainerAllocator> , typename std::allocator_traits<ContainerAllocator>::template rebind_alloc< ::geometry_msgs::Point_<ContainerAllocator> >> _waypoints_type;
   _waypoints_type waypoints;
+
+   typedef std::basic_string<char, std::char_traits<char>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<char>> _task_name_type;
+  _task_name_type task_name;
 
 
 
@@ -66,7 +71,8 @@ return s;
 template<typename ContainerAllocator1, typename ContainerAllocator2>
 bool operator==(const ::gazebo_sfm_plugin::Update_waypointRequest_<ContainerAllocator1> & lhs, const ::gazebo_sfm_plugin::Update_waypointRequest_<ContainerAllocator2> & rhs)
 {
-  return lhs.waypoints == rhs.waypoints;
+  return lhs.waypoints == rhs.waypoints &&
+    lhs.task_name == rhs.task_name;
 }
 
 template<typename ContainerAllocator1, typename ContainerAllocator2>
@@ -123,12 +129,12 @@ struct MD5Sum< ::gazebo_sfm_plugin::Update_waypointRequest_<ContainerAllocator> 
 {
   static const char* value()
   {
-    return "0511c019d3d3f0edeb56aaf3709c8aea";
+    return "ff528316f30ce0dbcbe264c018c709a7";
   }
 
   static const char* value(const ::gazebo_sfm_plugin::Update_waypointRequest_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x0511c019d3d3f0edULL;
-  static const uint64_t static_value2 = 0xeb56aaf3709c8aeaULL;
+  static const uint64_t static_value1 = 0xff528316f30ce0dbULL;
+  static const uint64_t static_value2 = 0xcbe264c018c709a7ULL;
 };
 
 template<class ContainerAllocator>
@@ -148,6 +154,7 @@ struct Definition< ::gazebo_sfm_plugin::Update_waypointRequest_<ContainerAllocat
   static const char* value()
   {
     return "geometry_msgs/Point[] waypoints\n"
+"string task_name\n"
 "\n"
 "================================================================================\n"
 "MSG: geometry_msgs/Point\n"
@@ -174,6 +181,7 @@ namespace serialization
     template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
     {
       stream.next(m.waypoints);
+      stream.next(m.task_name);
     }
 
     ROS_DECLARE_ALLINONE_SERIALIZER
@@ -207,6 +215,10 @@ struct Printer< ::gazebo_sfm_plugin::Update_waypointRequest_<ContainerAllocator>
     }
     if (v.waypoints.empty() || false)
       s << "]";
+    if (true || !indent.empty())
+      s << std::endl;
+    s << indent << "task_name: ";
+    Printer<std::basic_string<char, std::char_traits<char>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<char>>>::stream(s, indent + "  ", v.task_name);
   }
 };
 

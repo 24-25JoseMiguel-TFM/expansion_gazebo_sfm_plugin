@@ -40,7 +40,7 @@ template<>
 struct MD5Sum< ::gazebo_sfm_plugin::Update_waypoint > {
   static const char* value()
   {
-    return "e65fdf0b922727bc18f1f1772a8f5a15";
+    return "f5dd19960de228b666941d1879a83836";
   }
 
   static const char* value(const ::gazebo_sfm_plugin::Update_waypoint&) { return value(); }

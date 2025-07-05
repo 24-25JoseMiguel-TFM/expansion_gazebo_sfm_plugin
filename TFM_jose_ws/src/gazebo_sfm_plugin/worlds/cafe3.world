@@ -92,7 +92,7 @@
         <people_distance>6.0</people_distance>
         <!-- weights -->
         <goal_weight>2.0</goal_weight>
-        <obstacle_weight>80.0</obstacle_weight> <!--10.0-->
+        <obstacle_weight>8.0</obstacle_weight> <!--10.0-->
         <social_weight>15</social_weight> <!--2.1-->
         <group_gaze_weight>3.0</group_gaze_weight>
         <group_coh_weight>2.0</group_coh_weight>
@@ -127,7 +127,7 @@
         <animation_factor>5.1</animation_factor>
         <people_distance>6.0</people_distance>
         <goal_weight>2.0</goal_weight>
-        <obstacle_weight>80.0</obstacle_weight>
+        <obstacle_weight>8.0</obstacle_weight>
         <social_weight>15.0</social_weight> <!--2.1-->
         <group_gaze_weight>3.0</group_gaze_weight>
         <group_coh_weight>2.0</group_coh_weight>
@@ -147,11 +147,11 @@
     <actor name="actor3">
       <pose>-1 0 1.25 0 0 0</pose>
       <skin>
-        <filename>stand.dae</filename>
+        <filename>walk.dae</filename>
         <scale>1.0</scale>
       </skin>
-      <animation name="stand">
-        <filename>stand.dae</filename>
+      <animation name="walking">
+        <filename>walk.dae</filename>
         <scale>1.000000</scale>
         <interpolate_x>true</interpolate_x>
       </animation>
@@ -161,7 +161,7 @@
         <animation_factor>5.1</animation_factor>
         <people_distance>6.0</people_distance>
         <goal_weight>2.0</goal_weight>
-        <obstacle_weight>80.0</obstacle_weight>
+        <obstacle_weight>8.0</obstacle_weight>
         <social_weight>15.0</social_weight> <!--2.1-->
         <group_gaze_weight>3.0</group_gaze_weight>
         <group_coh_weight>2.0</group_coh_weight>

@@ -9,10 +9,11 @@ import struct
 import geometry_msgs.msg
 
 class Update_waypointRequest(genpy.Message):
-  _md5sum = "0511c019d3d3f0edeb56aaf3709c8aea"
+  _md5sum = "ff528316f30ce0dbcbe264c018c709a7"
   _type = "gazebo_sfm_plugin/Update_waypointRequest"
   _has_header = False  # flag to mark the presence of a Header object
   _full_text = """geometry_msgs/Point[] waypoints
+string task_name
 
 ================================================================================
 MSG: geometry_msgs/Point
@@ -21,8 +22,8 @@ float64 x
 float64 y
 float64 z
 """
-  __slots__ = ['waypoints']
-  _slot_types = ['geometry_msgs/Point[]']
+  __slots__ = ['waypoints','task_name']
+  _slot_types = ['geometry_msgs/Point[]','string']
 
   def __init__(self, *args, **kwds):
     """
@@ -32,7 +33,7 @@ float64 z
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       waypoints
+       waypoints,task_name
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -43,8 +44,11 @@ float64 z
       # message fields cannot be None, assign default values for those that are
       if self.waypoints is None:
         self.waypoints = []
+      if self.task_name is None:
+        self.task_name = ''
     else:
       self.waypoints = []
+      self.task_name = ''
 
   def _get_types(self):
     """
@@ -63,6 +67,12 @@ float64 z
       for val1 in self.waypoints:
         _x = val1
         buff.write(_get_struct_3d().pack(_x.x, _x.y, _x.z))
+      _x = self.task_name
+      length = len(_x)
+      if python3 or type(_x) == unicode:
+        _x = _x.encode('utf-8')
+        length = len(_x)
+      buff.write(struct.Struct('<I%ss'%length).pack(length, _x))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -88,6 +98,15 @@ float64 z
         end += 24
         (_x.x, _x.y, _x.z,) = _get_struct_3d().unpack(str[start:end])
         self.waypoints.append(val1)
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      start = end
+      end += length
+      if python3:
+        self.task_name = str[start:end].decode('utf-8', 'rosmsg')
+      else:
+        self.task_name = str[start:end]
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e)  # most likely buffer underfill
@@ -105,6 +124,12 @@ float64 z
       for val1 in self.waypoints:
         _x = val1
         buff.write(_get_struct_3d().pack(_x.x, _x.y, _x.z))
+      _x = self.task_name
+      length = len(_x)
+      if python3 or type(_x) == unicode:
+        _x = _x.encode('utf-8')
+        length = len(_x)
+      buff.write(struct.Struct('<I%ss'%length).pack(length, _x))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -131,6 +156,15 @@ float64 z
         end += 24
         (_x.x, _x.y, _x.z,) = _get_struct_3d().unpack(str[start:end])
         self.waypoints.append(val1)
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      start = end
+      end += length
+      if python3:
+        self.task_name = str[start:end].decode('utf-8', 'rosmsg')
+      else:
+        self.task_name = str[start:end]
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e)  # most likely buffer underfill
@@ -262,6 +296,6 @@ def _get_struct_B():
     return _struct_B
 class Update_waypoint(object):
   _type          = 'gazebo_sfm_plugin/Update_waypoint'
-  _md5sum = 'e65fdf0b922727bc18f1f1772a8f5a15'
+  _md5sum = 'f5dd19960de228b666941d1879a83836'
   _request_class  = Update_waypointRequest
   _response_class = Update_waypointResponse

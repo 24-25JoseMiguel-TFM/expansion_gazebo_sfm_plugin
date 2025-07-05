@@ -33,9 +33,7 @@ GZ_REGISTER_MODEL_PLUGIN(PedestrianSFMPlugin)
 #define WALKING_ANIMATION "walking"
 
 /////////////////////////////////////////////////
-PedestrianSFMPlugin::PedestrianSFMPlugin() : 
-    actionClient_(nullptr),
-    actionServer_(nullptr)
+PedestrianSFMPlugin::PedestrianSFMPlugin()
 {
 }
 
@@ -120,18 +118,6 @@ void PedestrianSFMPlugin::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
   // Initialize dynamic reconfigure
   reconfigureServer = std::make_unique<dynamic_reconfigure::Server<gazebo_sfm_plugin::PedestrianSFMPluginConfig>>(*this->nodeHandle);
   reconfigureServer->setCallback(boost::bind(&PedestrianSFMPlugin::reconfigureCallback, this, _1, _2));
-
-  // Initialize action client and server
-  std::string action_name = "/" + this->actor->GetName() + "/task_assignment";
-  this->actionClient_.reset(new actionlib::SimpleActionClient<gazebo_sfm_plugin::TaskAssignmentAction>(
-    *this->nodeHandle, action_name, true));
-
-  this->actionServer_.reset(new actionlib::SimpleActionServer<gazebo_sfm_plugin::TaskAssignmentAction>(
-    *this->nodeHandle, 
-    "task_assignment",
-    boost::bind(&PedestrianSFMPlugin::executeTaskAssignment, this, _1),
-    false));
-  this->actionServer_->start();
 
   ROS_INFO("Pedestrian SFM Plugin loaded for %s", this->actor->GetName().c_str());
 }
@@ -271,77 +257,108 @@ void PedestrianSFMPlugin::HandlePedestrians()
 }
 
 /////////////////////////////////////////////////
-void PedestrianSFMPlugin::OnUpdate(const common::UpdateInfo &_info)
-{
-  double dt = (_info.simTime - this->lastUpdate).Double();
+void PedestrianSFMPlugin::OnUpdate(const common::UpdateInfo &_info) {
+    double dt = (_info.simTime - this->lastUpdate).Double();
+    ignition::math::Pose3d actorPose = this->actor->WorldPose();
 
-  ignition::math::Pose3d actorPose = this->actor->WorldPose();
+    HandleObstacles();
+    HandlePedestrians();
 
-  HandleObstacles();
-  HandlePedestrians();
+    // Enhanced waypoint tracking
+    if (!this->sfmActor.goals.empty()) {
+        const auto& current_goal = this->sfmActor.goals.front();
+        double distance_to_goal = (this->sfmActor.position - current_goal.center).norm();
+        
+        // Debug information
+        ROS_DEBUG_THROTTLE(1.0, "[%s] Current position: (%.2f, %.2f), Goal: (%.2f, %.2f), Distance: %.2f, Radius: %.2f",
+                         this->actor->GetName().c_str(),
+                         this->sfmActor.position.getX(),
+                         this->sfmActor.position.getY(),
+                         current_goal.center.getX(),
+                         current_goal.center.getY(),
+                         distance_to_goal,
+                         current_goal.radius);
+        
+        // Check if goal reached with more detailed logging
+        if (distance_to_goal < current_goal.radius+0.1) {
+            ROS_INFO("[%s] Reached waypoint at (%.2f, %.2f) - Current pos: (%.2f, %.2f), Dist: %.2f", 
+                    this->actor->GetName().c_str(),
+                    current_goal.center.getX(),
+                    current_goal.center.getY(),
+                    this->sfmActor.position.getX(),
+                    this->sfmActor.position.getY(),
+                    distance_to_goal);
+            
+            // Remove the completed waypoint
+            this->sfmActor.goals.erase(this->sfmActor.goals.begin());
+            
+            if (!this->sfmActor.goals.empty()) {
+                const auto& next_goal = this->sfmActor.goals.front();
+                ROS_INFO("[%s] Moving to next waypoint at (%.2f, %.2f)", 
+                        this->actor->GetName().c_str(),
+                        next_goal.center.getX(),
+                        next_goal.center.getY());
+            } else {
+                ROS_INFO("[%s] All waypoints completed!", 
+                        this->actor->GetName().c_str());
+            }
+        }
+    }
 
-  sfm::SFM.computeForces(this->sfmActor, this->otherActors);
-  sfm::SFM.updatePosition(this->sfmActor, dt);
+    // Rest of the OnUpdate function...
+    sfm::SFM.computeForces(this->sfmActor, this->otherActors);
+    sfm::SFM.updatePosition(this->sfmActor, dt);
 
-  utils::Angle h = this->sfmActor.yaw;
-  utils::Angle add = utils::Angle::fromRadian(1.5707);
-  h = h + add;
-  double yaw = h.toRadian();
-  ignition::math::Vector3d rpy = actorPose.Rot().Euler();
-  utils::Angle current = utils::Angle::fromRadian(rpy.Z());
-  double diff = (h - current).toRadian();
-  if (std::fabs(diff) > IGN_DTOR(10))
-  {
-    current = current + utils::Angle::fromRadian(diff * 0.005);
-    yaw = current.toRadian();
-  }
-  actorPose.Pos().X(this->sfmActor.position.getX());
-  actorPose.Pos().Y(this->sfmActor.position.getY());
-  actorPose.Rot() =
-      ignition::math::Quaterniond(1.5707, 0, yaw);
+    // Rest of the OnUpdate function remains the same...
+    utils::Angle h = this->sfmActor.yaw;
+    utils::Angle add = utils::Angle::fromRadian(1.5707);
+    h = h + add;
+    double yaw = h.toRadian();
+    ignition::math::Vector3d rpy = actorPose.Rot().Euler();
+    utils::Angle current = utils::Angle::fromRadian(rpy.Z());
+    double diff = (h - current).toRadian();
+    if (std::fabs(diff) > IGN_DTOR(10))
+    {
+        current = current + utils::Angle::fromRadian(diff * 0.005);
+        yaw = current.toRadian();
+    }
+    actorPose.Pos().X(this->sfmActor.position.getX());
+    actorPose.Pos().Y(this->sfmActor.position.getY());
+    actorPose.Rot() = ignition::math::Quaterniond(1.5707, 0, yaw);
 
-  actorPose.Pos().Z(1.2138);
+    actorPose.Pos().Z(1.2138);
 
-  double distanceTraveled =
-      (actorPose.Pos() - this->actor->WorldPose().Pos()).Length();
+    double distanceTraveled = (actorPose.Pos() - this->actor->WorldPose().Pos()).Length();
 
-  this->actor->SetWorldPose(actorPose, false, false);
-  this->actor->SetScriptTime(this->actor->ScriptTime() +
-                             (distanceTraveled * this->animationFactor));
-  this->lastUpdate = _info.simTime;
+    this->actor->SetWorldPose(actorPose, false, false);
+    this->actor->SetScriptTime(this->actor->ScriptTime() + (distanceTraveled * this->animationFactor));
+    this->lastUpdate = _info.simTime;
 }
+
 
 bool PedestrianSFMPlugin::UpdateWaypointCallback(gazebo_sfm_plugin::Update_waypoint::Request &req,
-  gazebo_sfm_plugin::Update_waypoint::Response &res) {
-  this->sfmActor.goals.clear();
+                                               gazebo_sfm_plugin::Update_waypoint::Response &res) {
+    this->sfmActor.goals.clear();
 
-  for (const auto &waypoint : req.waypoints) {
-    sfm::Goal goal;
-    goal.center.set(waypoint.x, waypoint.y);
-    goal.radius = 0.3;
-    this->sfmActor.goals.push_back(goal); 
-  }
+    ROS_INFO("[%s] Received %zu waypoints:", this->actor->GetName().c_str(), req.waypoints.size());
+    
+    for (size_t i = 0; i < req.waypoints.size(); ++i) {
+        const auto &waypoint = req.waypoints[i];
+        sfm::Goal goal;
+        goal.center.set(waypoint.x, waypoint.y);
+        goal.radius = 0.5;
+        this->sfmActor.goals.push_back(goal);
 
-  sdf::ElementPtr modelElemCyclic =
-    this->sdf->GetElement("trajectory")->GetElement("cyclic");
-  if(!modelElemCyclic){
-    sdf::ElementPtr modelElemHome =
-    this->sdf->GetElement("trajectory")->GetElement("home");
-    if (modelElemHome)
-    {
-      sfm::Goal goal;
-      ROS_INFO("%s will return home", this->actor->GetName().c_str());
-      ignition::math::Vector3d g = modelElemHome->Get<ignition::math::Vector3d>();
-      goal.center.set(g.X(), g.Y());
-      goal.radius = 0.3;
-      this->sfmActor.goals.push_back(goal);
+        ROS_INFO("[%s]   Waypoint %zu: (%.2f, %.2f) - Radius: %.2f", 
+                this->actor->GetName().c_str(),
+                i+1,
+                waypoint.x, waypoint.y,
+                goal.radius);
     }
-  }
 
-  res.success = true;
-  return true;
+    res.success = true;
+    return true;
 }
-
 bool PedestrianSFMPlugin::ReturnHomeCallback(gazebo_sfm_plugin::Return_home::Request &req,
                                            gazebo_sfm_plugin::Return_home::Response &res) {
     this->sfmActor.goals.clear();
@@ -352,7 +369,7 @@ bool PedestrianSFMPlugin::ReturnHomeCallback(gazebo_sfm_plugin::Return_home::Req
         ignition::math::Vector3d g = modelElemHome->Get<ignition::math::Vector3d>();
         sfm::Goal goal;
         goal.center.set(g.X(), g.Y());
-        goal.radius = 0.3;
+        goal.radius = 0.5;
         this->sfmActor.goals.push_back(goal);
         res.success = true;
     } else {
@@ -369,36 +386,4 @@ void PedestrianSFMPlugin::reconfigureCallback(gazebo_sfm_plugin::PedestrianSFMPl
 
   ROS_INFO("New velocity %s: %.2f m/s", this->actor->GetName().c_str(), config.pedestrian_velocity);
   ROS_INFO("New cyclic %d",config.cyclic);
-}
-
-void PedestrianSFMPlugin::executeTaskAssignment(const gazebo_sfm_plugin::TaskAssignmentGoalConstPtr &goal) {
-    this->sfmActor.goals.clear();
-    
-    for (const auto &position : goal->positions) {
-        sfm::Goal sfmGoal;
-        sfmGoal.center.set(position.x, position.y);
-        sfmGoal.radius = 0.3;
-        this->sfmActor.goals.push_back(sfmGoal);
-    }
-    
-    ROS_INFO("%s received new task assignment with %lu waypoints", 
-             this->actor->GetName().c_str(), goal->positions.size());
-
-    sdf::ElementPtr modelElemCyclic = this->sdf->GetElement("trajectory")->GetElement("cyclic");
-    if (!modelElemCyclic) {
-        sdf::ElementPtr modelElemHome = this->sdf->GetElement("trajectory")->GetElement("home");
-        if (modelElemHome) {
-            sfm::Goal goal;
-            ROS_INFO("%s will return home", this->actor->GetName().c_str());
-            ignition::math::Vector3d g = modelElemHome->Get<ignition::math::Vector3d>();
-            goal.center.set(g.X(), g.Y());
-            goal.radius = 0.3;
-            this->sfmActor.goals.push_back(goal);
-        }
-    }
-
-    gazebo_sfm_plugin::TaskAssignmentResult result;
-    result.success = true;
-    result.message = "Task assignment completed successfully";
-    actionServer_->setSucceeded(result);
 }
