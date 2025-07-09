@@ -268,17 +268,7 @@ void PedestrianSFMPlugin::OnUpdate(const common::UpdateInfo &_info) {
     if (!this->sfmActor.goals.empty()) {
         const auto& current_goal = this->sfmActor.goals.front();
         double distance_to_goal = (this->sfmActor.position - current_goal.center).norm();
-        
-        // Debug information
-        ROS_DEBUG_THROTTLE(1.0, "[%s] Current position: (%.2f, %.2f), Goal: (%.2f, %.2f), Distance: %.2f, Radius: %.2f",
-                         this->actor->GetName().c_str(),
-                         this->sfmActor.position.getX(),
-                         this->sfmActor.position.getY(),
-                         current_goal.center.getX(),
-                         current_goal.center.getY(),
-                         distance_to_goal,
-                         current_goal.radius);
-        
+                
         // Check if goal reached with more detailed logging
         if (distance_to_goal < current_goal.radius+0.1) {
             ROS_INFO("[%s] Reached waypoint at (%.2f, %.2f) - Current pos: (%.2f, %.2f), Dist: %.2f", 
@@ -301,6 +291,14 @@ void PedestrianSFMPlugin::OnUpdate(const common::UpdateInfo &_info) {
             } else {
                 ROS_INFO("[%s] All waypoints completed!", 
                         this->actor->GetName().c_str());
+
+                   sdf::ElementPtr modelElemHome = this->sdf->GetElement("trajectory")->GetElement("home");
+                if (modelElemHome) {
+
+
+                    ROS_INFO("%s returning home", this->actor->GetName().c_str());
+                }
+
             }
         }
     }
@@ -335,7 +333,6 @@ void PedestrianSFMPlugin::OnUpdate(const common::UpdateInfo &_info) {
     this->lastUpdate = _info.simTime;
 }
 
-
 bool PedestrianSFMPlugin::UpdateWaypointCallback(gazebo_sfm_plugin::Update_waypoint::Request &req,
                                                gazebo_sfm_plugin::Update_waypoint::Response &res) {
     this->sfmActor.goals.clear();
@@ -354,6 +351,21 @@ bool PedestrianSFMPlugin::UpdateWaypointCallback(gazebo_sfm_plugin::Update_waypo
                 i+1,
                 waypoint.x, waypoint.y,
                 goal.radius);
+    }
+
+    sdf::ElementPtr modelElemHome = this->sdf->GetElement("trajectory")->GetElement("home");
+    if (modelElemHome) {
+
+        ROS_INFO("%s will return home after finishing the tasks", this->actor->GetName().c_str());
+        ignition::math::Vector3d g = modelElemHome->Get<ignition::math::Vector3d>();
+        sfm::Goal goal;
+        goal.center.set(g.X(), g.Y());
+        goal.radius = 0.5;
+        this->sfmActor.goals.push_back(goal);
+        res.success = true;
+    } else {
+        ROS_WARN("%s has no home defined", this->actor->GetName().c_str());
+        res.success = false;
     }
 
     res.success = true;
