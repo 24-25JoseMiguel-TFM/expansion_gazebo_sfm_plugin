@@ -264,50 +264,79 @@ void PedestrianSFMPlugin::OnUpdate(const common::UpdateInfo &_info) {
     HandleObstacles();
     HandlePedestrians();
 
+    // Static variable to store the last goal
+    static sfm::Goal last_goal;
+    static bool first_update = true;
+
     // Enhanced waypoint tracking
     if (!this->sfmActor.goals.empty()) {
         const auto& current_goal = this->sfmActor.goals.front();
         double distance_to_goal = (this->sfmActor.position - current_goal.center).norm();
                 
-        // Check if goal reached with more detailed logging
+        // Check if goal reached
         if (distance_to_goal < current_goal.radius+0.1) {
-            ROS_INFO("[%s] Reached waypoint at (%.2f, %.2f) - Current pos: (%.2f, %.2f), Dist: %.2f", 
-                    this->actor->GetName().c_str(),
-                    current_goal.center.getX(),
-                    current_goal.center.getY(),
-                    this->sfmActor.position.getX(),
-                    this->sfmActor.position.getY(),
-                    distance_to_goal);
-            
-            // Remove the completed waypoint
-            this->sfmActor.goals.erase(this->sfmActor.goals.begin());
-            
-            if (!this->sfmActor.goals.empty()) {
-                const auto& next_goal = this->sfmActor.goals.front();
-                ROS_INFO("[%s] Moving to next waypoint at (%.2f, %.2f)", 
+            // Only show messages if this is a new goal or the first update
+            if (first_update || 
+                (current_goal.center.getX() != last_goal.center.getX()) ||
+                (current_goal.center.getY() != last_goal.center.getY())) {
+                
+                ROS_INFO("[%s] Reached waypoint at (%.2f, %.2f) - Current pos: (%.2f, %.2f), Dist: %.2f", 
                         this->actor->GetName().c_str(),
-                        next_goal.center.getX(),
-                        next_goal.center.getY());
+                        current_goal.center.getX(),
+                        current_goal.center.getY(),
+                        this->sfmActor.position.getX(),
+                        this->sfmActor.position.getY(),
+                        distance_to_goal);
+            }
+            
+            if (this->sfmActor.cyclicGoals) {
+                // Move the current waypoint to the end of the list
+                auto first_goal = this->sfmActor.goals.front();
+                this->sfmActor.goals.erase(this->sfmActor.goals.begin());
+                this->sfmActor.goals.push_back(first_goal);
+                
+                // Only show message if this is a new goal
+                if (!first_update && 
+                    (this->sfmActor.goals.front().center.getX() != last_goal.center.getX() ||
+                     this->sfmActor.goals.front().center.getY() != last_goal.center.getY())) {
+                    
+                    ROS_INFO("[%s] Cycling waypoints - Next: (%.2f, %.2f)", 
+                            this->actor->GetName().c_str(),
+                            this->sfmActor.goals.front().center.getX(),
+                            this->sfmActor.goals.front().center.getY());
+                }
             } else {
+                // Remove the completed waypoint
+                this->sfmActor.goals.erase(this->sfmActor.goals.begin());
+                
+                if (!this->sfmActor.goals.empty()) {
+                    ROS_INFO("[%s] Moving to next waypoint at (%.2f, %.2f)", 
+                            this->actor->GetName().c_str(),
+                            this->sfmActor.goals.front().center.getX(),
+                            this->sfmActor.goals.front().center.getY());
+                }
+            }
+
+            // Update last goal and clear first update flag
+            last_goal = current_goal;
+            first_update = false;
+            
+            if (this->sfmActor.goals.empty()) {
                 ROS_INFO("[%s] All waypoints completed!", 
                         this->actor->GetName().c_str());
 
-                   sdf::ElementPtr modelElemHome = this->sdf->GetElement("trajectory")->GetElement("home");
+                sdf::ElementPtr modelElemHome = this->sdf->GetElement("trajectory")->GetElement("home");
                 if (modelElemHome) {
-
-
                     ROS_INFO("%s returning home", this->actor->GetName().c_str());
                 }
-
             }
         }
     }
 
-    // Rest of the OnUpdate function...
+    // Rest of the OnUpdate function remains the same...
     sfm::SFM.computeForces(this->sfmActor, this->otherActors);
     sfm::SFM.updatePosition(this->sfmActor, dt);
 
-    // Rest of the OnUpdate function remains the same...
     utils::Angle h = this->sfmActor.yaw;
     utils::Angle add = utils::Angle::fromRadian(1.5707);
     h = h + add;
