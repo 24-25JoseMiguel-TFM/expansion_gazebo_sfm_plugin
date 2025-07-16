@@ -26,18 +26,18 @@ tasks:
   - name: "Mesa4"
     x_humans: -2.7
     y_humans: -8.9
-    x_robots: 0.0
-    y_robots: 0.0
+    x_robots: 13.0
+    y_robots: 0.36
     for_humans: true
-    for_robots: false
+    for_robots: true
 
   - name: "Mesa5"
     x_humans: 1.4
     y_humans: -8.9
-    x_robots: 0.0
-    y_robots: 0.0
+    x_robots: 11.8
+    y_robots: 3.8
     for_humans: true
-    for_robots: false
+    for_robots: true
 
   - name: "Nevera"
     x_humans: 2.07

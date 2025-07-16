@@ -4,7 +4,7 @@
 #include "gazebo_sfm_plugin/Update_waypoint.h"
 
 namespace gazebo_sfm_plugin {
-
+ 
 TaskCoordinator::TaskCoordinator(ros::NodeHandle& nh) : nh_(nh) {
     nh_.param("num_pedestrians", num_pedestrians_, 3); // Default to 3 pedestrians
     nh_.param("num_robots", num_robots_,1); // Default to 1 robot
@@ -76,51 +76,82 @@ bool TaskCoordinator::loadTasksCallback(gazebo_sfm_plugin::LoadTasks::Request &r
 }
 
 void TaskCoordinator::distributeTasks() {
-    // Primero agrupar tareas por actor
+
     std::map<std::string, std::vector<geometry_msgs::Point>> actor_waypoints;
     std::map<std::string, std::string> actor_tasks;
-
     std::map<std::string, std::vector<geometry_msgs::Point>> robot_waypoints;
-    std::map<std::string, std::string> robot_tasks; 
-    
+    std::map<std::string, std::string> robot_tasks;
+
     size_t current_actor_index = 0;
-    for (auto& task : tasks_) {
-
-        if (task.completed || !task.for_humans || task.assigned) continue;
-        
-        std::string pedestrian = pedestrian_names_[current_actor_index];
-        geometry_msgs::Point pos;
-        pos.x = task.x_humans;
-        pos.y = task.y_humans;
-        pos.z = 0;
-        
-        actor_waypoints[pedestrian].push_back(pos);
-        actor_tasks[pedestrian] += task.name + " ";
-        
-        task.assigned = true;
-        task.assigned_to = pedestrian;
-        current_actor_index = (current_actor_index + 1) % pedestrian_names_.size();
-
-    }
-
     size_t current_robot_index = 0;
+    bool next_is_robot = true;
 
-        for (auto& task : tasks_) {
-        if (task.completed || !task.for_robots || task.assigned) continue;
-        
-        std::string robot = robot_names_[current_robot_index];
-        geometry_msgs::Point pos;
-        pos.x = task.x_robots;
-        pos.y = task.y_robots;
-        pos.z = 0;
-        
-        robot_waypoints[robot].push_back(pos);
-        robot_tasks[robot] += task.name + " ";
-        
-        task.assigned = true;
-        task.assigned_to = robot;
-        current_robot_index = (current_robot_index + 1) % robot_names_.size();
+    for (auto& task : tasks_) {
+        if (task.completed || task.assigned) continue;
 
+        if (task.for_humans && task.for_robots) {
+            // Tarea para ambos: alternamos
+            if (next_is_robot) {
+                // Asignar a robot
+                if (!task.for_robots) continue;
+                
+                std::string robot = robot_names_[current_robot_index];
+                geometry_msgs::Point pos;
+                pos.x = task.x_robots;
+                pos.y = task.y_robots;
+                pos.z = 0;
+                
+                robot_waypoints[robot].push_back(pos);
+                robot_tasks[robot] += task.name + " ";
+                task.assigned = true;
+                task.assigned_to = robot;
+                current_robot_index = (current_robot_index + 1) % robot_names_.size();
+            } else {
+                // Asignar a humano
+                if (!task.for_humans) continue;
+                
+                std::string pedestrian = pedestrian_names_[current_actor_index];
+                geometry_msgs::Point pos;
+                pos.x = task.x_humans;
+                pos.y = task.y_humans;
+                pos.z = 0;
+                
+                actor_waypoints[pedestrian].push_back(pos);
+                actor_tasks[pedestrian] += task.name + " ";
+                task.assigned = true;
+                task.assigned_to = pedestrian;
+                current_actor_index = (current_actor_index + 1) % pedestrian_names_.size();
+            }
+            next_is_robot = !next_is_robot; // Alternar para la próxima tarea mixta
+        } 
+        else if (task.for_humans) {
+            // Solo para humanos
+            std::string pedestrian = pedestrian_names_[current_actor_index];
+            geometry_msgs::Point pos;
+            pos.x = task.x_humans;
+            pos.y = task.y_humans;
+            pos.z = 0;
+            
+            actor_waypoints[pedestrian].push_back(pos);
+            actor_tasks[pedestrian] += task.name + " ";
+            task.assigned = true;
+            task.assigned_to = pedestrian;
+            current_actor_index = (current_actor_index + 1) % pedestrian_names_.size();
+        }
+        else if (task.for_robots) {
+            // Solo para robots
+            std::string robot = robot_names_[current_robot_index];
+            geometry_msgs::Point pos;
+            pos.x = task.x_robots;
+            pos.y = task.y_robots;
+            pos.z = 0;
+            
+            robot_waypoints[robot].push_back(pos);
+            robot_tasks[robot] += task.name + " ";
+            task.assigned = true;
+            task.assigned_to = robot;
+            current_robot_index = (current_robot_index + 1) % robot_names_.size();
+        }
     }
     
     // Luego enviar todos los waypoints de cada actor de una vez
