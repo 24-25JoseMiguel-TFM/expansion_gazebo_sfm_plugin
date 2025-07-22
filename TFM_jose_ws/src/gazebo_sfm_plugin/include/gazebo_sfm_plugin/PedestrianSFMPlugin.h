@@ -58,6 +58,7 @@ private:
   ros::ServiceServer updateWaypointService;
   ros::ServiceServer returnHomeService;
   std::unique_ptr<dynamic_reconfigure::Server<gazebo_sfm_plugin::PedestrianSFMPluginConfig>> reconfigureServer;
+
 };
 }
 #endif

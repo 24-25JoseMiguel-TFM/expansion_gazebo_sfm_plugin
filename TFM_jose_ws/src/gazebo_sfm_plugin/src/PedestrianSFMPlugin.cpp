@@ -17,7 +17,7 @@
 /** http://www.opensource.org/licenses/BSD-3-Clause                    */
 /**                                                                    */
 /***********************************************************************/
-
+ 
 #include <functional>
 #include <string>
 #include <geometry_msgs/Point.h>
@@ -321,15 +321,6 @@ void PedestrianSFMPlugin::OnUpdate(const common::UpdateInfo &_info) {
             last_goal = current_goal;
             first_update = false;
             
-            if (this->sfmActor.goals.empty()) {
-                ROS_INFO("[%s] All waypoints completed!", 
-                        this->actor->GetName().c_str());
-
-                sdf::ElementPtr modelElemHome = this->sdf->GetElement("trajectory")->GetElement("home");
-                if (modelElemHome) {
-                    ROS_INFO("%s returning home", this->actor->GetName().c_str());
-                }
-            }
         }
     }
 

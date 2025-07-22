@@ -76,7 +76,7 @@
  <actor name="actor1">
       <pose>-1 2 1.25 0 0 0</pose>
       <skin>
-        <filename>walk.dae</filename>
+        <filename>walk-red.dae</filename>
         <scale>1.0</scale>
       </skin>
       <animation name="walking">
@@ -112,7 +112,7 @@
     <actor name="actor2">
       <pose>-1 -8 1.25 0 0 0</pose>
       <skin>
-        <filename>walk.dae</filename> <!--run.dae-->
+        <filename>walk-blue.dae</filename> <!--run.dae-->
         <scale>1.0</scale>
       </skin>
       <animation name="walking">

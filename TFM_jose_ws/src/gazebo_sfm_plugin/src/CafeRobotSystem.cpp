@@ -3,7 +3,7 @@
 #include <move_base_msgs/MoveBaseAction.h>
 #include <actionlib/client/simple_action_client.h>
 #include "gazebo_sfm_plugin/Update_waypoint.h"
-
+ 
 typedef actionlib::SimpleActionClient<move_base_msgs::MoveBaseAction> MoveBaseClient;
 
 class TaskRobotController {
@@ -37,6 +37,16 @@ public:
 
         ROS_INFO("Received new task: %s with %zu waypoints", 
                 req.task_name.c_str(), req.waypoints.size());
+
+        // Mostrar todos los waypoints con formato legible
+            std::string waypoints_str;
+            for (size_t i = 0; i < req.waypoints.size(); ++i) {
+                waypoints_str += "\n  [" + std::to_string(i+1) + "] x: " + 
+                                std::to_string(req.waypoints[i].x) + 
+                                ", y: " + std::to_string(req.waypoints[i].y);
+            }
+            ROS_INFO("Waypoints details:%s", waypoints_str.c_str());
+
 
         // Process all waypoints sequentially
         for (const auto& waypoint : req.waypoints) {

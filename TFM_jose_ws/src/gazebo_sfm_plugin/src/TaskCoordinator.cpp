@@ -29,11 +29,10 @@ bool TaskCoordinator::loadTasksFromFile(const std::string& file_path) {
             new_task.name = task_node["name"].as<std::string>();
             new_task.x_humans = task_node["x_humans"].as<double>();
             new_task.y_humans = task_node["y_humans"].as<double>();
+            new_task.x_robots = task_node["x_robots"].as<double>();  
+            new_task.y_robots = task_node["y_robots"].as<double>(); 
             new_task.for_humans = task_node["for_humans"].as<bool>();
             new_task.for_robots = task_node["for_robots"].as<bool>();
-            new_task.completed = false;
-            new_task.assigned = false;
-            new_task.assigned_to = "";
             tasks_.push_back(new_task);
         }
         ROS_INFO("Loaded %lu tasks from file.", tasks_.size());
@@ -63,9 +62,6 @@ bool TaskCoordinator::loadTasksCallback(gazebo_sfm_plugin::LoadTasks::Request &r
             new_task.x_robots = req.x_robots[i];
             new_task.y_robots= req.y_robots[i];
             new_task.for_robots = req.for_robots[i];
-            new_task.completed = false;
-            new_task.assigned = false;
-            new_task.assigned_to = "";
             tasks_.push_back(new_task);
         }
     }
@@ -87,13 +83,10 @@ void TaskCoordinator::distributeTasks() {
     bool next_is_robot = true;
 
     for (auto& task : tasks_) {
-        if (task.completed || task.assigned) continue;
 
         if (task.for_humans && task.for_robots) {
             // Tarea para ambos: alternamos
             if (next_is_robot) {
-                // Asignar a robot
-                if (!task.for_robots) continue;
                 
                 std::string robot = robot_names_[current_robot_index];
                 geometry_msgs::Point pos;
@@ -103,12 +96,9 @@ void TaskCoordinator::distributeTasks() {
                 
                 robot_waypoints[robot].push_back(pos);
                 robot_tasks[robot] += task.name + " ";
-                task.assigned = true;
-                task.assigned_to = robot;
                 current_robot_index = (current_robot_index + 1) % robot_names_.size();
             } else {
                 // Asignar a humano
-                if (!task.for_humans) continue;
                 
                 std::string pedestrian = pedestrian_names_[current_actor_index];
                 geometry_msgs::Point pos;
@@ -134,8 +124,6 @@ void TaskCoordinator::distributeTasks() {
             
             actor_waypoints[pedestrian].push_back(pos);
             actor_tasks[pedestrian] += task.name + " ";
-            task.assigned = true;
-            task.assigned_to = pedestrian;
             current_actor_index = (current_actor_index + 1) % pedestrian_names_.size();
         }
         else if (task.for_robots) {
